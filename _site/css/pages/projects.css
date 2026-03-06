@@ -36,3 +36,9 @@
   .projects-year{max-width:100%;}
   .projects-cards{max-width:min(720px, calc(100% - 2*var(--pad)));}
 }
+
+.projects-hint{
+  text-align:center;
+  margin: 6px 0 18px;
+  color: var(--accent);
+}

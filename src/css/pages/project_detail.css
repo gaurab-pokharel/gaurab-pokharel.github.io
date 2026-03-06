@@ -6,10 +6,12 @@
 .project-detail-card{
   border-radius:18px;
   border:1px solid var(--border);
-  background:var(--card-bg);
-  box-shadow:var(--shadow);
-  padding:clamp(18px,2.5vw,28px);
-  transition:transform 140ms ease,background 140ms ease,border-color 140ms ease;
+  background: rgba(10, 14, 20, 0.62);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 2.5vw, 28px);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .project-detail-card:hover{
@@ -61,3 +63,22 @@
   margin: 0 0 12px;
 }
 
+.project-page{
+  position: relative;
+  max-width: 920px;
+  margin: 18px auto 0;
+}
+
+.project-page::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: rgba(0,0,0,0.18);
+  z-index: 0;
+}
+
+.project-page > *{
+  position: relative;
+  z-index: 1;
+}
