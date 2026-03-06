@@ -1,0 +1,91 @@
+---
+layout: layouts/base.njk
+title: "Home"
+description: "Landing page"
+styles:
+  - /css/pages/home.css
+---
+
+<section class="home-split">
+  <div class="home-card home-photo" aria-label="Headshot">
+    <img class="home-photo-img" src="/assets/img/headshot.jpg" alt="Headshot" />
+  </div>
+
+  <div class="home-card home-bio">
+    <div class="home-bio-inner">
+      <h1>Hi, I’m <span class="accent">{{ site.name }}</span>.</h1>
+
+      <p>
+        My hometown is Kathmandu, Nepal. I graduated in Fall 2021 from
+        <a href="https://www.oberlin.edu/" target="_blank" rel="noopener">Oberlin College</a>
+        with a degree in Computer Science (High Honors) and Mathematics.
+        I then earned my M.S. in Computer Science (Machine Learning concentration) from
+        <a href="https://www.gmu.edu/" target="_blank" rel="noopener">George Mason University</a>.
+        Currently, I am continuing my Ph.D. in Computer Science at
+        <a href="https://vt.edu" target="_blank" rel="noopener">Virginia Tech's</a>
+        <a href="https://www.vt.edu/innovationcampus/index.html" target="_blank" rel="noopener">Institute for Advanced Computing</a>
+        under the advisement of
+        <a href="https://people.cs.vt.edu/sanmay/" target="_blank" rel="noopener">Dr. Sanmay Das</a>.
+      </p>
+
+      <p>
+        As a researcher in AI and machine learning,
+        <strong>my interests span game theory and its applications in the allocation of scarce societal resources</strong>.
+        I am particularly passionate about exploring how AI can address issues of distributive justice, and I remain
+        committed to investigating the implications of various policies and mechanisms in this context.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="home-highlights">
+  <div class="mini-grid mini-grid-centered">
+    <div class="mini-card">
+      <div class="mini-title">Current focus</div>
+      <div class="muted">Discretion as a resource in dynamic allocation</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-title">Methods</div>
+      <div class="muted">Interpretable ML, Dynamic Models, Simulation</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-title">Now</div>
+      <div class="muted">Building Tools + Writing Papers + Dissertation</div>
+    </div>
+  </div>
+</section>
+
+<section class="home-news">
+  <article class="news-card">
+    <h2 class="news-heading">News</h2>
+
+    {% if news and (news | length) > 0 %}
+      <ul class="news-list">
+        {% for n in news %}
+          <li class="news-item">
+            <div class="news-meta">
+              <span class="news-date">{{ n.date }}</span>
+            </div>
+
+            <div class="news-main">
+              {% if n.link %}
+                <a class="news-title" href="{{ n.link }}"
+                   {% if n.link | slice(0, 4) == "http" %}target="_blank" rel="noopener"{% endif %}>
+                  {{ n.title }}
+                </a>
+              {% else %}
+                <span class="news-title">{{ n.title }}</span>
+              {% endif %}
+
+              {% if n.body %}
+                <div class="muted news-body">{{ n.body | mdInline | safe }}</div>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No news yet.</p>
+    {% endif %}
+  </article>
+</section>

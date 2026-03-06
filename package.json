@@ -1,0 +1,14 @@
+{
+  "name": "gabi-site",
+  "private": true,
+  "scripts": {
+    "dev": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.1"
+  }
+}

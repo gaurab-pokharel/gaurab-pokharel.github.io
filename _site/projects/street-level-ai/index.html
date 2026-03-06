@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Street-Level AI · Gaurab</title>
+    <meta name="description" content="This project investigates the reliability of Large Language Models (LLMs) in &quot;street-level&quot; bureaucratic roles, specifically within the high-stakes domain of homelessness resource allocation. By comparing LLM-generated prioritizations against real-world data from St. Louis, the research demonstrates that current off-the-shelf models exhibit significant internal inconsistency and fail to align with established, socially determined vulnerability scoring systems. The study reveals that while LLMs can mimic lay human judgments in simple pairwise tests, they struggle to replicate the nuanced, context-sensitive discretion of professional caseworkers, suggesting that &quot;vibe prioritization&quot; is not yet ready for unmediated integration into critical social safety net decisions." />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components/nav.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/cards.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+
+
+  
+    <link rel="stylesheet" href="/css/pages/project_detail.css" />
+  
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  </head>
+  <body>
+    <canvas id="bg" aria-hidden="true"></canvas>
+
+    <header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Gaurab</a>
+
+    <nav class="links" aria-label="Primary">
+      
+        
+        <a href="/" class="">
+          Home
+        </a>
+      
+        
+        <a href="/projects/" class="active">
+          Projects
+        </a>
+      
+        
+        <a href="/cv/" class="">
+          CV
+        </a>
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="container">
+      
+<section class="project-page">
+  <a class="back-link" href="/projects/">← Back to Projects</a>
+
+  <article class="project-detail-card">
+    <h1>Street-Level AI: Are Large Language Models Ready for Real-World Judgments?</h1>
+<p><strong>Authors:</strong> <strong>Gaurab Pokharel</strong>¹, Shafkat Farabi¹, Patrick J. Fowler², and Sanmay Das¹</p>
+<p><strong>Affiliations:</strong> ¹Virginia Tech, ²Washington University in St. Louis</p>
+<p><strong>Venue:</strong> <em>Proceedings of the Eighth AAAI/ACM Conference on AI, Ethics, and Society (AIES 2025)</em></p>
+<hr>
+<h2><strong>Overview</strong></h2>
+<p>As Large Language Models (LLMs) are increasingly touted for their ability to streamline human work, they are likely to see rapid uptake in domains involving the allocation of scarce societal resources. In this paper, we explore whether LLMs are ready to replace or supplement &quot;street-level bureaucrats&quot;—the individuals tasked with deciding how to allocate scarce social resources or approve benefits.</p>
+<p>We ground our inquiry in the domain of <strong>homelessness resource allocation</strong>. Using real-world data from St. Louis, we examine how well LLM judgments align with human assessments and the socially and politically determined vulnerability scoring systems currently in use.</p>
+<blockquote>
+<p><strong>Key Takeaway:</strong> Our findings call into question the readiness of current generation AI systems for naive integration in high-stakes societal decision-making. While LLMs demonstrate qualitative consistency with lay human judgments in simple testing, their prioritizations are extremely inconsistent when applied to real-world data.</p>
+</blockquote>
+<hr>
+<h2><strong>Methodology</strong></h2>
+<p>We designed two complementary experimental tasks to assess LLM alignment with human judgments and established scoring systems:</p>
+<h3><strong>1. Pairwise Comparisons</strong></h3>
+<p>We replicated an experiment using 10 pairs of household data (including demographics, income, and disability status) drawn from homelessness service records. Models were asked to prioritize one household for <strong>Transitional Housing</strong> (intensive support) while the other received an <strong>Emergency Shelter</strong> (less intensive overnight stay). We tested models under four information conditions:</p>
+<ul>
+<li><strong>No Prediction:</strong> The model sees only the household data table.</li>
+<li><strong>Only Prediction:</strong> The model sees only the outcome prediction.</li>
+<li><strong>Prediction First:</strong> The model generates its own outcome prediction before making the allocation decision.</li>
+<li><strong>Shared Prediction:</strong> The model sees both the data table and a pre-computed &quot;outcome prediction&quot; risk score.</li>
+</ul>
+<h3><strong>2. Ranking Task</strong></h3>
+<p>We elicited pairwise prioritization comparisons from LLMs to create a complete ranked list of households for prioritization using the <strong>Rank Centrality</strong> algorithm. These rankings were compared against established bureaucratic assessment tools, such as the <strong>VI-SPDAT</strong> (Vulnerability Index-Service Prioritization Decision Assistance Tool) and the <strong>RMFS</strong> (Risk/Medical Frailty Score).</p>
+<hr>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/sl-ai/base_prompt_1.png"
+    alt="Outcome Scores Heatmap"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    "
+    width="500"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 2.</strong> The 'base prompt' used in both the pairwise comparison and ranking tasks to standardize model input.
+  </figcaption>
+</figure>
+<hr>
+<h2><strong>Key Findings</strong></h2>
+<h3><strong>Internal Inconsistency</strong></h3>
+<p>LLMs failed to produce stable vulnerability orderings. Spearman correlation coefficients between independent runs of the same model on the exact same data ranged from near zero to only moderate, indicating that two executions can generate markedly different rankings.</p>
+<h3><strong>Misalignment with Established Systems</strong></h3>
+<p>LLM-generated rankings showed <strong>near-zero correlation</strong> with the vetted bureaucratic scoring systems (VI-SPDAT and RMFS) adopted in coordinated entry systems.</p>
+<h3><strong>Weak Predictive Validity for Human Decisions</strong></h3>
+<p>When tested against actual service receipt data, LLM rankings were weak predictors of whether a household actually received intensive services. LLMs offered no improvement over existing tools in forecasting real-world decisions made by human experts.</p>
+<h3><strong>Inconsistent Decision Criteria</strong></h3>
+<p>Regression analysis showed that LLMs focused on different question-answer pairs across different runs. For instance, models were inconsistently influenced by &quot;No answer&quot; responses in questionnaires and showed varying polarities for the same features (like current living arrangements).</p>
+<hr>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/sl-ai/model_level_results.png"
+    alt="Outcome Scores Heatmap"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    "
+    width="500"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 2.</strong> Outcome-oriented scores across models and configurations; red denotes
+    “outcome-oriented” (favoring lower-risk) and blue denotes “vulnerability-oriented”
+    (favoring higher-need).
+  </figcaption>
+</figure>
+<hr>
+<h2><strong>Conclusion</strong></h2>
+<p>Our study cautions against the wholesale replacement of street-level bureaucrats with off-the-shelf LLMs. Without domain-specific adaptation, these models fail to capture the local justice principles and context-sensitive discretion essential for equitable public service. Future AI integration must focus on <strong>hybrid systems</strong> where machine recommendations are transparent, consistently calibrated, and subject to professional human oversight.</p>
+<hr>
+<h2><strong>Citation</strong></h2>
+<pre><code class="language-bibtex">@article{Pokharel_Farabi_Fowler_Das_2025, 
+    title={Street-Level AI: Are Large Language Models Ready for Real-World Judgments?}, 
+    volume={8}, 
+    ISSN={3065-8365}, 
+    url={https://ojs.aaai.org/index.php/AIES/article/view/36694}, 
+    DOI={10.1609/aies.v8i3.36694}, 
+    number={3}, 
+    journal={Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society}, 
+    author={Pokharel, Gaurab and Farabi, Shafkat and Fowler, Patrick J. and Das, Sanmay}, 
+    year={2025}, 
+    month=oct, 
+    pages={2043–2054}
+}
+</code></pre>
+<hr>
+<p><em>This research was supported by NSF Award 2533162.</em></p>
+<hr>
+<div style="display:flex; justify-content:center; margin-top:18px;">
+  <a href="https://ojs.aaai.org/index.php/AIES/article/view/36694" target="_blank" rel="noopener" aria-label="Paper (PDF)">
+    <img src="/assets/icons/pdf.png" alt="Paper PDF" style="width:100px; height:100px; display:block;" />
+  </a>
+</div>
+
+  </article>
+</section>
+    </main>
+
+    <footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-social" aria-label="Social links">
+      
+        <a class="social-btn" href="https://github.com/gaurab-pokharel" target="_blank" rel="noopener" aria-label="GitHub">
+          <img class="social-icon" src="/assets/icons/github.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://scholar.google.com/citations?user=FSE8mAIAAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <img class="social-icon" src="/assets/icons/scholar.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://www.linkedin.com/in/gaurab278/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img class="social-icon" src="/assets/icons/linkedin.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="mailto:gaurab@vt.edu" aria-label="Email">
+          <img class="social-icon" src="/assets/icons/email.png" alt="" />
+        </a>
+      
+    </div>
+
+    <div class="footer-meta">
+      <span class="muted">© Gaurab · Built with 11ty</span>
+      <span class="muted">Last updated: 2024-07-31</span>
+    </div>
+  </div>
+</footer>
+
+    <script type="module" src="/js/app.js"></script>
+    <script src="/js/transitions.js"></script>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  });
+</script>
+
+  </body>
+</html>

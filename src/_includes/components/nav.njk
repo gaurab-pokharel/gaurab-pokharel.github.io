@@ -1,0 +1,14 @@
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="/">{{ site.name }}</a>
+
+    <nav class="links" aria-label="Primary">
+      {% for item in site.nav %}
+        {% set active = (page.url | navActive(item.href)) %}
+        <a href="{{ item.href }}" class="{% if active %}active{% endif %}">
+          {{ item.label }}
+        </a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

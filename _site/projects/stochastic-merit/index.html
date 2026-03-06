@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Fixed Points and Stochastic Meritocracies · Gaurab</title>
+    <meta name="description" content="Meritocratic selection into scarce opportunities (e.g., elite schools, jobs, or housing) is often treated as a best-case mechanism for fairness: choose the strongest candidates today, and do so symmetrically across groups. This project shows why that intuition can fail over time. We study an inter-generational selection process in which admission increases future “merit,” so that today’s selection changes tomorrow’s applicant pool. Even when two groups start identical and the per-period rule is deterministic and merit-based, stochastic shocks can create substantial transient gaps. In an Equal-Advantage benchmark, these gaps eventually wash out and the system converges back to parity, with the speed of convergence depending on program capacity and efficacy. But when we introduce a minimal feedback loop—an Affinity-Advantage in which the currently leading group’s non-admitted members receive even a tiny boost—random early leads become self-reinforcing, producing persistent long-run separation and, beyond a threshold, extreme dominance. Simulations in a richer continuous-ability model mirror the theory: small feedback advantages can entrench inequality despite individually fair decision rules. The results emphasize that static fairness at a single decision point is insufficient in dynamic settings, and that policy and algorithm design must explicitly account for long-run feedback, scarcity, and the stability properties of the induced process." />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components/nav.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/cards.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+
+
+  
+    <link rel="stylesheet" href="/css/pages/project_detail.css" />
+  
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  </head>
+  <body>
+    <canvas id="bg" aria-hidden="true"></canvas>
+
+    <header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Gaurab</a>
+
+    <nav class="links" aria-label="Primary">
+      
+        
+        <a href="/" class="">
+          Home
+        </a>
+      
+        
+        <a href="/projects/" class="active">
+          Projects
+        </a>
+      
+        
+        <a href="/cv/" class="">
+          CV
+        </a>
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="container">
+      
+<section class="project-page">
+  <a class="back-link" href="/projects/">← Back to Projects</a>
+
+  <article class="project-detail-card">
+    <h1>Fixed Points and Stochastic Meritocracies: A Long-Term Perspective</h1>
+<p><strong>Authors:</strong> <strong>Gaurab Pokharel</strong>¹, Diptangshu Sen², Sanmay Das¹, and Juba Ziani²</p>
+<p><strong>Affiliations:</strong> ¹Virginia Tech, ²Georgia Tech</p>
+<hr>
+<h2>Overview</h2>
+<p>Many high-stakes allocation systems are <em>meritocratic</em> at the point of decision (admit the strongest applicants, hire the top candidates, etc.).<br>
+But when the program itself <strong>changes future “merit”</strong> (e.g., college boosts future outcomes), meritocracy can create <strong>feedback loops</strong>.</p>
+<p>This project studies a simple question:</p>
+<blockquote>
+<p>If two groups start out identical, can a merit-based, individually-fair selection rule still generate persistent group inequality over time?</p>
+</blockquote>
+<hr>
+<h2>Setup (Stylized Inter-generational Model)</h2>
+<p>We model two equally-sized groups that evolve across generations.</p>
+<ul>
+<li>A scarce program (think “college”) has capacity <strong>α</strong> (a fixed fraction of the population per generation).</li>
+<li>Selection is <strong>deterministic and meritocratic</strong> each generation (a best-case setting for fairness).</li>
+<li>The “benefit” of admission is encoded by a success probability <strong>p</strong> (admitted individuals become “high-type” next generation with probability p).</li>
+<li>Non-admitted individuals evolve according to one of two transition models:</li>
+</ul>
+<h3>Model 1: Equal Advantage (EA)</h3>
+<p>Both groups face the same dynamics. Randomness can create a temporary lead, but there is no feedback advantage for the leader.</p>
+<h3>Model 2: Affinity Advantage (AA)</h3>
+<p>A minimal feedback loop: if one group is ahead, its non-admitted members get a small advantage <strong>ε</strong> in becoming high-type next generation.</p>
+<hr>
+<h2>Main Results (Intuition)</h2>
+<h3>1) Symmetry does <em>not</em> imply equal outcomes at all times</h3>
+<p>Even from identical starting conditions, stochasticity can produce sizeable group gaps—especially when populations are small.</p>
+<h3>2) Equal Advantage eventually returns to parity</h3>
+<p>Under EA, the system converges to a unique parity fixed point where both groups have the same long-run fraction of high-types.</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/stochastic-merit/parity_single_run_v2.png"
+    alt="EA Return to Parity"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.2);
+    "
+    width="700"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 1.</strong> (EA) Sample trajectories under Equal Advantage showing eventual return to parity.
+  </figcaption>
+</figure>
+<h3>3) A tiny Affinity Advantage can lock in permanent separation</h3>
+<p>Under AA, even a small ε can create persistent long-run separation: stochastic leads appear, then the feedback loop reinforces them.</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/stochastic-merit/compare_ea_aa_v2.png"
+    alt="EA vs. AA Return to Parity"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.2);
+    "
+    width="700"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 2.</strong> (EA vs AA) With a small affinity advantage, EA restores parity but AA yields persistent separation.
+  </figcaption>
+</figure>
+<h3>4) A sharp threshold for extreme dominance</h3>
+<p>In the AA model (α &lt; 1/2), there is a threshold
+$\tilde{\epsilon} = \frac{2\alpha(1-p)}{1-2\alpha}$
+that separates regimes where the leading group can eventually become overwhelmingly dominant.</p>
+<hr>
+<h2>Richer Simulation Model</h2>
+<p>To test robustness beyond binary “types,” we also simulate a richer continuous-ability model where:</p>
+<ul>
+<li>Admitted individuals get a stochastic ability boost,</li>
+<li>Ability transmits imperfectly across generations,</li>
+<li>The leading group’s non-admits receive an additional stochastic “affinity” boost.</li>
+</ul>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/stochastic-merit/admit_proprotions_fullmodel_final.png"
+    alt="Full Model"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.2);
+    "
+    width="500"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 2.</strong> (Simulation) Heatmap of leading-group share among admits versus capacity α and mean affinity advantage.
+  </figcaption>
+</figure>
+<h2>Why this matters (for algorithmic fairness)</h2>
+<p>Static, one-shot fairness can look “perfect” in each round, yet long-run disparities can still:</p>
+<ul>
+<li>arise due to randomness,</li>
+<li>persist due to feedback loops,</li>
+<li>worsen under scarcity.</li>
+</ul>
+<p>This suggests fairness interventions should explicitly reason about <strong>dynamics</strong>, <strong>scarcity</strong>, and <strong>long-run equilibria</strong>, not only per-round constraints.</p>
+<hr>
+<h2>Citation</h2>
+<pre><code class="language-bibtex">@article{Pokharel_Sen_Das_Ziani_2025,
+  title={Fixed Points and Stochastic Meritocracies: A Long-Term Perspective},
+  author={Pokharel, Gaurab and Sen, Diptangshu and Das, Sanmay and Ziani, Juba},
+  year={2025},
+  url={http://arxiv.org/abs/2510.07478},
+  doi={10.48550/arXiv.2510.07478}
+}
+</code></pre>
+<hr>
+<p><em>Work supposed by US National Science Foundation (NSF) under grants IIS-2504990, IIS-2336236 and IIS-2533162.</em></p>
+<hr>
+<div style="display:flex; justify-content:center; margin-top:18px;">
+  <a href="https://arxiv.org/abs/2510.07478" target="_blank" rel="noopener" aria-label="Paper (PDF)">
+    <img src="/assets/icons/pdf.png" alt="Paper PDF" style="width:100px; height:100px; display:block;" />
+  </a>
+</div>
+
+  </article>
+</section>
+    </main>
+
+    <footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-social" aria-label="Social links">
+      
+        <a class="social-btn" href="https://github.com/gaurab-pokharel" target="_blank" rel="noopener" aria-label="GitHub">
+          <img class="social-icon" src="/assets/icons/github.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://scholar.google.com/citations?user=FSE8mAIAAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <img class="social-icon" src="/assets/icons/scholar.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://www.linkedin.com/in/gaurab278/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img class="social-icon" src="/assets/icons/linkedin.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="mailto:gaurab@vt.edu" aria-label="Email">
+          <img class="social-icon" src="/assets/icons/email.png" alt="" />
+        </a>
+      
+    </div>
+
+    <div class="footer-meta">
+      <span class="muted">© Gaurab · Built with 11ty</span>
+      <span class="muted">Last updated: 2024-10-09</span>
+    </div>
+  </div>
+</footer>
+
+    <script type="module" src="/js/app.js"></script>
+    <script src="/js/transitions.js"></script>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  });
+</script>
+
+  </body>
+</html>

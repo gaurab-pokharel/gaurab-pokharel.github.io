@@ -1,0 +1,16 @@
+{
+  "name": "Gaurab",
+  "title": "PhD Student • ML + High-stakes Allocation",
+  "description": "I study how discretion, algorithms, and stochasticity interact in high-stakes social allocation systems.",
+ "nav": [
+  { "label": "Home", "href": "/" },
+  { "label": "Projects", "href": "/projects/" },
+  { "label": "CV", "href": "/cv/" }
+],
+  "social": {
+  "github": "https://github.com/gaurab-pokharel",
+  "linkedin": "https://www.linkedin.com/in/gaurab278/",
+  "scholar": "https://scholar.google.com/citations?user=FSE8mAIAAAAJ&hl=en",
+  "email": "mailto:gaurab@vt.edu"
+}
+}

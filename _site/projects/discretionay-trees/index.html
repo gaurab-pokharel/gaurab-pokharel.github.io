@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Discretionary Trees · Gaurab</title>
+    <meta name="description" content="Street-level bureaucrats (e.g., homelessness caseworkers) must implement policy while retaining discretion to make exceptions in individual cases—an essential feature that can improve outcomes but also raise concerns about bias and procedural justice. Using administrative records from the St. Louis HMIS (2007–2014) during a period when intervention assignment was less formulaic, this project uses machine learning to make caseworker decision-making legible: (i) how much of it can be captured by simple, human-usable rules, (ii) whether decisions remain consistent beyond those simple rules, and (iii) how discretion is applied and with what apparent consequences. Short, interpretable decision trees capture a substantial portion of assignments, suggesting plausible “default” heuristics, while higher-capacity models show that caseworkers are highly consistent overall. We operationalize discretion as systematic deviations from the short-tree baseline and show that these deviations are not random: discretionary decisions disproportionately target lower-vulnerability households, and discretionary upgrades to more intensive interventions align with higher expected marginal benefit—evidence consistent with strategic, welfare-improving discretion rather than arbitrary overrides." />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components/nav.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/cards.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+
+
+  
+    <link rel="stylesheet" href="/css/pages/project_detail.css" />
+  
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  </head>
+  <body>
+    <canvas id="bg" aria-hidden="true"></canvas>
+
+    <header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Gaurab</a>
+
+    <nav class="links" aria-label="Primary">
+      
+        
+        <a href="/" class="">
+          Home
+        </a>
+      
+        
+        <a href="/projects/" class="active">
+          Projects
+        </a>
+      
+        
+        <a href="/cv/" class="">
+          CV
+        </a>
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="container">
+      
+<section class="project-page">
+  <a class="back-link" href="/projects/">← Back to Projects</a>
+
+  <article class="project-detail-card">
+    <h1>Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning</h1>
+<p><strong>Authors:</strong> <strong>Gaurab Pokharel</strong>¹, Patrick J. Fowler², and Sanmay Das¹</p>
+<p><strong>Affiliations:</strong> ¹Virginia Tech, ²Washington University in St. Louis</p>
+<p><strong>Venue:</strong> <em>Proceedings of the AAAI Conference on Artificial Intelligence (AAAI 2024)</em></p>
+<hr>
+<h2>Overview</h2>
+<p>Street-level bureaucrats (caseworkers, triage nurses, etc.) implement policy in real time while exercising judgment in individual cases. That discretion can be valuable—allowing exceptions when context matters—but it can also introduce inequities if applied inconsistently.</p>
+<p>This project uses machine learning to answer three practical questions:</p>
+<ol>
+<li><strong>Simple rules:</strong> How much of real decision-making can be summarized as short, human-usable heuristics?</li>
+<li><strong>Consistency:</strong> When decisions go beyond simple rules, are they still procedurally consistent?</li>
+<li><strong>Discretion effects:</strong> When discretion happens, who gets it—and does it appear outcome-improving?</li>
+</ol>
+<hr>
+<h2>Data and Setting</h2>
+<p>We use administrative data from the St. Louis Homeless Management Information System (HMIS), covering household characteristics and assigned interventions during 2007–2014, when assignment was not fully formulaic.</p>
+<p>We focus primarily on the tradeoff between:</p>
+<ul>
+<li><strong>Emergency Shelter (ES)</strong> (less intensive)</li>
+<li><strong>Transitional Housing (TH)</strong> (more intensive)</li>
+</ul>
+<hr>
+<h2>Method</h2>
+<h3>1) “Default heuristics” via short decision trees</h3>
+<p>We learn short, constrained decision trees that approximate the kind of quick heuristics a caseworker could plausibly apply in “easy” cases.</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discretionary-trees/serdtTrees.png"
+    alt="SERDT Trees"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.2);
+    "
+    width="800"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 1.</strong> The decision trees generated by SER-DT for the assignment of Emergency Shelter (left) and Transitional Housing (right). The left branches of each node indicate that the parent condition was satisfied, whereas the right branch indicates the condition was false. The generated trees are small but can encompass a significant portion of the correctly made decisions.
+  </figcaption>
+</figure>
+<h3>2) Consistency via a high-capacity model</h3>
+<p>We train a stronger predictive model (e.g., gradient-boosted trees) to test whether caseworker decisions are consistent even when not captured by the short heuristics.</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discretionary-trees/fig_roc_curves.png"
+    alt="XGBoost Performance"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,1);
+    "
+    width="500"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 2.</strong> ROC curves for each tree used to learn intervention assignments using the XGBoost algorithm. Predictive discrimination, measured using the area under the ROC curve is very high, implying significant consistency in caseworker decision-making.
+  </figcaption>
+</figure>
+<h3>3) Operationalizing discretion</h3>
+<p>We treat <strong>discretionary decisions</strong> as those where the actual assignment differs from what the short-tree heuristic would have predicted—capturing “beyond-heuristic” judgment.</p>
+<hr>
+<h2>Key Findings</h2>
+<h3>A) Many decisions are explainable by simple rules</h3>
+<p>Short trees capture a meaningful share of assignment decisions, consistent with the idea that caseworkers rely on heuristics for many cases.</p>
+<h3>B) Beyond heuristics, decisions are still highly consistent</h3>
+<p>A more flexible model predicts assignments extremely well, suggesting caseworkers are procedurally consistent rather than arbitrary.</p>
+<h3>C) Discretion is targeted and not random</h3>
+<p>When discretion occurs, it tends to be applied to <strong>lower-vulnerability</strong> households rather than the most vulnerable.</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discretionary-trees/fig_vulnerability_tests.png"
+    alt="Nonparametric test on vulnerability"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,1);
+    "
+    width="700"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 3.</strong> Non-parametric test comparing vulnerability scores between the discretionary subgroups and the population predicted to receive the intervention.
+  </figcaption>
+</figure>
+<h3>D) Discretionary upgrades align with higher marginal benefit</h3>
+<p>Discretionary moves from predicted ES → actual TH are associated with higher expected marginal benefit than random reassignment, while discretionary TH → ES does not show a comparable loss.</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discretionary-trees/fig_marginal_benefit_tests.png"
+    alt="Nonparametric test on marginal utility"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,1);
+    "
+    width="700"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 4.</strong> Non-parametric test comparing the marginal gain in utility resulting from the switch in interventions between the discretionary subgroups and the population predicted to receive the intervention.
+  </figcaption>
+</figure>
+<h3>E) A compact way to visualize “discretion” in the dataset</h3>
+<p>A nice at-a-glance graphic is the predicted-vs-actual distribution (the “where mismatches happen” plot).</p>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discretionary-trees/fig_pred_vs_actual.png"
+    alt="Nonparametric test on marginal utility"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,1);
+    "
+    width="500"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 5.</strong> Distribution of the number of records for predicted versus actual assignment of intervention. We focus our analysis of discretion quantification in the subgroups marked within the red  box.
+  </figcaption>
+</figure>
+<hr>
+<h2>Why this matters for decision support</h2>
+<p>This is evidence for a “human-in-the-loop” design story: simple rules explain a large portion of decisions, and discretion appears to be applied in structured ways that (at least on average) align with improved outcomes for certain cases. That motivates decision support tools that <strong>make heuristics explicit</strong> and <strong>support/monitor discretion</strong>, rather than replacing frontline judgment.</p>
+<hr>
+<h2>Citation</h2>
+<pre><code class="language-bibtex">@article{Pokharel_Das_Fowler_2024, 
+    title={Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning}, 
+    volume={38},
+    ISSN={2374-3468, 2159-5399}, 
+    url={https://ojs.aaai.org/index.php/AAAI/article/view/30236}, 
+    DOI={10.1609/aaai.v38i20.30236},  
+    number={20}, 
+    journal={Proceedings of the AAAI Conference on Artificial Intelligence}, 
+    author={Pokharel, Gaurab and Das, Sanmay and Fowler, Patrick}, 
+    year={2024}, 
+    month=mar, 
+    pages={22303–22312} 
+  }
+</code></pre>
+<hr>
+<p><em>This work was partially supported by the NSF (IIS-1939677, IIS-2127752) and by Amazon through an NSF FAI award.</em></p>
+<hr>
+<div style="display:flex; justify-content:center; margin-top:18px;">
+  <a href="https://ojs.aaai.org/index.php/AAAI/article/view/30236" target="_blank" rel="noopener" aria-label="Paper (PDF)">
+    <img src="/assets/icons/pdf.png" alt="Paper PDF" style="width:100px; height:100px; display:block;" />
+  </a>
+</div>
+
+  </article>
+</section>
+    </main>
+
+    <footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-social" aria-label="Social links">
+      
+        <a class="social-btn" href="https://github.com/gaurab-pokharel" target="_blank" rel="noopener" aria-label="GitHub">
+          <img class="social-icon" src="/assets/icons/github.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://scholar.google.com/citations?user=FSE8mAIAAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <img class="social-icon" src="/assets/icons/scholar.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://www.linkedin.com/in/gaurab278/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img class="social-icon" src="/assets/icons/linkedin.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="mailto:gaurab@vt.edu" aria-label="Email">
+          <img class="social-icon" src="/assets/icons/email.png" alt="" />
+        </a>
+      
+    </div>
+
+    <div class="footer-meta">
+      <span class="muted">© Gaurab · Built with 11ty</span>
+      <span class="muted">Last updated: 2023-09-30</span>
+    </div>
+  </div>
+</footer>
+
+    <script type="module" src="/js/app.js"></script>
+    <script src="/js/transitions.js"></script>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+styles:
+  - /css/pages/project_detail.css
+---
+
+<section class="project-page">
+  <a class="back-link" href="/projects/">← Back to Projects</a>
+
+  <article class="project-detail-card">
+    {{ content | safe }}
+  </article>
+</section>

@@ -1,0 +1,63 @@
+[
+  {
+    "year": 2026,
+    "month": 2,
+    "title": "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+    "authors": "Gaurab Pokharel, Sanmay Das, Patrick J. Fowler",
+    "venue": "arXiv",
+    "type": "Preprint",
+    "url": "https://arxiv.org/abs/2602.10039",
+    "doi": "10.48550/ARXIV.2602.10039"
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "title": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+    "authors": "Gaurab Pokharel, Shafkat Farabi, Patrick J. Fowler, Sanmay Das",
+    "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society (AIES)",
+    "type": "Conference Proceedings",
+    "url": "https://ojs.aaai.org/index.php/AIES/article/view/36694",
+    "doi": "10.1609/aies.v8i3.36694"
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "title": "Beyond Automation: Understanding Fairness, Ethics, and Human Discretion in AI-driven Societal Decisions",
+    "authors": "Gaurab Pokharel",
+    "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society (AIES)",
+    "type": "Conference Proceedings",
+    "url": "https://ojs.aaai.org/index.php/AIES/article/view/36793",
+    "doi": "10.1609/aies.v8i3.36793"
+  },
+  {
+    "year": 2025,
+    "month": 10,
+    "title": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+    "authors": "Gaurab Pokharel, Diptangshu Sen, Sanmay Das, Juba Ziani",
+    "venue": "arXiv",
+    "type": "Preprint",
+    "url": "http://arxiv.org/abs/2510.07478",
+    "doi": "10.48550/arXiv.2510.07478"
+  },
+  {
+    "year": 2024,
+    "month": 3,
+    "title": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+    "authors": "Gaurab Pokharel, Sanmay Das, Patrick Fowler",
+    "venue": "Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)",
+    "type": "Conference Proceedings",
+    "url": "https://ojs.aaai.org/index.php/AAAI/article/view/30236",
+    "doi": "10.1609/aaai.v38i20.30236"
+  },
+  {
+    "year": 2023,
+    "month": 2,
+    "title": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+    "authors": "Gaurab Pokharel, Sanmay Das",
+    "venue": "arXiv",
+    "type": "Preprint",
+    "url": "http://arxiv.org/abs/2302.06176",
+    "doi": "10.48550/arXiv.2302.06176",
+    "note": "arXiv:2302.06176 [cs]"
+  }
+]

@@ -1,0 +1,184 @@
+{
+  "pdf": "/assets/cv/Gaurab_Pokharel_CV.pdf",
+  "summary": "PhD candidate in Computer Science (Virginia Tech) focused on building and validating AI systems that support high-stakes human judgment. I develop end-to-end Python pipelines on messy observational data—from study design and modeling to reliability/robustness analysis and reproducible reporting—with research spanning interpretable ML for human decision processes, evaluation of modern AI systems, and sequential decision-making methods relevant to sampling and training mechanisms.",
+  "sections": [
+    {
+      "title": "Experience",
+      "items": [
+        {
+          "title": "Graduate Research Assistant",
+          "org": "Virginia Tech",
+          "dates": "Aug 2021 – Present",
+          "meta": "Advisor: Sanmay Das",
+          "bullets": [
+            "Built and validated models of real-world human decision-making using large, noisy administrative datasets; emphasized replicable pipelines, clear error analysis, and decision-relevant metrics.",
+            "Developed interpretable ML baselines (short decision trees) to approximate “default” judgment policies and quantified systematic deviations; used this framework to study consistency and outcome correlates of overrides.",
+            "Designed evaluation protocols for AI judgment systems (including repeated-run robustness checks, aggregation from pairwise preferences to global rankings, and structured failure-mode analysis).",
+            "Implemented simulation and sequential decision-making methods (bandits / learning dynamics) relevant to adaptive sampling strategies and resource allocation under uncertainty.",
+            "Produced well-documented Python tooling for data preparation, feature generation, model training, and reporting to support iterative experimentation with strict temporal separation."
+          ]
+        },
+        {
+          "title": "Graduate Teaching Assistant, Machine Learning (Graduate)",
+          "org": "Virginia Tech",
+          "dates": "Aug 2023 – May 2024",
+          "bullets": [
+            "Supported instruction for graduate ML (office hours, grading, exam logistics); strengthened communication of technical ideas and careful evaluation practice."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Selected Research",
+      "items": [
+                {
+          "title": "Modeling Discretion as a Budgeted Resource (Dynamic Policies)",
+          "dates": "2026",
+          "summary": "Developed a dynamic model of costly, limited human intervention; characterized threshold-style policies and how distributional properties shape when to “spend” discretion under capacity constraints.",
+          "link": "https://arxiv.org/abs/2602.10039"
+        },
+        {
+          "title": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+          "dates": "2025",
+          "summary": "Designed and evaluated AI judgment pipelines with robustness checks (run-to-run consistency), alignment tests against established metrics, and clear communication of failure modes for operational settings.",
+          "link": "https://doi.org/10.1609/aies.v8i3.36694"
+        },
+        {
+          "title": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+          "dates": "2024",
+          "summary": "Built short, interpretable models of “default” human decision heuristics and quantified systematic deviations; analyzed consistency and when deviations are associated with improved outcomes—transferable for validating human scoring behavior.",
+          "link": "https://doi.org/10.1609/aaai.v38i20.30236"
+        }
+      ]
+    },
+    {
+      "title": "Education",
+      "items": [
+        {
+          "title": "PhD, Computer Science",
+          "org": "Virginia Tech",
+          "dates": "2024 – Present", 
+          "meta": "CGPA: 4.0/4.0"
+        },
+        {
+          "title": "M.S., Computer Science",
+          "org": "(ML Concentration) George Mason University",
+          "dates": "2021 – 2023",
+          "meta": "CGPA: 3.96/4.0"
+        },
+        {
+          "title": "B.A., Mathematics & Computer Science",
+          "org": "(High Honors) Oberlin College",
+          "dates": "2017 – 2021",
+          "meta": "CGPA: 3.82/4.0"
+        }
+      ]
+    },
+    {
+      "title": "Skills",
+      "items": [
+        {
+          "title": "Core",
+          "pills": [
+            "Python",
+            "Statistical modeling",
+            "ML evaluation & validation",
+            "Reliability/robustness analysis",
+            "Experiment design",
+            "Reproducible workflows"
+          ]
+        },
+        {
+          "title": "ML / Data",
+          "pills": [
+            "Pandas",
+            "NumPy",
+            "scikit-learn",
+            "PyTorch",
+            "Feature engineering",
+            "Temporal splits (anti-leakage)",
+            "Structured error analysis",
+            "Reporting"
+          ]
+        },
+        {
+          "title": "Methods",
+          "pills": [
+            "Interpretable ML (trees)",
+            "Supervised learning",
+            "Sequential decision-making (bandits)",
+            "Simulation modeling",
+            "Noisy observational data"
+          ]
+        },
+        {
+          "title": "Tools",
+          "pills": [
+            "Linux",
+            "Git",
+            "Shell (Bash/Zsh)",
+            "SQL",
+            "LaTeX",
+            "Documentation & collaboration"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Awards & Recognitions",
+      "items": [
+        {
+          "title": "Best Paper",
+          "org": "Multi-Agent AI in the Real World Workshop @ AAAI 2025",
+          "link": "https://sites.google.com/view/marw-ai-agents/accepted-papers"
+        },
+        {
+          "title": "Distinguished Academic Achievement Award",
+          "org": "George Mason University",
+          "dates": "2025"
+        },
+        {
+          "title": "The R.J. Thomas ’52 Award for Outstanding Computer Science Students",
+          "org": "Oberlin College",
+          "dates": "2021"
+        },
+        {
+          "title": "Oberlin College Research Fellow",
+          "org": "Oberlin College",
+          "dates": "2019–2021",
+          "link": "https://www.oberlin.edu/undergraduate-research/gaurab-pokharel-21"
+        },
+        {
+          "title": "Davis Project for Peace Award",
+          "org": "Oberlin College",
+          "dates": "2019",
+          "link": "https://www.oberlin.edu/news/bikalpa-baniya-19-and-gaurab-pokharel-21-receive-davis-projects-peace-award"
+        }
+      ]
+    },
+    {
+  "title": "Service",
+  "items": [
+    {
+      "title": "Reviewer",
+      "pills": [
+        "FAccT ’26",
+        "EC ’26",
+        "AAAI ’26",
+        "AIES ’26",
+        "AAAI ’25",
+        "AIES ’25",
+        "EAAMO ’25"
+      ]
+    },
+    {
+      "title": "Organizing",
+      "pills": [
+        "Workflow Chair · AIES ’23",
+        "Local Chair · EAAMO ’22"
+      ]
+    }
+  ]
+}
+  ]
+}

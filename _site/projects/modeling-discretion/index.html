@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Budgeting Discretion · Gaurab</title>
+    <meta name="description" content="This research formalizes street-level discretion as a finite-budget resource allocation problem, proving that optimal decision-makers follow a dynamic threshold rule determined by the tail-heaviness of potential welfare gains. By analyzing years of homelessness service data, the study demonstrates that human caseworkers strategically ration their discretionary authority in response to real-world capacity openings and operational timing. The findings highlight that discretion is a managed resource, offering a unit-free framework for comparing decision-making personalities across different institutional settings." />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components/nav.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/cards.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+
+
+  
+    <link rel="stylesheet" href="/css/pages/project_detail.css" />
+  
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  </head>
+  <body>
+    <canvas id="bg" aria-hidden="true"></canvas>
+
+    <header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Gaurab</a>
+
+    <nav class="links" aria-label="Primary">
+      
+        
+        <a href="/" class="">
+          Home
+        </a>
+      
+        
+        <a href="/projects/" class="active">
+          Projects
+        </a>
+      
+        
+        <a href="/cv/" class="">
+          CV
+        </a>
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="container">
+      
+<section class="project-page">
+  <a class="back-link" href="/projects/">← Back to Projects</a>
+
+  <article class="project-detail-card">
+    <h1>Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making</h1>
+<p><strong>Authors:</strong> <strong>Gaurab Pokharel</strong>¹, Sanmay Das¹, and Patrick J. Fowler²</p>
+<p><strong>Affiliations:</strong> ¹Virginia Tech, ²Washington University in St. Louis</p>
+<hr>
+<h2><strong>Overview</strong></h2>
+<p>Street-level bureaucrats (caseworkers, triage nurses, etc.) constantly balance rigid policy rules with the complex reality of individual cases. While they often have the professional authority to override a default recommendation, this discretion is a finite resource—using it today reduces the ability to use it tomorrow.</p>
+<p>In this paper, we formalize this dilemma as <strong>Budgeted Discretion</strong>. We model it as a dynamic allocation problem where an agent must choose when to spend a limited &quot;override budget&quot; over a finite time horizon to maximize total welfare.</p>
+<blockquote>
+<p><strong>Key Takeaway:</strong> Optimal agents follow a simple threshold rule—they &quot;hold their fire&quot; and conserve discretion for rare, high-stakes outliers when the potential welfare gains are fat-tailed (highly varied), but spend more routinely when gains are thin-tailed (more uniform).</p>
+</blockquote>
+<hr>
+<h2><strong>Theoretical Contribution</strong></h2>
+<h3><strong>The Behavioral Invariance Theorem</strong></h3>
+<p>We identify a &quot;behavioral invariance&quot; in optimal decision-making. For location-scale families of improvement distributions, the rate at which an optimal agent exercises discretion is <strong>independent of the scale of potential gains</strong> and depends only on the distribution's <strong>shape</strong> (its tail profile).</p>
+<p>This yields a unit-free prediction: changing the units of measurement (e.g., dollars vs. thousands) changes the numerical thresholds but <strong>does not change the probability</strong> that an agent will choose to override at a given state.</p>
+<hr>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discmodel/fig1.png"
+    alt="Spending Profiles"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    "
+    width="800"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 1.</strong> (a) Shows how the spending trajectory remains identical despite varying scale parameters. (b) Illustrates how "patient" (fat-tailed) versus "aggressive" (thin-tailed) policies evolve over 
+  </figcaption>
+</figure>
+<hr>
+<h2><strong>Empirical Evidence: Homelessness Services</strong></h2>
+<p>Using operational data from the St. Louis Homeless Management Information System (HMIS) between 2008 and 2014, we test if real-world overrides track operational constraints. We recover a baseline &quot;heuristic policy&quot; using decision trees and define discretion as any instance where a caseworker deviates from this baseline.</p>
+<h3><strong>Key Findings:</strong></h3>
+<ul>
+<li>
+<p><strong>Strategic Rationing:</strong> Caseworkers dynamically adjust their rationing based on inventory. The probability of &quot;rationing&quot; (moving a client from scarce housing back to the default shelter) rises when shelter exits create openings and falls when housing exits expand availability.</p>
+</li>
+<li>
+<p><strong>Operational Bandwidth:</strong> Discretion is not a frictionless exercise. It peaks on <strong>Mondays</strong> (reflecting start-of-week batching) and drops significantly on <strong>weekends</strong> when intake operations are effectively offline.</p>
+</li>
+<li></li>
+</ul>
+<p><strong>Seasonality:</strong> Overrides are more &quot;front-loaded&quot; early in the federal fiscal year (starting in October), with the composition shifting toward more &quot;upgrades&quot; as the year progresses.</p>
+<hr>
+<figure style="
+  margin: 1.25rem auto;
+  width: fit-content;
+  max-width: 95%;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.7);
+  border-radius: 12px;
+  padding: 14px 14px 10px;
+">
+  <img
+    src="/images/discmodel/fig2.png"
+    alt="The opportunity cost map"
+    style="
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    "
+    width="800"
+  />
+  <figcaption style="
+    margin-top: 10px;
+    font-size: 0.95rem;
+    line-height: 1.35;
+    color: rgba(255,255,255,0.88);
+  ">
+    <strong>Figure 2.</strong> A heatmap of optimal thresholds ($\mathcal{T}_{\tau,k}$). Darker regions indicate states where agents require a very high perceived gain to justify spending their remaining budget.
+  </figcaption>
+</figure>
+<hr>
+<h2><strong>Implications for AI &amp; Decision Support</strong></h2>
+<p>Our results provide a foundation for designing decision-support systems that preserve beneficial human judgment without forgoing oversight. If overrides are scarce, systems should assist bureaucrats not just in <em>which</em> cases merit discretion, but <em>when</em> to deploy it given future option values and workflow constraints.</p>
+<hr>
+<h2><strong>Citation</strong></h2>
+<pre><code class="language-bibtex"> @article{Pokharel_Das_Fowler_2026, 
+     title={Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making}, 
+     rights={Creative Commons Attribution 4.0 International}, 
+     url={https://arxiv.org/abs/2602.10039}, 
+     DOI={10.48550/ARXIV.2602.10039}, 
+     publisher={arXiv}, 
+     author={Pokharel, Gaurab and Das, Sanmay and Fowler, Patrick J.}, 
+     year={2026} 
+}
+</code></pre>
+<hr>
+<p><em>This work was supported by NSF Award 2533162.</em></p>
+<hr>
+<div style="display:flex; justify-content:center; margin-top:18px;">
+  <a href="https://arxiv.org/abs/2602.10039" target="_blank" rel="noopener" aria-label="Paper (PDF)">
+    <img src="/assets/icons/pdf.png" alt="Paper PDF" style="width:100px; height:100px; display:block;" />
+  </a>
+</div>
+  </article>
+</section>
+    </main>
+
+    <footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-social" aria-label="Social links">
+      
+        <a class="social-btn" href="https://github.com/gaurab-pokharel" target="_blank" rel="noopener" aria-label="GitHub">
+          <img class="social-icon" src="/assets/icons/github.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://scholar.google.com/citations?user=FSE8mAIAAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <img class="social-icon" src="/assets/icons/scholar.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://www.linkedin.com/in/gaurab278/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img class="social-icon" src="/assets/icons/linkedin.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="mailto:gaurab@vt.edu" aria-label="Email">
+          <img class="social-icon" src="/assets/icons/email.png" alt="" />
+        </a>
+      
+    </div>
+
+    <div class="footer-meta">
+      <span class="muted">© Gaurab · Built with 11ty</span>
+      <span class="muted">Last updated: 2025-05-31</span>
+    </div>
+  </div>
+</footer>
+
+    <script type="module" src="/js/app.js"></script>
+    <script src="/js/transitions.js"></script>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  });
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,103 @@
+---
+layout: layouts/base.njk
+title: "CV"
+description: "Curriculum vitae"
+styles:
+  - /css/pages/cv.css
+---
+
+<section class="cv-page">
+  <div class="cv-stack">
+    <article class="cv-card">
+      <header class="cv-top">
+        <h1>CV</h1>
+        {% if cv.pdf %}
+          <a class="button" href="{{ cv.pdf }}" target="_blank" rel="noopener">Download PDF</a>
+        {% endif %}
+      </header>
+
+      {% if cv.summary %}
+        <div class="cv-summary">
+          <p>{{ cv.summary }}</p>
+        </div>
+      {% endif %}
+
+      <div class="cv-tools">
+        <input id="cvSearch" class="search" type="search" placeholder="Search CV…" />
+      </div>
+    </article>
+
+    {% for section in cv.sections %}
+      <article class="cv-card">
+        <h2 class="cv-card-title">{{ section.title }}</h2>
+
+        <div class="cv-section">
+          {% for item in section.items %}
+            <div class="cv-entry" data-cv-item>
+              <div class="cv-entry-header">
+                <div class="cv-entry-left">
+                  {% if item.link %}
+                    <a class="cv-entry-title-link" href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                  {% else %}
+                    <span class="cv-entry-title">{{ item.title }}</span>
+                  {% endif %}
+                  {% if item.org %}<span class="muted"> · {{ item.org }}</span>{% endif %}
+                  {% if item.dates %}<span class="muted"> · {{ item.dates }}</span>{% endif %}
+                </div>
+              </div>
+
+              {% if item.meta %}<p class="muted">{{ item.meta }}</p>{% endif %}
+
+              {% if item.pills %}
+                <div class="cv-pill-row">
+                  {% for x in item.pills %}
+                    <span class="cv-pill">{{ x }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {% if item.summary %}<p>{{ item.summary }}</p>{% endif %}
+
+              {% if item.bullets %}
+                <ul class="cv-bullets">
+                  {% for b in item.bullets %}
+                    <li>{{ b }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </article>
+    {% endfor %}
+
+    <article class="cv-card">
+      <h2 class="cv-card-title">Publications</h2>
+
+      {% if publications and (publications | length) > 0 %}
+        <div class="cv-publications">
+          <ol class="pub-list">
+            {% for p in publications %}
+              <li class="pub-item">
+                {% if p.url %}
+                  <a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.title }}</a>
+                {% else %}
+                  <span>{{ p.title }}</span>
+                {% endif %}
+                <div class="muted pub-meta">
+                  {{ p.authors }}
+                  {% if p.venue %} · {{ p.venue }}{% endif %}
+                  · {{ p.year }}
+                </div>
+              </li>
+            {% endfor %}
+          </ol>
+        </div>
+      {% else %}
+        <p class="muted">No publications loaded yet.</p>
+      {% endif %}
+    </article>
+  </div>
+</section>
+
+<script type="module" src="/js/pages/cv.js"></script>

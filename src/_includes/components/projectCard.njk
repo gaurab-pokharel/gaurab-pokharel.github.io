@@ -1,0 +1,37 @@
+<article class="card">
+  <div class="card-top">
+    <div class="card-top-left">
+      <h3 class="card-title">
+        <a class="card-title-link" href="{{ project.url }}">{{ project.data.title }}</a>
+      </h3>
+
+      {% if project.data.status %}
+        <div class="status-row">
+          {% if project.data.status | length %}
+            {% for s in project.data.status %}
+              <span class="pill">{{ s }}</span>
+            {% endfor %}
+          {% else %}
+            <span class="pill">{{ project.data.status }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if project.data.links and project.data.links.paper and project.data.links.paper != "" %}
+      <a class="card-icon" href="{{ project.data.links.paper }}" target="_blank" rel="noopener" aria-label="Paper">
+        <img class="card-icon-img" src="/assets/icons/pdf.png" alt="" />
+      </a>
+    {% endif %}
+  </div>
+
+  {% if project.data.description %}
+    <p class="muted">{{ project.data.description }}</p>
+  {% endif %}
+
+  <div class="tags">
+    {% for t in (project.data.tags or []) %}
+      <span class="tag">{{ t }}</span>
+    {% endfor %}
+  </div>
+</article>

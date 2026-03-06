@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: "Projects"
+description: "Current and past projects"
+styles:
+  - /css/pages/projects.css
+---
+
+<h1>Projects</h1>
+
+{% set lastYear = "" %}
+
+{% for p in collections.projects %}
+  {% set y = (p.date | year) %}
+
+  {% if y != lastYear %}
+    {% if lastYear != "" %}
+      </div>
+    {% endif %}
+
+    <div class="projects-year">
+      <h2 class="year-heading">{{ y }}</h2>
+    </div>
+
+    <div class="projects-cards">
+    {% set lastYear = y %}
+  {% endif %}
+
+  {% set project = p %}
+  {% include "components/projectCard.njk" %}
+{% endfor %}
+
+</div>

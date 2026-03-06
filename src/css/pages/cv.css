@@ -1,0 +1,113 @@
+.cv-page{max-width:920px;margin:18px auto 0;}
+.cv-stack{display:flex;flex-direction:column;gap:14px;}
+
+.cv-card{
+  border-radius:18px;
+  border:1px solid var(--border);
+  background:var(--card-bg);
+  box-shadow:var(--shadow);
+  padding:clamp(16px,2.2vw,24px);
+  transition:transform 140ms ease,background 140ms ease,border-color 140ms ease;
+}
+
+.cv-card:hover{
+  transform:translateY(-2px);
+  background:var(--card-bg-hover);
+  border-color:rgba(255,255,255,0.18);
+}
+
+.cv-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.cv-summary{margin-top:10px;}
+.cv-tools{margin-top:12px;display:flex;flex-direction:column;gap:10px;}
+
+.cv-card-title{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin:0 0 10px;
+  font-size:22px;
+  color:var(--accent);
+  letter-spacing:0.3px;
+}
+
+.cv-card-title::before,
+.cv-card-title::after{
+  content:"";
+  flex:1;
+  height:2px;
+  background:rgba(255,215,90,0.55);
+  border-radius:2px;
+}
+
+.cv-section{display:flex;flex-direction:column;gap:12px;}
+
+.cv-entry{
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:rgba(0,0,0,0);
+  padding:12px 14px;
+  transition:transform 140ms ease,background 140ms ease,border-color 140ms ease;
+}
+
+.cv-entry:hover{
+  transform:translateY(-2px);
+  background:var(--card-bg-hover);
+  border-color:rgba(255,255,255,0.18);
+}
+
+.cv-entry-title{font-weight:750;}
+
+.cv-bullets{margin:10px 0 0;padding-left:18px;}
+
+.pub-list{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:10px;}
+
+.pub-item{
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:rgba(0,0,0,0);
+  padding:12px 14px;
+  transition:transform 140ms ease,background 140ms ease,border-color 140ms ease;
+}
+
+.pub-item:hover{
+  transform:translateY(-2px);
+  background:var(--card-bg-hover);
+  border-color:rgba(255,255,255,0.18);
+}
+
+.pub-meta{margin-top:4px;}
+
+.cv-pill-row{
+  margin-top:10px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.cv-pill{
+  font-size:12px;
+  padding:6px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.08);
+  color:var(--text);
+}
+
+.cv-entry-title-link{
+  font-weight:750;
+  color:var(--link);
+  text-decoration:none;
+}
+.cv-entry-title-link:visited{color:var(--link);}
+.cv-entry-title-link:hover{
+  color:var(--link-hover);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}

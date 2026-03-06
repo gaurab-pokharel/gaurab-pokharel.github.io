@@ -1,0 +1,34 @@
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-social" aria-label="Social links">
+      {% if site.social.github %}
+        <a class="social-btn" href="{{ site.social.github }}" target="_blank" rel="noopener" aria-label="GitHub">
+          <img class="social-icon" src="/assets/icons/github.png" alt="" />
+        </a>
+      {% endif %}
+
+      {% if site.social.scholar %}
+        <a class="social-btn" href="{{ site.social.scholar }}" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <img class="social-icon" src="/assets/icons/scholar.png" alt="" />
+        </a>
+      {% endif %}
+
+      {% if site.social.linkedin %}
+        <a class="social-btn" href="{{ site.social.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img class="social-icon" src="/assets/icons/linkedin.png" alt="" />
+        </a>
+      {% endif %}
+
+      {% if site.social.email %}
+        <a class="social-btn" href="{{ site.social.email }}" aria-label="Email">
+          <img class="social-icon" src="/assets/icons/email.png" alt="" />
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="footer-meta">
+      <span class="muted">© {{ site.name }} · Built with 11ty</span>
+      <span class="muted">Last updated: {{ page.date | isoDate }}</span>
+    </div>
+  </div>
+</footer>

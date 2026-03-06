@@ -1,0 +1,106 @@
+.card{
+  display:block;
+  padding:16px;
+  border-radius:var(--radius);
+  border:1px solid var(--border);
+  background:var(--card-bg);
+  color:var(--text);
+  transition:transform 120ms ease,background 120ms ease,border-color 120ms ease;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  background:var(--card-bg-hover);
+  border-color:rgba(255,255,255,0.18);
+}
+
+.card-top{
+  display:grid;
+  grid-template-columns: 1fr auto; 
+  align-items:start;
+  gap:10px;
+}
+
+.card-top-left{
+  display:block; 
+}
+
+.status-row{
+  display:flex;
+  gap:8px;
+  margin-left:6px;
+  margin-top:2px;
+  flex-wrap:wrap;
+}
+
+.card-title{
+  margin:0;
+  font-size:22px;      
+  text-align:center;  
+  width:100%;
+}
+
+.card-title-link{
+  display:block;      
+  text-align:center;
+  color:var(--text);
+  text-decoration:none;
+}
+
+.card-title-link:visited{color:var(--text);}
+.card-title-link:hover{
+  color:var(--accent-hover);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.card-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.card-icon{
+  width:40px;
+  height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  border:1px solid rgba(255,215,90,0.25);
+  background:rgba(255,255,255,0.04);
+  transition:transform 140ms ease,background 140ms ease,border-color 140ms ease,box-shadow 140ms ease;
+}
+
+.card-icon:hover{
+  transform:translateY(-1px);
+  background:rgba(255,215,90,0.08);
+  border-color:rgba(255,215,90,0.45);
+  box-shadow:0 10px 26px rgba(255,215,90,0.10);
+}
+
+.card-icon-img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  display:block;
+}
+
+.pill{
+  font-size:12px;
+  padding:4px 9px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--muted);
+  white-space:nowrap;
+}
+
+.tags{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+
+.tag{
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.10);
+  color:var(--muted);
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Eviction Prediction Framework · Gaurab</title>
+    <meta name="description" content="Modular pipeline for eviction risk modeling with strict temporal separation." />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/components/nav.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/cards.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  </head>
+  <body>
+    <canvas id="bg" aria-hidden="true"></canvas>
+
+    <header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a class="brand" href="/">Gaurab</a>
+
+    <nav class="links" aria-label="Primary">
+      
+        
+        <a href="/" class="">
+          Home
+        </a>
+      
+        
+        <a href="/projects/" class="active">
+          Projects
+        </a>
+      
+        
+        <a href="/cv/" class="">
+          CV
+        </a>
+      
+    </nav>
+  </div>
+</header>
+
+    <main class="container">
+      
+<section class="project-page">
+  <a class="back-link" href="/projects/">← Back to Projects</a>
+
+  <article class="project-detail-card">
+    <h2>Problem statement</h2>
+<p>Eviction risk modeling is often undermined by <strong>data leakage</strong>, ad-hoc feature pipelines, and inconsistent train/test splits that do not reflect how the model would be used in production. The goal of this project is to build a reproducible framework that (1) enforces strict temporal separation, (2) supports rapidly iterating on feature sets and models, and (3) produces comparable evaluations across experiments.</p>
+<h2>Solution approach</h2>
+<p>I built a modular, interface-driven pipeline with:</p>
+<ul>
+<li><strong>Configurable temporal cohorts</strong> (train and multiple future test windows) to enforce leakage-free evaluation.</li>
+<li>A <strong>feature-generator architecture</strong> (pluggable “generators” for property-, owner-, and case-level features) with consistent naming, documentation, and validation.</li>
+<li>A modeling layer supporting baseline models and more expressive learners (e.g., gradient-boosted trees), with cross-validation and tracked hyperparameters.</li>
+<li>Evaluation utilities for <strong>PR-AUC / ROC-AUC</strong>, calibration checks, and cohort-level breakdowns.</li>
+</ul>
+<h2>Results</h2>
+<ul>
+<li>A single framework that can run repeated experiments across time windows and feature bundles without re-writing data prep logic.</li>
+<li>Clearer diagnosis of performance drops after refactors by isolating differences in <strong>feature definitions</strong>, <strong>cohort construction</strong>, and <strong>training protocol</strong>.</li>
+<li>A maintainable foundation for adding new feature families (e.g., recency/volatility trends, network/owner aggregation, and policy-relevant derived signals).</li>
+</ul>
+<h2>Main conclusions</h2>
+<p>A rigorous eviction-risk workflow requires the pipeline to be as “auditable” as the model: when temporal splits and features are first-class objects, it becomes far easier to (a) prevent leakage, (b) compare experiments honestly, and (c) ship improvements without regressions.</p>
+
+  </article>
+</section>
+    </main>
+
+    <footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-social" aria-label="Social links">
+      
+        <a class="social-btn" href="https://github.com/gaurab-pokharel" target="_blank" rel="noopener" aria-label="GitHub">
+          <img class="social-icon" src="/assets/icons/github.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://scholar.google.com/citations?user=FSE8mAIAAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <img class="social-icon" src="/assets/icons/scholar.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="https://www.linkedin.com/in/gaurab278/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img class="social-icon" src="/assets/icons/linkedin.png" alt="" />
+        </a>
+      
+
+      
+        <a class="social-btn" href="mailto:gaurab@vt.edu" aria-label="Email">
+          <img class="social-icon" src="/assets/icons/email.png" alt="" />
+        </a>
+      
+    </div>
+
+    <div class="footer-meta">
+      <span class="muted">© Gaurab · Built with 11ty</span>
+      <span class="muted">Last updated: 2026-02-28</span>
+    </div>
+  </div>
+</footer>
+
+    <script type="module" src="/js/app.js"></script>
+    <script src="/js/transitions.js"></script>
+
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ],
+      throwOnError: false
+    });
+  });
+</script>
+
+  </body>
+</html>
