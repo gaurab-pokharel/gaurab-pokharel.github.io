@@ -14,7 +14,7 @@
   --link-hover:rgba(255,235,140,1);
   --accent:var(--link);
   --accent-hover:var(--link-hover);
-  --card-bg:rgba(27, 27, 25, 0.02);
+  --card-bg:rgba(0, 0, 0, 0.5);
   --card-bg-hover:rgba(109, 105, 105, 0.3);
 }
 
