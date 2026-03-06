@@ -2,7 +2,9 @@
   <div class="card-top">
     <div class="card-top-left">
       <h3 class="card-title">
-        <a class="card-title-link" href="{{ project.url }}">{{ project.data.title }}</a>
+        <a class="card-title-link" href="{{ project.url }}" data-project-modal="1" aria-haspopup="dialog">
+        {{ project.data.title }}
+      </a>
       </h3>
 
       {% if project.data.status %}

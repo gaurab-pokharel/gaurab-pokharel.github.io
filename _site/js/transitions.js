@@ -18,6 +18,7 @@
     if (href.startsWith("#")) return true;
     if (href.startsWith("mailto:") || href.startsWith("tel:")) return true;
     if (a.hasAttribute("download")) return true;
+    if (a.dataset.projectModal) return true;
 
     // ignore cross-origin
     try {

@@ -4,10 +4,11 @@ title: "Projects"
 description: "Current and past projects"
 styles:
   - /css/pages/projects.css
+  - /css/pages/project_detail.css
 ---
 
 <h1>Projects</h1>
-
+<p class="projects-hint muted">Click on Each Title to Learn More</p>
 {% set lastYear = "" %}
 
 {% for p in collections.projects %}
@@ -29,5 +30,5 @@ styles:
   {% set project = p %}
   {% include "components/projectCard.njk" %}
 {% endfor %}
-
+<script type="module" src="/js/pages/projects.js"></script>
 </div>
