@@ -1,0 +1,103 @@
+[{
+    "id": "can-llms-rank",
+    "title": "Can LLMs Rank?",
+    "period": "2026",
+    "status": "current",
+    "summary": "Diagnosing whether LLM pairwise rankings can be trusted: consistency within a run and agreement across runs.",
+    "thumbnail": "assets/img/projects/can-llms-rank.png",
+    "tags": ["LLMs", "Ranking", "Pairwise comparisons", "Consistency", "Triage", "Resource allocation"],
+    "links": [
+      { "label": "Paper (arXiv)", "url": "https://arxiv.org/html/2606.30412v1" }
+    ],
+    "body": "can-llms-rank"
+  },
+  {
+    "id": "eviction-prediction",
+    "title": "Eviction Prediction Framework",
+    "period": "2026–present",
+    "status": "current",
+    "summary": "A modular, leakage-resistant pipeline for eviction risk modeling with strict temporal splits.",
+    "thumbnail": "assets/img/projects/eviction-prediction.png",
+    "tags": ["Temporal splits", "Feature engineering", "Model evaluation", "Reproducibility"],
+    "links": [],
+    "body": "eviction-prediction"
+  },
+  {
+    "id": "modeling-discretion",
+    "title": "Budgeting Discretion",
+    "period": "2025–present",
+    "status": "current",
+    "summary": "Formalizing street-level discretion as a finite budget, with theory and evidence from homelessness services.",
+    "thumbnail": "assets/img/projects/modeling-discretion.png",
+    "tags": ["Dynamic programming", "Resource allocation", "Discretion", "Invariance", "Heavy tails"],
+    "links": [
+      { "label": "Paper (arXiv 2026)", "url": "https://arxiv.org/abs/2602.10039" }
+    ],
+    "body": "modeling-discretion"
+  },
+  {
+    "id": "stochastic-merit",
+    "title": "Fixed Points and Stochastic Meritocracies",
+    "period": "2024–present",
+    "status": "current",
+    "summary": "How merit-based selection with feedback loops can turn random early leads into persistent group inequality.",
+    "thumbnail": "assets/img/projects/stochastic-merit.png",
+    "tags": ["Long-run fairness", "Feedback loops", "Stochastic processes", "Meritocratic selection", "Dynamics"],
+    "links": [
+      { "label": "Paper (FAccT 2026, to appear)", "url": "https://arxiv.org/abs/2510.07478" }
+    ],
+    "body": "stochastic-merit"
+  },
+  {
+    "id": "street-level-ai",
+    "title": "Street-Level AI",
+    "period": "2024–2025",
+    "status": "past",
+    "summary": "Testing whether off-the-shelf LLMs are ready for high-stakes homelessness prioritization decisions.",
+    "thumbnail": "assets/img/projects/street-level-ai.png",
+    "tags": ["LLMs", "Human-AI decision-making", "Ranking", "Homelessness services", "Robustness"],
+    "links": [
+      { "label": "Paper (AIES 2025)", "url": "https://ojs.aaai.org/index.php/AIES/article/view/36694" }
+    ],
+    "body": "street-level-ai"
+  },
+  {
+    "id": "discretionary-trees",
+    "title": "Discretionary Trees",
+    "period": "2023–2024",
+    "status": "past",
+    "summary": "Using interpretable machine learning to understand how homelessness caseworkers exercise discretion.",
+    "thumbnail": "assets/img/projects/discretionary-trees.png",
+    "tags": ["Interpretable ML", "Street-level bureaucracy", "Homelessness services", "Discretion", "Procedural justice"],
+    "links": [
+      { "label": "Paper (AAAI 2024)", "url": "https://ojs.aaai.org/index.php/AAAI/article/view/30236" }
+    ],
+    "body": "discretionary-trees"
+  },
+  {
+    "id": "two-sided-matching",
+    "title": "Two-Sided Bandits in Matching Markets",
+    "period": "2022–2023",
+    "status": "past",
+    "summary": "Decentralized learning algorithms that converge to stable matchings when both sides must learn their preferences.",
+    "thumbnail": "assets/img/projects/two-sided-matching.png",
+    "tags": ["Matching markets", "Bandits", "Decentralized learning", "Stable matching", "Thompson sampling"],
+    "links": [
+      { "label": "Paper (arXiv 2023)", "url": "https://arxiv.org/abs/2302.06176" }
+    ],
+    "body": "two-sided-matching"
+  },
+  {
+    "id": "value-of-info",
+    "title": "Increasing the Value of Information in Online POMDP Planning",
+    "period": "2020–2021",
+    "status": "past",
+    "summary": "An entropy-augmented POMCP that stops online planners from missing delayed information-gathering actions.",
+    "thumbnail": "assets/img/projects/value-of-info.png",
+    "tags": ["POMDPs", "Online planning", "Value of information", "POMCP", "Entropy"],
+    "links": [
+      { "label": "Thesis (PDF)", "url": "assets/files/papers/undergrad_thesis.pdf" }
+    ],
+    "body": "value-of-info"
+  }
+]

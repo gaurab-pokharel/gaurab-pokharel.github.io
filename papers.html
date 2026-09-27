@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papers · Gaurab Pokharel</title>
+  <meta name="description" content="Papers by Gaurab Pokharel — conference papers, preprints, and extended abstracts on algorithmic fairness, human-AI decision-making, and the allocation of scarce public resources." />
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main id="content">
+
+    <!-- Page heading -->
+    <section class="page-head">
+      <div class="container">
+        <h1>Papers</h1>
+        <p class="page-lede">Conference papers, preprints, and extended abstracts, newest first.</p>
+      </div>
+    </section>
+
+    <!-- The three sections are rendered by assets/js/papers.js from
+         data/papers.json, in the order the file lists them. -->
+    <section class="papers-main">
+      <div class="container">
+        <div id="papers-sections" class="papers-sections">
+          <p class="papers-loading">Loading papers…</p>
+        </div>
+
+        <!-- Shown only when the list cannot render (fetch failure, no data) -->
+        <p id="papers-note" class="grid-note" hidden></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/papers.js"></script>
+</body>
+</html>

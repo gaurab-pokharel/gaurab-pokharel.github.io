@@ -1,0 +1,50 @@
+[
+  {
+    "date": "2026-09-24",
+    "title": "Budgeting Discretion accepted to NeurIPS 2026 as a spotlight",
+    "body": "Our paper **[Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making](project.html?id=modeling-discretion)** was accepted to **[NeurIPS 2026](https://neurips.cc/Conferences/2026)** and selected as a spotlight! See you in Atlanta in December.",
+    "link": "project.html?id=modeling-discretion"
+  },
+  {
+    "date": "2026-09-17",
+    "title": "Advanced to PhD candidacy",
+    "body": "Defended my dissertation proposal at Virginia Tech and am now officially a PhD candidate.",
+    "link": ""
+  },
+  {
+    "date": "2026-07-16",
+    "title": "Can LLMs Rank? accepted to AIES 2026",
+    "body": "Our paper **[Can LLMs Rank? A Tale of Triads and Triage](project.html?id=can-llms-rank)** was accepted to **[AIES 2026](https://www.aies-conference.com/2026/)** in Malmö, Sweden.",
+    "link": "project.html?id=can-llms-rank"
+  },
+  {
+    "date": "2026-06-29",
+    "title": "New preprint: Can LLMs Rank?",
+    "body": "We pair a circular-triad check with inter-run agreement to tell whether an LLM's rankings can be trusted — details on the [project page](project.html?id=can-llms-rank).",
+    "link": ""
+  },
+  {
+    "date": "2026-06-25",
+    "title": "Presented at FAccT 2026",
+    "body": "Presented **[Fixed Points and Stochastic Meritocracies: A Long-Term Perspective](project.html?id=stochastic-merit)** at **[FAccT 2026](https://facctconference.org/2026/index.html)** in Montreal.",
+    "link": "project.html?id=stochastic-merit"
+  },
+  {
+    "date": "2026-06-08",
+    "title": "Started research internship",
+    "body": "Joined **[Pearson](https://www.pearson.com/en-us.html)** as an ML research intern on the Scoring Services team, working on evaluation methodology for model-assisted scoring workflows.",
+    "link": ""
+  },
+  {
+    "date": "2026-03-02",
+    "title": "Accepted: Fixed Points and Stochastic Meritocracies",
+    "body": "Our paper **[Fixed Points and Stochastic Meritocracies: A Long-Term Perspective](project.html?id=stochastic-merit)** was accepted to **[FAccT 2026](https://facctconference.org/2026/index.html)**.",
+    "link": "project.html?id=stochastic-merit"
+  },
+  {
+    "date": "2026-02-20",
+    "title": "Preprint: Budgeting Discretion",
+    "body": "New preprint on modeling discretion as a budgeted resource available **[online](https://arxiv.org/abs/2602.10039)**.",
+    "link": "project.html?id=modeling-discretion"
+  }
+]

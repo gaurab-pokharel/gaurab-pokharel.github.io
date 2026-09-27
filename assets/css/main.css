@@ -1,0 +1,1499 @@
+/* ==========================================================================
+   gpokharel.com — main.css
+   Shared foundation styles for every page of the site.
+
+   Contents
+     1.  Design tokens
+     2.  Reset and base
+     3.  Typography
+     4.  Links, selection and focus
+     5.  Layout: .container, .prose, .section
+     6.  Skip link
+     7.  Header and navigation (markup injected by site.js)
+     8.  Footer (markup injected by site.js)
+     9.  Buttons
+     10. Cards, tags and the responsive card grid
+     11. Utilities
+     12. Motion preferences
+     13. Home page — hero and recent news
+     14. Projects page — heading, status filter, card link overlay
+     15. Project detail page — panel, write-up content, paper badge
+     16. CV page
+     17. Papers page
+
+   Mobile-first. Breakpoints: 480px, 768px, 1024px.
+   Only the tokens below may be used for colors and fonts.
+   ========================================================================== */
+
+/* 1. Design tokens --------------------------------------------------------- */
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --text: #1b1b1a;
+  --text-muted: #6b6b64;
+  --border: #e7e3dc;
+  --accent: #14655b;
+  --accent-hover: #0e4a43;
+  --accent-soft: #e7f0ee;
+
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+  --fs-h1: clamp(1.9rem, 1.45rem + 1.7vw, 2.7rem);
+  --fs-h2: clamp(1.4rem, 1.2rem + 0.8vw, 1.85rem);
+  --fs-h3: clamp(1.15rem, 1.05rem + 0.4vw, 1.35rem);
+  --fs-small: 0.875rem;
+  --lh-body: 1.7;
+
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --section-y: clamp(2.5rem, 1.8rem + 3vw, 5rem);
+  --gap: 1rem;
+  --maxw: 1080px;
+  --maxw-text: 68ch;
+  --radius: 10px;
+  --photo-radius: 14px;
+
+  --shadow: 0 1px 2px rgba(27, 27, 26, 0.04), 0 2px 6px rgba(27, 27, 26, 0.05);
+  --shadow-hover: 0 2px 4px rgba(27, 27, 26, 0.05), 0 4px 10px rgba(27, 27, 26, 0.07);
+}
+
+/* 2. Reset and base --------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sticky-footer layout: main grows so the footer sits at the bottom
+   of the viewport even on short pages. */
+main {
+  display: block;
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* Responsive media: never overflow, never distort. */
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+img {
+  display: block;
+}
+
+figure {
+  margin: 0 0 1.25em;
+}
+
+/* Thin dividers only. */
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: calc(var(--section-y) / 2) 0;
+}
+
+/* Anchored headings shouldn't hide against the viewport edge. */
+[id] {
+  scroll-margin-top: 1rem;
+}
+
+/* 3. Typography -------------------------------------------------------------
+   Body and UI in the sans face; the name and headings in the serif face.
+   Headings are sentence case, weight 500–600, never all caps. */
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  color: var(--text);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.6em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+ul,
+ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.35em;
+}
+
+/* Only weights 400/500 (sans) and 500/600 (serif) are loaded;
+   keep bold restrained rather than synthesising a heavy 700. */
+b,
+strong {
+  font-weight: 500;
+}
+
+small,
+.small {
+  font-size: var(--fs-small);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+blockquote {
+  margin: 1.5em 0;
+  padding: 0.25em 0 0.25em 1em;
+  border-left: 3px solid var(--border);
+  color: var(--text-muted);
+}
+
+/* 4. Links, selection and focus --------------------------------------------- */
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+/* Visible focus for keyboard users, everywhere. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* The skip-link target (#content) receives programmatic focus;
+   the whole-page ring is unnecessary there. */
+#content:focus {
+  outline: none;
+}
+
+/* 5. Layout ------------------------------------------------------------------ */
+
+.container {
+  width: min(100% - 2 * var(--gutter), var(--maxw));
+  margin-inline: auto;
+}
+
+/* Caps long-form text at a comfortable measure. */
+.prose {
+  max-width: var(--maxw-text);
+}
+
+.section {
+  padding-block: var(--section-y);
+}
+
+/* 6. Skip link ----------------------------------------------------------------
+   First focusable element on the page (injected by site.js);
+   hidden until it receives keyboard focus. */
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 10;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transform: translateY(-250%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* 7. Header and navigation ------------------------------------------------------
+   site.js injects: .header-inner > .wordmark + .nav-toggle + .site-nav.
+   Mobile-first: the nav is collapsed behind the menu button by default and
+   #site-header.nav-open reveals it; from 768px up it is a horizontal row. */
+
+#site-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  flex-wrap: wrap; /* lets the open mobile menu drop to a full-width row */
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 var(--gap);
+  padding-block: 0.8rem;
+}
+
+.wordmark {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  padding-block: 0.35rem;
+}
+
+.wordmark:hover {
+  color: var(--accent);
+}
+
+/* Menu button — mobile only (hidden from 768px up). 44px tap target. */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.nav-toggle:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.nav-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* The button swaps between a menu icon and a close icon. */
+.nav-toggle .icon-close {
+  display: none;
+}
+
+.nav-open .nav-toggle .icon-close {
+  display: block;
+}
+
+.nav-open .nav-toggle .icon-menu {
+  display: none;
+}
+
+/* Collapsed by default on narrow screens. */
+.site-nav {
+  display: none;
+  flex-basis: 100%;
+}
+
+.nav-open .site-nav {
+  display: block;
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0.55rem 0 0;
+  padding: 0.35rem 0 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.site-nav li {
+  margin: 0;
+}
+
+.site-nav a {
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* tap target */
+  padding: 0.2rem 0.15rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--accent);
+}
+
+/* Active page (aria-current set by site.js). */
+.site-nav a[aria-current="page"] {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .site-nav {
+    display: block;
+    flex-basis: auto;
+  }
+
+  .site-nav ul {
+    flex-direction: row;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    border-top: 0;
+  }
+
+  .site-nav a {
+    min-height: 0;
+    padding: 0.35rem 0.1rem;
+  }
+
+  .site-nav a[aria-current="page"] {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.5em;
+  }
+}
+
+/* 8. Footer ---------------------------------------------------------------------
+   site.js injects: .footer-inner > .social-links + .footer-meta. */
+
+#site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: var(--section-y);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 1.75rem;
+}
+
+.social-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+}
+
+.social-links li {
+  margin: 0;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; /* tap target */
+  height: 44px;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+}
+
+.social-links a:hover {
+  color: var(--accent);
+}
+
+.social-links svg {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-meta {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+@media (min-width: 768px) {
+  .footer-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* 9. Buttons ----------------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px; /* tap target */
+  padding: 0.5rem 1.15rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--surface);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.button:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: var(--surface);
+}
+
+/* Quiet variant for secondary actions. */
+.button--ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+.button--ghost:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-hover);
+}
+
+/* 10. Cards, tags and the card grid ---------------------------------------------
+   Used by the projects page; grid steps 1 → 2 → 3 columns as space allows. */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 0.6rem + 1.5vw, 1.5rem);
+}
+
+@media (min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Restrained hover: the border picks up the accent, nothing more. */
+.card:hover,
+.card:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Fixed-aspect media frame: thumbnails crop with object-fit and never distort. */
+.card-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--accent-soft);
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 0.45rem;
+  padding: 1.05rem 1.15rem 1.2rem;
+}
+
+.card-title {
+  margin: 0;
+  font-size: var(--fs-h3);
+}
+
+.card-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  color: var(--accent);
+}
+
+.card-meta {
+  margin: 0;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+}
+
+.card-summary {
+  margin: 0;
+}
+
+.tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+}
+
+.tags li {
+  margin: 0;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent); /* ≈ 5.9:1 on --accent-soft — passes WCAG AA */
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 480px) {
+  .card-body {
+    padding: 0.95rem 1rem 1.05rem;
+  }
+}
+
+/* 11. Utilities ----------------------------------------------------------------- */
+
+/* Accessible-only text (e.g. the menu button label). */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 12. Motion preferences ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 13. Home page — hero and recent news (index.html) --------------------------
+   The hero pairs the portrait with the introduction: two columns from 768px
+   up (photo left, intro right, vertically centered) and stacked with the
+   photo on top below that. "Recent news" is a dated list that home.js
+   renders from data/news.json: each item is a muted date beside a title
+   (linked when the item has a link) over a short body that may carry
+   inline links and bold. */
+
+/* Mobile-first: a single column, photo on top. */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 3vw, 4rem);
+}
+
+/* Fixed-aspect 4:5 portrait frame: overflow clips the image to the rounded
+   corners, object-fit crops it without distortion, and the surface tone
+   holds the space quietly while it loads. */
+.hero-photo {
+  width: min(280px, 100%);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--photo-radius);
+  background: var(--surface);
+}
+
+.hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name tight against its role line; the base h1 margin is too generous here. */
+.hero-intro h1 {
+  margin-bottom: 0.35rem;
+}
+
+.hero-role {
+  margin: 0 0 1.4rem;
+  font-size: var(--fs-h3);
+  color: var(--text-muted);
+}
+
+/* From 768px up: portrait left, intro right. The photo column runs from
+   240px at the breakpoint up to 300px on wide screens, scaling fluidly. */
+@media (min-width: 768px) {
+  .hero {
+    grid-template-columns: clamp(240px, 26vw, 300px) minmax(0, 1fr);
+  }
+
+  .hero-photo {
+    width: 100%; /* fill the photo column */
+  }
+}
+
+/* Recent news ---------------------------------------------------------------
+   A thin divider separates it from the hero. The date stacks above the item
+   below 480px and sits in its own column from there up. */
+
+.news {
+  border-top: 1px solid var(--border);
+  padding-block: calc(var(--section-y) * 0.6) var(--section-y);
+}
+
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news-list li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin: 0; /* row rhythm comes from the padding, not the base li margin */
+  padding-block: 0.95rem;
+  border-top: 1px solid var(--border);
+}
+
+.news-date {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keeps items at a readable measure inside the wide container. */
+.news-item {
+  max-width: var(--maxw-text);
+}
+
+/* Item titles are small serif headings with quiet links, like card titles.
+   Sized down from the base h3 scale so they read as compact list headings —
+   just above body text, not section-heading size. */
+.news-title {
+  margin: 0 0 0.15rem;
+  font-size: clamp(1.05rem, 1rem + 0.2vw, 1.30rem);
+}
+
+.news-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.news-title a:hover {
+  color: var(--accent);
+}
+
+.news-body {
+  margin: 0;
+}
+
+/* From 480px up: the date sits in its own column beside the item. */
+@media (min-width: 480px) {
+  .news-list li {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1.25rem;
+  }
+
+  .news-date {
+    flex: 0 0 10rem;
+  }
+}
+
+
+/* 14. Projects page — heading, status filter, card link overlay (projects.html)
+   The cards themselves use the shared section-10 styles untouched; this
+   section only adds the page-heading rhythm, the All / Current / Past
+   filter pills, and the overlay that stretches each card's title link
+   over the whole card. Filtering re-appends DOM nodes, so the hidden
+   state needs no rules here. */
+
+.page-head {
+  padding-block: calc(var(--section-y) * 0.85) 0;
+}
+
+.page-head h1 {
+  margin: 0;
+}
+
+.page-lede {
+  margin: 0.6rem 0 0;
+  max-width: var(--maxw-text);
+  color: var(--text-muted);
+}
+
+/* The band that holds the filter and the grid. */
+.projects-main {
+  padding-block: calc(var(--section-y) / 2) var(--section-y);
+}
+
+/* Status filter: pill buttons whose active state is styled straight off
+   aria-pressed, so state lives in one (accessible) place. The bar hides
+   itself while empty, so a JS failure leaves no stray gap. */
+.status-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--gap) / 2);
+  margin-bottom: calc(var(--gap) * 1.5);
+}
+
+.status-filter:empty {
+  display: none;
+}
+
+.filter-btn {
+  min-height: 44px; /* comfortable tap target on every screen */
+  padding: 0.3rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent-hover);
+}
+
+.filter-btn[aria-pressed="true"] {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-hover); /* ≈ 8.7:1 on --accent-soft — passes WCAG AA */
+}
+
+/* Stretch each card's title link over the whole card, scoped to the
+   projects grid so section 10 stays as-is for any other use. Hover and
+   keyboard focus already light the card border via .card:hover and
+   .card:focus-within; the link text keeps the global focus outline. */
+.projects-grid .card {
+  position: relative;
+}
+
+.projects-grid .card-title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* Quiet inline note for the empty and failed-to-load states. */
+.grid-note {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+
+
+/* 15. Project detail page — panel, write-up content, paper badge (project.html)
+   The write-up sits on a slightly sunken panel; figures, code blocks and
+   link buttons are white plates on it. Later rules win where a selector
+   (.tag, for example) is also styled in section 10. */
+
+/* Two additions to the token set, both scoped to needs of this page:
+   — --surface-sunken: the panel fill. A mix of --bg and --border
+     (roughly 60/40), so it stays inside the existing warm neutral ramp.
+     It is visibly darker than the page background while keeping
+     --text-muted on it at ≈ 4.7:1, above the WCAG AA 4.5:1 minimum.
+   — --font-mono: a system monospace stack for the BibTeX blocks.
+     No webfont is downloaded for it. */
+:root {
+  --surface-sunken: #f3f0ea;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+/* Keep the project column tight around the reading measure so the panel
+   doesn't sprawl on wide screens: cap at the text measure plus the panel's
+   two paddings, then center. Below that width it just fills the container. */
+.project-detail {
+  max-width: calc(var(--maxw-text) + 6rem);
+  margin-inline: auto;
+}
+
+/* --- The panel that anchors the project content ------------------------- */
+
+/* A rounded, slightly sunken box: darker fill than the page, a hairline
+   border to define the edge, and fluid padding. The white elements
+   inside it (figures, code blocks, link buttons) read as raised layers
+   on the panel, which gives depth without shadows or gradients. */
+.project-panel {
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--photo-radius);
+  padding: clamp(1.25rem, 1rem + 2.2vw, 3rem);
+  margin-inline: auto;
+}
+
+/* The panel's own padding provides the breathing room at its edges. */
+.project-panel > :first-child {
+  margin-top: 0;
+}
+
+.project-panel > :last-child {
+  margin-bottom: 0;
+}
+
+/* --- Header area --------------------------------------------------------- */
+
+.project-backnav {
+  margin: 0 0 1.5rem;
+}
+
+.back-link {
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* comfortable tap target */
+}
+
+.back-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.back-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.project-header h1 {
+  margin: 0 0 0.5rem;
+}
+
+.project-meta {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  margin: 0 0 1rem;
+}
+
+.tag-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+}
+
+.tag {
+  font-size: var(--fs-small);
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+}
+
+.project-links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0 0 2rem;
+  padding: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent-hover);
+  color: var(--accent-hover);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Write-up (Markdown) content ---------------------------------------- */
+
+.project-body {
+  margin-top: 0.5rem;
+  margin-inline: auto;
+}
+
+.project-body p,
+.project-body li {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.project-body-loading {
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+/* Section divider. On the sunken panel the --border hairline is nearly
+   invisible, so this uses a softened --text-muted to read as a thin but
+   deliberate separator. */
+.prose hr {
+  border: none;
+  height: 1px;
+  background-color: var(--text-muted);
+  opacity: 0.55;
+  margin: 2.5rem auto;
+}
+
+.prose blockquote {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose figure {
+  margin: 2rem auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+/* White figure plates sit on the sunken panel like mounted prints. */
+.prose figure img {
+  display: block;
+  margin-inline: auto;
+  max-width: 100%;
+  height: auto;
+  padding: 8px;
+  background: var(--surface); /* keeps transparent plots readable */
+  border: 1px solid var(--border);
+  border-radius: var(--photo-radius);
+}
+
+.prose figcaption {
+  margin-top: 0.6rem;
+  margin-inline: auto;
+  max-width: 60ch;
+  font-size: var(--fs-small);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.prose pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+.prose :not(pre) > code {
+  background: var(--accent-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+/* --- Centered paper badge at the bottom --------------------------------- */
+
+.paper-badge {
+  margin: 3rem 0 0;
+  text-align: center;
+}
+
+.paper-badge-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.paper-badge-link:hover {
+  color: var(--accent-hover);
+}
+
+.paper-badge-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.paper-badge-label {
+  font-size: var(--fs-small);
+}
+
+/* 16. CV page (cv.html) --------------------------------------------------------
+   Sections from data/cv.json: a hairline-underlined title over entries
+   whose primary and secondary lines sit left and date right. Print
+   layout lives in print.css. */
+
+/* Print-only letterhead: hidden on screen, revealed by print.css. */
+.cv-print-header {
+  display: none;
+}
+
+.cv-page {
+  padding-block: var(--section-y);
+}
+
+/* Heading row: title on the left, download button on the right. */
+.cv-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+}
+
+.cv-header h1 {
+  margin: 0;
+}
+
+.cv-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--surface);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.cv-download:hover {
+  background: var(--accent-hover);
+  color: var(--surface);
+}
+
+.cv-download:focus-visible {
+  outline: 2px solid var(--accent-hover);
+  outline-offset: 2px;
+}
+
+.cv-download svg {
+  flex: none;
+}
+
+.cv-updated {
+  margin: 0.5rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+.cv-loading,
+.cv-error {
+  color: var(--text-muted);
+}
+
+.cv-error a {
+  color: var(--accent);
+}
+
+/* ---- sections ---- */
+
+.cv-section {
+  margin-top: calc(var(--section-y) * 0.7);
+}
+
+.cv-section-title {
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--fs-h3);
+}
+
+.cv-entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+/* ---- entries: primary + secondary left, date right ---- */
+
+.cv-entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap);
+}
+
+.cv-entry-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.cv-primary {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1.45;
+  max-width: var(--maxw-text);
+}
+
+.cv-secondary {
+  margin: 0.15rem 0 0;
+  color: var(--text-muted);
+  max-width: var(--maxw-text);
+}
+
+/* Author-name emphasis inside publication author lists.
+   Weight 500 — the heaviest Inter weight the site loads. */
+.cv-secondary strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.cv-date {
+  flex: none;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cv-detail {
+  margin: 0.4rem 0 0;
+  max-width: var(--maxw-text);
+}
+
+.cv-detail-list {
+  margin: 0.5rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.4rem;
+  max-width: var(--maxw-text);
+}
+
+.cv-detail-list li::marker {
+  color: var(--text-muted);
+}
+
+/* ---- link pills after an entry (DOI, arXiv, Details, …) ---- */
+
+.cv-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.cv-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* comfortable tap target */
+  padding: 0 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.cv-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.cv-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-download,
+  .cv-link {
+    transition: none;
+  }
+}
+
+/* Narrow screens: let the date wrap under a long primary line while
+   staying right-aligned. */
+@media (max-width: 480px) {
+  .cv-entry-head {
+    flex-wrap: wrap;
+  }
+
+  .cv-date {
+    margin-left: auto;
+    white-space: normal;
+  }
+}
+
+/* 17. Papers page (papers.html) --------------------------------------------
+   Three sections from data/papers.json (conference papers, preprints,
+   extended abstracts), each a hairline-underlined heading over a plain
+   list. An entry is a serif title, the author line with the site owner's
+   name emphasised, the year on the right from 480px up, a muted venue
+   line with an optional note pill ("Spotlight"), and small link pills.
+   Shares .page-head / .page-lede from section 14, .grid-note for the
+   failure note, and the .tag pill from sections 10 and 15. */
+
+/* The band that holds the sections; the page heading sits above it. */
+.papers-main {
+  padding-block: calc(var(--section-y) / 2) var(--section-y);
+}
+
+.papers-loading {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.papers-section {
+  margin-top: calc(var(--section-y) * 0.7);
+}
+
+.papers-section:first-child {
+  margin-top: 0;
+}
+
+/* Same treatment as the CV section titles, so the two pages read alike. */
+.papers-section-title {
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--fs-h3);
+}
+
+/* A plain list: hairlines between entries, no numbering. */
+.papers-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paper {
+  margin: 0; /* row rhythm comes from the padding, not the base li margin */
+  padding-block: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* The section title already draws the line above the first entry. */
+.paper:first-child {
+  border-top: 0;
+}
+
+/* Head row: title and authors on the left, year on the right (from 480px). */
+.paper-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* The main column grows so the year lands at the far right (as the CV's
+   dates do); the text inside it is capped at the reading measure. */
+.paper-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* Sized between the CV entry titles and a section heading: this is the
+   page's main content, so titles get a little more presence than on the CV. */
+.paper-title {
+  margin: 0;
+  max-width: var(--maxw-text);
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1rem + 0.25vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.paper-authors {
+  margin: 0.2rem 0 0;
+  max-width: var(--maxw-text);
+  color: var(--text-muted);
+}
+
+/* Author-name emphasis, as on the CV page. Weight 500 is the heaviest
+   Inter weight the site loads. */
+.paper-authors strong {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.paper-year {
+  flex: none;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+}
+
+/* One short line of metadata, so it isn't capped at the reading measure:
+   that keeps the note pill on the same line whenever there is room. */
+.paper-venue {
+  margin: 0.35rem 0 0;
+  color: var(--text-muted);
+  font-size: var(--fs-small);
+}
+
+/* The note pill (e.g. "Spotlight") trails the venue text; a touch smaller
+   than the venue line so it reads as a label, not a second sentence. */
+.paper-note {
+  margin-left: 0.35rem;
+  font-size: 0.78rem;
+  vertical-align: 0.08em;
+}
+
+/* Link pills after an entry (DOI, arXiv, Project page, …) — the same
+   shape as the CV's .cv-link so the two pages feel like one site. */
+.paper-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.paper-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px; /* comfortable tap target */
+  padding: 0 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--accent);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.paper-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.paper-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* From 480px up: the year sits in its own column beside the title. */
+@media (min-width: 480px) {
+  .paper-head {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--gap);
+  }
+
+  .paper-year {
+    text-align: right;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paper-link {
+    transition: none;
+  }
+}

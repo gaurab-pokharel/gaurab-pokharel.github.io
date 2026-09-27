@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects · Gaurab Pokharel</title>
+  <meta name="description" content="Current and past research projects by Gaurab Pokharel — AI, fairness, and the allocation of scarce societal resources." />
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <main id="content">
+
+    <!-- Page heading -->
+    <section class="page-head">
+      <div class="container">
+        <h1>Projects</h1>
+        <p class="page-lede">Work on AI, fairness, and the allocation of scarce societal resources — current projects first, then past.</p>
+      </div>
+    </section>
+
+    <!-- Status filter and card grid, both rendered by assets/js/projects.js -->
+    <section class="projects-main">
+      <div class="container">
+        <div id="project-filters" class="status-filter" role="group" aria-label="Filter projects by status"></div>
+
+        <!-- Screen-reader-only announcement of filter results -->
+        <p id="filter-status" class="visually-hidden" role="status"></p>
+
+        <div id="project-grid" class="card-grid projects-grid"></div>
+
+        <!-- Shown only when the grid cannot render (fetch failure, no data) -->
+        <p id="grid-note" class="grid-note" hidden></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/projects.js"></script>
+</body>
+</html>

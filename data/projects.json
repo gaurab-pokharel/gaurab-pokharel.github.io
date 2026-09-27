@@ -1,0 +1,114 @@
+[
+    {
+    "id": "can-llms-rank",
+    "title": "Can LLMs Rank?",
+    "period": "2026",
+    "status": "current",
+    "summary": "Diagnosing whether LLM pairwise rankings can be trusted: consistency within a run and agreement across runs.",
+    "thumbnail": "assets/img/projects/can-llms-rank.png",
+    "tags": [
+      "LLMs",
+      "Ranking",
+      "Pairwise comparisons",
+      "Consistency",
+      "Triage",
+      "Resource allocation"
+    ],
+    "links": [
+      {
+        "label": "Paper (AIES 2026)",
+        "url": "https://arxiv.org/html/2606.30412v1"
+      }
+    ],
+    "body": "can-llms-rank"
+  },
+  {
+    "id": "modeling-discretion",
+    "title": "Budgeting Discretion",
+    "period": "2026",
+    "status": "current",
+    "summary": "Formalizing discretion as a finite override budget, with a dynamic threshold rule set by the tail-heaviness of potential gains, and evidence that caseworkers ration overrides against real capacity and timing.",
+    "thumbnail": "assets/img/projects/modeling-discretion.png",
+    "tags": ["Dynamic programming", "Resource allocation", "Discretion", "Invariance", "Heavy tails"],
+    "links": [
+      { "label": "Paper (NeurIPS 2026, spotlight)", "url": "https://arxiv.org/abs/2602.10039" }
+    ],
+    "body": "modeling-discretion"
+  },
+  {
+    "id": "eviction-prediction",
+    "title": "Eviction Prediction Framework",
+    "period": "2026",
+    "status": "current",
+    "summary": "A modular, leakage-free pipeline for eviction-risk modeling, with strict temporal splits and pluggable feature generators as first-class objects.",
+    "thumbnail": "assets/img/projects/eviction-prediction.png",
+    "tags": ["Temporal splits", "Feature engineering", "Model evaluation", "Reproducibility"],
+    "links": [],
+    "body": "eviction-prediction"
+  },
+  {
+    "id": "stochastic-merit",
+    "title": "Fixed Points and Stochastic Meritocracies",
+    "period": "2026",
+    "status": "past",
+    "summary": "How merit-based, individually fair selection can still entrench group inequality over time, once a small affinity feedback loop turns random early leads into self-reinforcing ones.",
+    "thumbnail": "assets/img/projects/stochastic-merit.png",
+    "tags": ["Long-run fairness", "Feedback loops", "Stochastic processes", "Meritocratic selection", "Dynamics"],
+    "links": [
+      { "label": "Paper (FAccT 2026)", "url": "https://arxiv.org/abs/2510.07478" }
+    ],
+    "body": "stochastic-merit"
+  },
+  {
+    "id": "street-level-ai",
+    "title": "Street-Level AI",
+    "period": "2025",
+    "status": "past",
+    "summary": "Testing whether off-the-shelf LLMs can stand in for street-level bureaucrats in homelessness allocation; they prove internally inconsistent and poorly aligned with vetted vulnerability scores.",
+    "thumbnail": "assets/img/projects/street-level-ai.png",
+    "tags": ["LLMs", "Human-AI decision-making", "Ranking", "Homelessness services", "Robustness", "Resource allocation"],
+    "links": [
+      { "label": "Paper (AIES 2025)", "url": "https://ojs.aaai.org/index.php/AIES/article/view/36694" }
+    ],
+    "body": "street-level-ai"
+  },
+  {
+    "id": "discretionary-trees",
+    "title": "Discretionary Trees",
+    "period": "2024",
+    "status": "past",
+    "summary": "Using machine learning to make street-level discretion in homelessness services legible, showing that discretionary overrides are targeted and welfare-improving rather than arbitrary.",
+    "thumbnail": "assets/img/projects/discretionary-trees.png",
+    "tags": ["Interpretable ML", "Street-level bureaucracy", "Homelessness services", "Discretion", "Procedural justice"],
+    "links": [
+      { "label": "Paper (AAAI 2024)", "url": "https://ojs.aaai.org/index.php/AAAI/article/view/30236" }
+    ],
+    "body": "discretionary-trees"
+  },
+  {
+    "id": "two-sided-matching",
+    "title": "Two-Sided Bandits in Matching Markets",
+    "period": "2023",
+    "status": "past",
+    "summary": "Decentralized algorithms that provably converge to stable matchings when both sides of a market must learn their preferences and cannot communicate.",
+    "thumbnail": "assets/img/projects/two-sided-matching.png",
+    "tags": ["Matching markets", "Bandits", "Decentralized learning", "Stable matching", "UCB", "Thompson sampling"],
+    "links": [
+      { "label": "Paper (arXiv)", "url": "https://arxiv.org/abs/2302.06176" }
+    ],
+    "body": "two-sided-matching"
+  },
+  {
+    "id": "value-of-info",
+    "title": "Increasing the Value of Information in Online POMDP Planning",
+    "period": "2021",
+    "status": "past",
+    "summary": "An entropy-augmented UCB rule for POMCP that keeps online planners from undervaluing information gathering when its payoff is delayed.",
+    "thumbnail": "assets/img/projects/value-of-info.png",
+    "tags": ["POMDPs", "Online planning", "Value of information", "POMCP", "Entropy", "UCB"],
+    "links": [
+      { "label": "Thesis (arXiv)", "url": "https://arxiv.org/abs/2409.13754" }
+    ],
+    "body": "value-of-info"
+  }
+]

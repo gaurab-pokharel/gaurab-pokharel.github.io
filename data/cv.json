@@ -1,0 +1,269 @@
+{
+  "pdf": "assets/files/cv.pdf",
+  "updated": "2026-09-27",
+  "sections": [
+    {
+      "title": "Research interests",
+      "entries": [
+        {
+          "detail": [
+            "Algorithmic fairness, game theory, and machine learning for the allocation of scarce societal resources",
+            "Interpretable models of human discretion in public-sector decision-making",
+            "Evaluation and reliability of large language models for high-stakes judgments",
+            "Learning dynamics in two-sided matching markets"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Education",
+      "entries": [
+        {
+          "primary": "PhD, Computer Science",
+          "secondary": "Virginia Tech",
+          "date": "2024 – present",
+          "detail": [
+            "Advanced to candidacy in September 2026 after defending the dissertation proposal",
+            "GPA: 4.0/4.0"
+          ]
+        },
+        {
+          "primary": "M.Sc., Computer Science",
+          "secondary": "George Mason University",
+          "date": "2021 – 2023",
+          "detail": "GPA: 3.96/4.0"
+        },
+        {
+          "primary": "B.A., Computer Science and Mathematics",
+          "secondary": "Oberlin College",
+          "date": "2017 – 2021",
+          "detail": "GPA: 3.82/4.0"
+        }
+      ]
+    },
+    {
+      "title": "Experience",
+      "entries": [
+        {
+          "primary": "Associate AI Scientist, Intern",
+          "secondary": "Pearson",
+          "date": "May 2026 – Aug 2026",
+          "detail": [
+            "Designed a two-arm study to test procedural equivalence in constructing rater-calibration “training packs” for a state reading assessment: an observational contrast of historical human-built versus current model-assisted packs, and a prospective controlled comparison across human-only, model-assisted, and consensus-gold processes; framed the question as a non-inferiority estimand and specified deconfounding strategies to unalias the manual-vs-model contrast from year.",
+            "Developed a response-agnostic Wasserstein distance over ordinal score-band labels to compare pack profiles without requiring shared responses, and built the surrounding inference framework (TOST equivalence testing with a margin scaled to observed human pack spread, estimated in a mixed model with item and rater random effects).",
+            "Applied post-hoc interpretability methods (integrated gradients, counterfactual perturbation, probing classifiers, collinearity-stable relative-importance analysis) to a proprietary transformer scorer with no exposed internals, characterizing the linguistic cues associated with score assignments.",
+            "Engineered a reproducible analysis pipeline (Python 3.12) with a synthetic-data generator, a single configuration flag to switch between simulated and production data, pinned dependency lockfiles, and drift-blocking pre-commit hooks; validated the full pipeline on simulated data ahead of data-collection approval.",
+            "Authored a technical methods note and a pre-registration of the primary estimand and equivalence margin, and produced operational briefing materials for experienced scorers and an independent gold panel; presented the study design to research and operations stakeholders."
+          ]
+        },
+        {
+          "primary": "Graduate Research Assistant",
+          "secondary": "Advisor: Sanmay Das",
+          "date": "Aug 2021 – present",
+          "detail": [
+            "Built and validated models of real-world human decision-making using large, noisy administrative datasets; emphasized replicable pipelines, clear error analysis, and decision-relevant metrics.",
+            "Developed interpretable ML baselines (short decision trees) to approximate “default” judgment policies and quantified systematic deviations; used this framework to study consistency and outcome correlates of overrides.",
+            "Designed evaluation protocols for AI judgment systems (including repeated-run robustness checks, aggregation from pairwise preferences to global rankings, and structured failure-mode analysis).",
+            "Implemented simulation and sequential decision-making methods (bandits / learning dynamics) relevant to adaptive sampling strategies and resource allocation under uncertainty.",
+            "Produced well-documented Python tooling for data preparation, feature generation, model training, and reporting to support iterative experimentation with strict temporal separation."
+          ]
+        },
+        {
+          "primary": "Graduate Teaching Assistant, Machine Learning (Graduate)",
+          "date": "Aug 2023 – May 2024",
+          "detail": [
+            "Supported instruction for graduate ML (office hours, grading, exam logistics); strengthened communication of technical ideas and careful evaluation practice."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Peer-reviewed publications",
+      "entries": [
+        {
+          "primary": "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+          "secondary": "Gaurab Pokharel, Sanmay Das, and Patrick J. Fowler",
+          "date": "2026",
+          "detail": "Advances in Neural Information Processing Systems (NeurIPS 2026), Atlanta, USA. Spotlight paper.",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2602.10039" }
+          ]
+        },
+        {
+          "primary": "Can LLMs Rank? A Tale of Triads and Triage",
+          "secondary": "Gaurab Pokharel, Shafkat Farabi, Patrick J. Fowler, and Sanmay Das",
+          "date": "2026",
+          "detail": "AAAI/ACM Conference on AI, Ethics, and Society (AIES 2026), Malmö, Sweden",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2606.30412" }
+          ]
+        },
+        {
+          "primary": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+          "secondary": "Gaurab Pokharel, Diptangshu Sen, Sanmay Das, and Juba Ziani",
+          "date": "2026",
+          "detail": "ACM Conference on Fairness, Accountability, and Transparency (FAccT ’26), Montreal, Canada, pp. 280–320",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1145/3805689.3806540" }
+          ]
+        },
+        {
+          "primary": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+          "secondary": "Gaurab Pokharel, Shafkat Farabi, Patrick J. Fowler, and Sanmay Das",
+          "date": "2025",
+          "detail": "AAAI/ACM Conference on AI, Ethics, and Society (AIES), pp. 2043–2054",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1609/aies.v8i3.36694" }
+          ]
+        },
+        {
+          "primary": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+          "secondary": "Gaurab Pokharel, Sanmay Das, and Patrick Fowler",
+          "date": "2024",
+          "detail": "AAAI Conference on Artificial Intelligence (AAAI), pp. 22303–22312",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1609/aaai.v38i20.30236" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Preprints",
+      "entries": [
+        {
+          "primary": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+          "secondary": "Gaurab Pokharel and Sanmay Das",
+          "date": "2023",
+          "detail": "arXiv:2302.06176",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2302.06176" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Extended abstracts",
+      "entries": [
+        {
+          "primary": "Beyond Automation: Understanding Fairness, Ethics, and Human Discretion in AI-driven Societal Decisions",
+          "secondary": "Gaurab Pokharel",
+          "date": "2025",
+          "detail": "AAAI/ACM Conference on AI, Ethics, and Society (AIES), Doctoral Consortium, pp. 2918–2920",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1609/aies.v8i3.36793" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Talks",
+      "entries": [
+        {
+          "primary": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+          "secondary": "Paper presentation, ACM FAccT 2026, Montreal, Canada",
+          "date": "June 2026",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1145/3805689.3806540" }
+          ]
+        },
+        {
+          "primary": "Converging to Stability in Two-Sided Bandits",
+          "secondary": "Paper presentation, Multi-Agent AI in the Real World Workshop, AAAI 2025, Philadelphia, USA",
+          "date": "March 2025"
+        },
+        {
+          "primary": "Using Machine Learning to Better Understand the Efficiency and Fairness of Allocation Systems",
+          "secondary": "Invited talk, DIMACS Workshop on Algorithm and Mechanism Design for Achieving the UN Sustainable Development Goals, New Jersey, USA",
+          "date": "October 2023"
+        }
+      ]
+    },
+    {
+      "title": "Awards",
+      "entries": [
+        {
+          "primary": "Spotlight paper",
+          "secondary": "NeurIPS 2026 · Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+          "date": "2026",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2602.10039" }
+          ]
+        },
+        {
+          "primary": "Best Paper",
+          "secondary": "Multi-Agent AI in the Real World Workshop at AAAI",
+          "date": "2025",
+          "links": [
+            { "label": "Details", "url": "https://sites.google.com/view/marw-ai-agents/accepted-papers" }
+          ]
+        },
+        {
+          "primary": "Distinguished Academic Achievement Award",
+          "secondary": "George Mason University",
+          "date": "2025"
+        },
+        {
+          "primary": "The R.J. Thomas ’52 Award for Outstanding Computer Science Students",
+          "secondary": "Oberlin College",
+          "date": "2021"
+        },
+        {
+          "primary": "Oberlin College Research Fellow",
+          "date": "2019 – 2021",
+          "links": [
+            { "label": "Details", "url": "https://www.oberlin.edu/undergraduate-research/gaurab-pokharel-21" }
+          ]
+        },
+        {
+          "primary": "Davis Project for Peace Award",
+          "secondary": "Oberlin College",
+          "date": "2019",
+          "links": [
+            { "label": "Details", "url": "https://www.oberlin.edu/news/bikalpa-baniya-19-and-gaurab-pokharel-21-receive-davis-projects-peace-award" }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Service",
+      "entries": [
+        {
+          "primary": "Conference reviewer",
+          "secondary": "AAAI (2025, 2026, 2027) · AIES (2025, 2026) · EAAMO (2025, 2026) · FAccT (2026) · EC (2026) · NeurIPS (2026)"
+        },
+        {
+          "primary": "Local Arrangements Chair",
+          "secondary": "CI+HCOMP",
+          "date": "2026"
+        },
+        {
+          "primary": "Workflow Chair",
+          "secondary": "AIES",
+          "date": "2023"
+        },
+        {
+          "primary": "Local Chair",
+          "secondary": "EAAMO",
+          "date": "2022"
+        }
+      ]
+    },
+    {
+      "title": "Skills",
+      "entries": [
+        {
+          "primary": "Programming",
+          "secondary": "Python (expert) · pandas · NumPy · scikit-learn · PyTorch · SQL · Git · Linux/Bash · LaTeX"
+        },
+        {
+          "primary": "AI evaluation",
+          "secondary": "Prompt engineering · Rank Centrality · Bradley–Terry models · ROC/AUC · Spearman correlation · Local inference"
+        },
+        {
+          "primary": "Modeling",
+          "secondary": "XGBoost · GLMs · Causal inference (BART) · Markov decision processes · Multi-armed bandits"
+        }
+      ]
+    }
+  ]
+}

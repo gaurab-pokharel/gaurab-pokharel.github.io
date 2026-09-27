@@ -1,0 +1,21 @@
+{
+  "name": "Gaurab Pokharel",
+  "role": "PhD candidate in Computer Science, Virginia Tech",
+  "email": "gaurab@vt.edu",
+  "location": "",
+  "social": {
+    "github": "https://github.com/gaurab-pokharel",
+    "linkedin": "https://www.linkedin.com/in/gaurab278/",
+    "scholar": "https://scholar.google.com/citations?user=FSE8mAIAAAAJ&hl=en"
+  },
+  "profileImage": "assets/img/profile.jpg",
+"bio": [
+  "I study algorithmic fairness and how people and algorithms allocate scarce public resources. Much of my work focuses on homelessness services, where caseworkers exercise their own judgment alongside algorithmic recommendations. I develop ways to model and budget that discretion and study how allocation decisions play out over time. I also investigate when large language models can be trusted as rankers and judges, and how merit-based selection affects fairness in the long run.",
+  "<strong>I am on the job market for positions starting in fall 2027, including faculty positions and research roles outside academia.</strong> You can find my <a href=\"cv.html\">CV</a> and <a href=\"papers.html\">papers</a> here. Please feel free to <a href=\"mailto:gaurab@vt.edu\">get in touch</a> about opportunities.",
+  "My hometown is Kathmandu, Nepal. I graduated from <a href=\"https://www.oberlin.edu/\">Oberlin College</a> in fall 2021 with a B.A. in Computer Science (High Honors) and Mathematics. I then earned an M.S. in Computer Science with a concentration in Machine Learning from <a href=\"https://www.gmu.edu/\">George Mason University</a>. I am now a Ph.D. candidate in Computer Science at <a href=\"https://vt.edu/\">Virginia Tech's</a> <a href=\"https://www.vt.edu/innovationcampus/index.html\">Institute for Advanced Computing</a>, advised by <a href=\"https://people.cs.vt.edu/sanmay/\">Dr. Sanmay Das</a> and <a href=\"https://publichealth.washu.edu/faculty/patrick-fowler/\">Dr. Patrick J. Fowler</a> ."
+],
+  "meta": {
+    "description": "Gaurab Pokharel is a PhD candidate in Computer Science at Virginia Tech working on algorithmic fairness and human-AI decision-making in public services. On the academic job market for faculty positions starting in fall 2027.",
+    "ogImage": "assets/img/og.png"
+  }
+}

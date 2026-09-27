@@ -1,0 +1,165 @@
+/* assets/css/print.css
+   Printable fallback for the CV page. Linked from cv.html with
+   media="print", so every rule here applies only when printing.
+   Goals: hide the site chrome and the download button, force black on
+   white, and lay the CV out as a tidy paper document. */
+
+@page {
+  margin: 1.6cm 1.8cm;
+}
+
+html,
+body {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+body {
+  font-size: 10.5pt;
+  line-height: 1.45;
+}
+
+p {
+  orphans: 2;
+  widows: 2;
+}
+
+/* ---- hide screen chrome ------------------------------------------------ */
+
+#site-header,
+#site-footer,
+.cv-header,        /* on-screen title row, including the download button */
+.cv-download,
+.cv-loading {
+  display: none !important;
+}
+
+/* ---- print letterhead --------------------------------------------------- */
+
+.cv-print-header {
+  display: block;
+}
+
+.cv-print-name {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 20pt;
+  font-weight: 600;
+  color: #000;
+}
+
+.cv-print-contact {
+  margin: 0.1cm 0 0;
+  font-size: 9.5pt;
+  color: #000;
+}
+
+.cv-updated {
+  margin: 0.15cm 0 0;
+  font-size: 8.5pt;
+  color: #000;
+}
+
+/* ---- layout -------------------------------------------------------------- */
+
+.container,
+.cv-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-section {
+  margin-top: 0.55cm;
+}
+
+.cv-section-title {
+  margin: 0 0 0.25cm;
+  padding-bottom: 0.08cm;
+  border-bottom: 1pt solid #000;
+  font-size: 12.5pt;
+  color: #000;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.cv-entries {
+  gap: 0.32cm;
+}
+
+/* Keep individual entries whole across page breaks. */
+.cv-entry {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.cv-primary {
+  font-size: 10.5pt;
+  color: #000;
+  max-width: none;
+}
+
+.cv-secondary {
+  margin-top: 0.03cm;
+  color: #000;
+  max-width: none;
+}
+
+.cv-secondary strong {
+  font-weight: 600;
+}
+
+.cv-date {
+  color: #000;
+  font-size: 9pt;
+}
+
+.cv-detail,
+.cv-detail-list {
+  color: #000;
+  max-width: none;
+}
+
+.cv-detail-list {
+  gap: 0.12cm;
+  padding-left: 0.5cm;
+}
+
+.cv-detail-list li::marker {
+  color: #000;
+}
+
+/* ---- links --------------------------------------------------------------- */
+
+a {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+/* Flatten the on-screen pills into plain labeled references. */
+.cv-links {
+  display: block;
+  margin-top: 0.1cm;
+}
+
+.cv-link {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font-size: 9pt;
+  font-weight: 500;
+}
+
+/* Print the destination after the label so URLs survive on paper. */
+.cv-link::after {
+  content: ": " attr(href);
+  font-weight: 400;
+  word-break: break-all;
+}
+
+.cv-error {
+  color: #000;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home · Gaurab Pokharel</title>
+  <meta name="description" content="Personal site of Gaurab Pokharel, PhD candidate in Computer Science at Virginia Tech — introduction, recent news, research projects, and CV." />
+  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+  <header id="site-header"></header>
+  <main id="content">
+
+    <!-- Hero: portrait on the left, introduction on the right from 768px up;
+         stacked with the photo on top below that. home.js fills the name,
+         role, portrait and bio from data/site.json; the static name and
+         portrait below are fallbacks so the page is never empty. -->
+    <section class="hero container section" aria-labelledby="hero-name">
+      <div class="hero-photo">
+        <img id="hero-img" src="assets/img/profile.jpg" alt="Gaurab Pokharel"
+             width="600" height="750" fetchpriority="high" decoding="async" />
+      </div>
+      <div class="hero-intro">
+        <h1 id="hero-name">Gaurab Pokharel</h1>
+        <p id="hero-role" class="hero-role">PhD candidate in Computer Science, Virginia Tech</p>
+        <div id="hero-bio" class="prose"></div>
+      </div>
+    </section>
+
+    <!-- Recent news: home.js renders this from data/news.json, newest first.
+         The section stays hidden if the file can't be loaded or is empty. -->
+    <section id="news-section" class="news container" aria-labelledby="news-heading" hidden>
+      <h2 id="news-heading">Recent news</h2>
+      <ul id="news-list" class="news-list"></ul>
+    </section>
+
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="assets/js/site.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+</html>

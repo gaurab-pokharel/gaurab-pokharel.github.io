@@ -1,0 +1,100 @@
+{
+  "sections": [
+    {
+      "id": "conference",
+      "title": "Conference papers",
+      "entries": [
+        {
+          "title": "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+          "authors": ["Gaurab Pokharel", "Sanmay Das", "Patrick J. Fowler"],
+          "venue": "Advances in Neural Information Processing Systems (NeurIPS 2026), Atlanta, USA",
+          "year": "2026",
+          "note": "Spotlight",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2602.10039" }
+          ],
+          "project": "modeling-discretion"
+        },
+        {
+          "title": "Can LLMs Rank? A Tale of Triads and Triage",
+          "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
+          "venue": "AAAI/ACM Conference on AI, Ethics, and Society (AIES 2026), Malmö, Sweden",
+          "year": "2026",
+          "note": "",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2606.30412" }
+          ],
+          "project": "can-llms-rank"
+        },
+        {
+          "title": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+          "authors": ["Gaurab Pokharel", "Diptangshu Sen", "Sanmay Das", "Juba Ziani"],
+          "venue": "ACM Conference on Fairness, Accountability, and Transparency (FAccT 2026), Montreal, Canada, pp. 280–320",
+          "year": "2026",
+          "note": "",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1145/3805689.3806540" },
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2510.07478" }
+          ],
+          "project": "stochastic-merit"
+        },
+        {
+          "title": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+          "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
+          "venue": "AAAI/ACM Conference on AI, Ethics, and Society (AIES 2025), pp. 2043–2054",
+          "year": "2025",
+          "note": "",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1609/aies.v8i3.36694" }
+          ],
+          "project": "street-level-ai"
+        },
+        {
+          "title": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+          "authors": ["Gaurab Pokharel", "Sanmay Das", "Patrick J. Fowler"],
+          "venue": "AAAI Conference on Artificial Intelligence (AAAI 2024), pp. 22303–22312",
+          "year": "2024",
+          "note": "",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1609/aaai.v38i20.30236" }
+          ],
+          "project": "discretionary-trees"
+        }
+      ]
+    },
+    {
+      "id": "preprints",
+      "title": "Preprints",
+      "entries": [
+        {
+          "title": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+          "authors": ["Gaurab Pokharel", "Sanmay Das"],
+          "venue": "arXiv:2302.06176",
+          "year": "2023",
+          "note": "",
+          "links": [
+            { "label": "arXiv", "url": "https://arxiv.org/abs/2302.06176" }
+          ],
+          "project": "two-sided-matching"
+        }
+      ]
+    },
+    {
+      "id": "abstracts",
+      "title": "Extended abstracts",
+      "entries": [
+        {
+          "title": "Beyond Automation: Understanding Fairness, Ethics, and Human Discretion in AI-driven Societal Decisions",
+          "authors": ["Gaurab Pokharel"],
+          "venue": "AAAI/ACM Conference on AI, Ethics, and Society (AIES 2025), Doctoral Consortium, pp. 2918–2920",
+          "year": "2025",
+          "note": "",
+          "links": [
+            { "label": "DOI", "url": "https://doi.org/10.1609/aies.v8i3.36793" }
+          ],
+          "project": ""
+        }
+      ]
+    }
+  ]
+}
