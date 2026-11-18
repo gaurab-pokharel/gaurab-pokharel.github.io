@@ -1,0 +1,37 @@
+{
+  "name": "Gaurab Pokharel",
+  "role": "PhD candidate in Computer Science, Virginia Tech",
+  "email": "gaurab@vt.edu",
+  "photo": "update/profile.jpg",
+
+  "headline": "I study how people and algorithms share decisions about scarce public resources.",
+  "intro": [
+    "Most of my work is on homelessness services, where a caseworker can overrule what an algorithm recommends. I ask when those overrides help and how caseworkers ration them. I also test whether a language model can be trusted to rank people at all."
+  ],
+
+  "jobMarket": {
+    "show": true,
+    "title": "Fall 2027 job market",
+    "text": "Faculty and research roles"
+  },
+
+  "home": {
+    "recentPapers": 3,
+    "news": 4
+  },
+
+  "social": {
+    "github": "https://github.com/gaurab-pokharel",
+    "linkedin": "https://www.linkedin.com/in/gaurab278/",
+    "scholar": "https://scholar.google.com/citations?user=FSE8mAIAAAAJ&hl=en"
+  },
+
+  "affiliations": {
+    "Gaurab Pokharel": "Virginia Tech",
+    "Sanmay Das": "Virginia Tech",
+    "Shafkat Farabi": "Virginia Tech",
+    "Patrick J. Fowler": "Washington University in St. Louis",
+    "Diptangshu Sen": "Georgia Tech",
+    "Juba Ziani": "Georgia Tech"
+  }
+}

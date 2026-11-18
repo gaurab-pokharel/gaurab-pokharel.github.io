@@ -1,37 +1,41 @@
 /* ==========================================================================
-   projects.js — projects listing page, loaded after site.js on
-   projects.html only.
+   projects.js — Projects page, loaded after site.js on projects.html only.
 
-   Responsibilities:
-   • Fetch data/projects.json and render one card per project into the
-     ready-made .card-grid / .card styles from main.css section 10 —
-     current projects first, then past, keeping the JSON order within
-     each group so the data file controls fine-grained ordering.
-   • Each card: lazy-loaded fixed-aspect thumbnail, linked title, one-line
-     summary, and tags. The title link is stretched over the whole card by
-     main.css section 14, so the entire card is one tap target while
-     screen readers hear just the project title as the link text.
-   • Build the All / Current / Past filter above the grid. Filtering works
-     by re-appending the matching cards to the grid, so it needs no extra
-     CSS to hide anything — the base grid keeps working on its own.
+   Reads update/projects.json and renders one card per project: current
+   projects first, then past, keeping the file's order within each group.
 
-   Depends on window.fetchJSON from assets/js/site.js.
+   A card shows the thumbnail, the year and status, the title, the one-line
+   summary and the first two topics. The thumbnail is read from the project's
+   own folder, update/projects/<id>/thumbnail.png, unless the entry names
+   another file with "thumbnail" (for example "thumbnail.svg"). The title
+   link is stretched over the whole card by main.css, so the card is one tap
+   target while screen readers hear just the project title.
+
+   The All / Current / Past filter re-appends the matching cards to the
+   grid, so it needs no CSS to hide anything.
    ========================================================================== */
 
 (function () {
   "use strict";
 
+  const Site = window.Site;
   const grid = document.getElementById("project-grid");
   const filterBar = document.getElementById("project-filters");
   const announcer = document.getElementById("filter-status");
   const note = document.getElementById("grid-note");
 
-  // Loaded on the wrong page (or the hook was removed): do nothing.
+  // Loaded on the wrong page, or site.js is missing: do nothing.
   if (!grid) return;
+  if (!Site) {
+    console.error("projects.js: window.Site missing. assets/js/site.js must load first.");
+    return;
+  }
+  const el = Site.el;
+
+  /** How many topics a card shows; the project page lists all of them. */
+  const TAGS_ON_CARD = 2;
 
   // Every rendered card in display order: { element, status }.
-  // Kept here so the filter can re-append matching cards without
-  // re-reading the DOM or needing any CSS for the hidden state.
   const cards = [];
 
   const FILTERS = [
@@ -43,31 +47,16 @@
   init();
 
   async function init() {
-    if (typeof window.fetchJSON !== "function") {
-      console.error("projects.js: window.fetchJSON missing — assets/js/site.js must load first.");
-      showNote("Projects could not be loaded.");
-      return;
-    }
-
     let projects;
     try {
-      projects = await window.fetchJSON("data/projects.json");
+      projects = await Site.fetchJSON(Site.paths.projects);
     } catch (error) {
-      // Typical causes: a network hiccup, or the page opened via file://
-      // where browsers block fetch. Keep the visible note generic and put
-      // the detail in the console, matching site.js's own fallback.
-      console.error("projects.js: could not load data/projects.json —", error);
       showNote("Projects could not be loaded right now.");
       return;
     }
 
-    if (!Array.isArray(projects) || projects.length === 0) {
-      showNote("No projects to show yet.");
-      return;
-    }
-
     // Entries without an id have nowhere to link; skip them loudly.
-    const usable = projects.filter(function (project) {
+    const usable = (Array.isArray(projects) ? projects : []).filter(function (project) {
       if (project && project.id) return true;
       console.warn("projects.js: skipping a project entry with no id:", project);
       return false;
@@ -86,13 +75,13 @@
   /* Ordering                                                                  */
   /* ------------------------------------------------------------------------ */
 
-  // "current" or anything else ("past", missing, unexpected) — normalized
+  // "current" or anything else ("past", missing, unexpected), normalized
   // once so ordering and filtering always agree.
   function normalizeStatus(status) {
     return String(status || "").trim().toLowerCase() === "current" ? "current" : "past";
   }
 
-  // Current projects first, then past, preserving JSON order within each.
+  // Current projects first, then past, preserving file order within each.
   function orderProjects(projects) {
     const current = projects.filter(function (p) { return normalizeStatus(p.status) === "current"; });
     const past = projects.filter(function (p) { return normalizeStatus(p.status) !== "current"; });
@@ -105,80 +94,59 @@
 
   function renderCards(projects) {
     const fragment = document.createDocumentFragment();
-
     projects.forEach(function (project) {
       const card = buildCard(project);
       cards.push(card);
       fragment.appendChild(card.element);
     });
-
-    grid.textContent = ""; // idempotent if ever re-run
+    grid.textContent = "";
     grid.appendChild(fragment);
   }
 
-  // One card: media frame, linked title, summary, tags — the markup the
-  // shared .card styles expect.
+  // One card: thumbnail, year and status, linked title, summary, topics.
   function buildCard(project) {
-    const card = document.createElement("article");
-    card.className = "card";
+    const status = normalizeStatus(project.status);
+    const card = el("li", "project-card");
 
-    card.appendChild(buildMedia(project));
+    card.appendChild(buildThumb(project));
 
-    const body = document.createElement("div");
-    body.className = "card-body";
+    const head = el("div", "project-card-head");
+    const meta = [project.period, status === "current" ? "Current" : "Past"].filter(Boolean);
+    head.appendChild(el("p", "project-card-meta", meta.join(" · ")));
 
-    const heading = document.createElement("h2");
-    heading.className = "card-title";
-    const link = document.createElement("a");
+    const heading = el("h2", "project-card-title");
+    const link = Site.keepCompounds(el("a", "", project.title || project.id));
     link.href = "project.html?id=" + encodeURIComponent(project.id);
-    link.textContent = project.title || project.id;
     heading.appendChild(link);
-    body.appendChild(heading);
+    head.appendChild(heading);
+    card.appendChild(head);
 
     if (project.summary) {
-      const summary = document.createElement("p");
-      summary.className = "card-summary";
-      summary.textContent = project.summary;
-      body.appendChild(summary);
+      card.appendChild(el("p", "project-card-summary", project.summary));
     }
 
-    const tags = Array.isArray(project.tags) ? project.tags.filter(Boolean) : [];
-    if (tags.length > 0) {
-      const list = document.createElement("ul");
-      list.className = "tags";
-      list.setAttribute("aria-label", "Topics");
-      tags.forEach(function (tag) {
-        const item = document.createElement("li");
-        item.className = "tag";
-        item.textContent = tag;
-        list.appendChild(item);
-      });
-      body.appendChild(list);
+    const tags = (Array.isArray(project.tags) ? project.tags : []).filter(Boolean).slice(0, TAGS_ON_CARD);
+    if (tags.length) {
+      card.appendChild(el("p", "project-card-tags", tags.join(" · ")));
     }
 
-    card.appendChild(body);
-    return { element: card, status: normalizeStatus(project.status) };
+    return { element: card, status: status };
   }
 
-  // Fixed-aspect media frame (16:10, object-fit: cover via .card-media).
-  // The frame keeps its soft background as a clean placeholder when the
-  // thumbnail is missing or fails to load, so the grid never shows a
-  // broken-image icon and rows stay aligned.
-  function buildMedia(project) {
-    const media = document.createElement("div");
-    media.className = "card-media";
-
-    if (project.thumbnail) {
-      const image = document.createElement("img");
-      image.src = project.thumbnail;
-      image.alt = ""; // decorative — the title right below names the project
-      image.setAttribute("loading", "lazy");
-      image.setAttribute("decoding", "async");
-      image.addEventListener("error", function () { image.remove(); });
-      media.appendChild(image);
-    }
-
-    return media;
+  // Fixed 16:10 frame. If the image is missing or fails to load it is
+  // removed, leaving the plain frame, so the grid never shows a broken icon.
+  function buildThumb(project) {
+    const frame = el("div", "project-thumb");
+    const image = document.createElement("img");
+    image.src = Site.paths.projectDir(project.id) + (project.thumbnail || "thumbnail.png");
+    image.alt = ""; // decorative: the title beside it names the project
+    image.width = 1200;
+    image.height = 750;
+    image.setAttribute("loading", "lazy");
+    image.setAttribute("decoding", "async");
+    image.addEventListener("error", function () { image.remove(); });
+    frame.appendChild(image);
+    return frame;
   }
 
   /* ------------------------------------------------------------------------ */
@@ -188,26 +156,19 @@
   function buildFilterBar() {
     if (!filterBar) return;
 
-    // Only worth showing when both groups exist; otherwise every option
-    // but "All" would be a dead end, so the bar stays empty (and hidden
-    // via .status-filter:empty).
+    // Only worth showing when both groups exist; otherwise every option but
+    // "All" would be a dead end, so the bar stays empty (and hidden).
     const currentCount = cards.filter(function (c) { return c.status === "current"; }).length;
     if (currentCount === 0 || currentCount === cards.length) return;
 
     FILTERS.forEach(function (filter) {
-      filterBar.appendChild(buildFilterButton(filter, filter.value === "all"));
+      const button = el("button", "filter-btn", filter.label);
+      button.type = "button";
+      button.dataset.status = filter.value;
+      button.setAttribute("aria-pressed", String(filter.value === "all"));
+      button.addEventListener("click", function () { applyFilter(filter.value); });
+      filterBar.appendChild(button);
     });
-  }
-
-  function buildFilterButton(filter, isPressed) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "filter-btn";
-    button.textContent = filter.label;
-    button.dataset.status = filter.value;
-    button.setAttribute("aria-pressed", String(isPressed)); // styling hooks off this
-    button.addEventListener("click", function () { applyFilter(filter.value); });
-    return button;
   }
 
   function applyFilter(value) {
@@ -221,7 +182,7 @@
     });
 
     // Re-append the matching cards in their original order; the rest are
-    // simply detached. No CSS involved, so the base grid can't break.
+    // simply detached.
     grid.textContent = "";
     const fragment = document.createDocumentFragment();
     visible.forEach(function (card) { fragment.appendChild(card.element); });

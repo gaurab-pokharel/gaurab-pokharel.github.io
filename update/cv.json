@@ -1,0 +1,256 @@
+{
+  "pdf": "update/cv.pdf",
+  "updated": "October 2026",
+  "sections": [
+    {
+      "title": "Research interests",
+      "entries": [
+        {
+          "detail": "Machine learning for the allocation of scarce public resources; human–AI decision-making and professional discretion; algorithmic fairness; sequential decision-making under uncertainty; game theory and market design; evaluation and reliability of large language models."
+        }
+      ]
+    },
+    {
+      "title": "Education",
+      "entries": [
+        {
+          "primary": "Ph.D., Computer Science",
+          "secondary": "Virginia Tech",
+          "date": "2021–present",
+          "detail": [
+            "Doctoral studies began at George Mason University in 2021; transferred to Virginia Tech in 2025.",
+            "Advisors: Sanmay Das and Patrick J. Fowler. GPA: 4.0/4.0.",
+            "Dissertation: “Discretion in the Allocation of Scarce Public Resources: Measurement, Dynamics, and Algorithmic Stand-ins” (expected defense: April 2027)."
+          ]
+        },
+        {
+          "primary": "M.S., Computer Science",
+          "secondary": "George Mason University",
+          "date": "2021–2024",
+          "detail": "Machine learning concentration; GPA: 3.96/4.0."
+        },
+        {
+          "primary": "B.A., Computer Science and Mathematics",
+          "secondary": "Oberlin College",
+          "date": "2017–2021",
+          "detail": "High Honors; GPA: 3.82/4.0. Honors thesis: “Increasing the Value of Information in Online POMDP Planning” ([arXiv:2409.13754](https://arxiv.org/abs/2409.13754))."
+        }
+      ]
+    },
+    {
+      "title": "Awards and honors",
+      "entries": [
+        {
+          "primary": "Spotlight paper, NeurIPS",
+          "secondary": "For “Budgeting Discretion”; 292 of 30,709 submissions",
+          "date": "2026"
+        },
+        {
+          "primary": "Top Reviewer, NeurIPS",
+          "date": "2026"
+        },
+        {
+          "primary": "Best Paper Award",
+          "secondary": "Multi-Agent AI in the Real World workshop at AAAI, for “Converging to Stability in Two-Sided Bandits”",
+          "date": "2025",
+          "links": [
+            { "label": "Details", "url": "https://sites.google.com/view/marw-ai-agents/accepted-papers" }
+          ]
+        },
+        {
+          "primary": "Distinguished Academic Achievement Award",
+          "secondary": "George Mason University",
+          "date": "2024"
+        },
+        {
+          "primary": "R.J. Thomas ’52 Award for Outstanding Computer Science Students",
+          "secondary": "Oberlin College",
+          "date": "2021"
+        },
+        {
+          "primary": "Oberlin College Research Fellow",
+          "date": "2019–2021",
+          "links": [
+            { "label": "Details", "url": "https://www.oberlin.edu/undergraduate-research/gaurab-pokharel-21" }
+          ]
+        },
+        {
+          "primary": "Davis Projects for Peace Award",
+          "secondary": "$10,000, with Bikalpa Baniya, for expanding Nepali Dreamers, a college counseling program in Kathmandu",
+          "date": "2019",
+          "links": [
+            { "label": "Details", "url": "https://www.oberlin.edu/news/bikalpa-baniya-19-and-gaurab-pokharel-21-receive-davis-projects-peace-award" }
+          ]
+        },
+        {
+          "primary": "Oberlin College Endowed Summer Fellowship",
+          "secondary": "Susan L. Phillips Social Justice Internship Fund ($5,000). Supported grant writing and fundraising for Swisscontact in Nepal.",
+          "date": "2018"
+        },
+        {
+          "primary": "Bonner Scholar",
+          "secondary": "Four-year service scholarship, Oberlin College",
+          "date": "2017–2021"
+        }
+      ]
+    },
+    {
+      "title": "Peer-reviewed conference papers",
+      "papers": "conference"
+    },
+    {
+      "title": "Extended abstracts",
+      "papers": "abstracts"
+    },
+    {
+      "title": "Preprints and manuscripts under review",
+      "papers": "preprints"
+    },
+    {
+      "title": "Professional experience",
+      "entries": [
+        {
+          "primary": "Graduate Research Assistant",
+          "secondary": "Virginia Tech. Previously at George Mason University; advisor: Sanmay Das.",
+          "date": "Aug 2021–present",
+          "detail": [
+            "Develop interpretable machine-learning models from administrative records to study caseworker decisions and professional discretion in the allocation of scarce public resources.",
+            "Model professional discretion as a budgeted resource in dynamic allocation settings.",
+            "Evaluate the reliability of large language models for ranking tasks."
+          ]
+        },
+        {
+          "primary": "Associate AI Scientist (Intern)",
+          "secondary": "Pearson, Scoring Services team",
+          "date": "May–Aug 2026",
+          "detail": [
+            "Designed and implemented an equivalence study comparing human-developed and model-assisted rater calibration materials for a state reading assessment.",
+            "Applied post-hoc interpretability methods to a proprietary transformer-based scoring model without access to model internals."
+          ]
+        },
+        {
+          "primary": "Research Fellow",
+          "secondary": "Oberlin College",
+          "date": "2019–2021"
+        }
+      ]
+    },
+    {
+      "title": "Teaching and mentoring",
+      "entries": [
+        {
+          "primary": "Graduate Teaching Assistant",
+          "secondary": "George Mason University",
+          "date": "Aug 2023–May 2024",
+          "detail": "Graduate course in machine learning; approximately 50 students per class. Held office hours, supported labs on model implementation and evaluation, graded assignments, and coordinated exam logistics."
+        },
+        {
+          "primary": "Research mentoring (master’s student)",
+          "secondary": "Virginia Tech",
+          "date": "2026–present",
+          "detail": "Provide day-to-day supervision of a master’s student applying a ranking-reliability framework to vision-language model judgments in a new domain, with faculty oversight by Sanmay Das."
+        },
+        {
+          "primary": "Peer mentoring",
+          "secondary": "Virginia Tech",
+          "date": "Ongoing",
+          "detail": "Support three junior lab members with research onboarding, code review, proof checking, and feedback on manuscripts and coursework."
+        }
+      ]
+    },
+    {
+      "title": "Talks and posters",
+      "entries": [
+        {
+          "primary": "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+          "secondary": "Spotlight paper presentation, NeurIPS 2026 (upcoming)",
+          "date": "December 2026"
+        },
+        {
+          "primary": "Can LLMs Rank? A Tale of Triads and Triage",
+          "secondary": "Paper presentation, AIES 2026, Malmö",
+          "date": "October 2026"
+        },
+        {
+          "primary": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+          "secondary": "Talk, FAccT 2026, Montreal",
+          "date": "June 2026"
+        },
+        {
+          "primary": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+          "secondary": "Poster, AIES 2025",
+          "date": "2025"
+        },
+        {
+          "primary": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+          "secondary": "Talk, Multi-Agent AI in the Real World workshop at AAAI",
+          "date": "2025"
+        },
+        {
+          "primary": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+          "secondary": "Poster, AAAI 2024",
+          "date": "2024"
+        }
+      ]
+    },
+    {
+      "title": "Service",
+      "entries": [
+        {
+          "primary": "Proceedings Chair",
+          "secondary": "ACM EAAMO 2026 (Munich)",
+          "date": "2026"
+        },
+        {
+          "primary": "Local Arrangements Chair",
+          "secondary": "CI 2026, co-located with HCOMP (Virginia Tech, Alexandria)",
+          "date": "2026"
+        },
+        {
+          "primary": "Workflow Chair",
+          "secondary": "AIES 2023",
+          "date": "2023"
+        },
+        {
+          "primary": "Local Chair",
+          "secondary": "EAAMO 2022",
+          "date": "2022"
+        },
+        {
+          "primary": "Program committees",
+          "secondary": "IASEAI (2027); NeurIPS (2026); EC (2026); FAccT (2026); AAAI (2025, 2026); AIES (2025, 2026); EAAMO (2025, 2026)"
+        }
+      ]
+    },
+    {
+      "title": "Technical skills",
+      "entries": [
+        {
+          "primary": "Programming",
+          "detail": "Python (pandas, NumPy, scikit-learn, PyTorch), R, SQL, Bash, Git, Linux, LaTeX."
+        },
+        {
+          "primary": "Modeling",
+          "detail": "XGBoost, generalized linear models, causal estimation (BART), Markov decision processes, multi-armed bandits."
+        },
+        {
+          "primary": "AI evaluation",
+          "detail": "Pairwise preference elicitation; ranking models (Rank Centrality, Bradley–Terry); local inference with open-weight models; equivalence and non-inferiority testing; post-hoc interpretability."
+        }
+      ]
+    },
+    {
+      "title": "Community engagement",
+      "entries": [
+        {
+          "primary": "Nepali Dreamers, Kathmandu",
+          "detail": "Expanded a college counseling and SAT preparation program for Nepali high-school students applying to universities abroad (Davis Projects for Peace, 2019, with Bikalpa Baniya)."
+        },
+        {
+          "primary": "Oberlin Public Library",
+          "detail": "Developed educational programming for young adults as a Bonner Scholar (2017–2021; more than 1,400 service hours; program leadership team, 2019–2021)."
+        }
+      ]
+    }
+  ]
+}

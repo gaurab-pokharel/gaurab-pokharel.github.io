@@ -4,38 +4,68 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Home · Gaurab Pokharel</title>
-  <meta name="description" content="Personal site of Gaurab Pokharel, PhD candidate in Computer Science at Virginia Tech — introduction, recent news, research projects, and CV." />
+  <meta name="description" content="Gaurab Pokharel studies algorithmic fairness and how people and algorithms share decisions about scarce public resources, with a focus on homelessness services." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Gaurab Pokharel" />
+  <meta property="og:title" content="Gaurab Pokharel" />
+  <meta property="og:description" content="Gaurab Pokharel studies algorithmic fairness and how people and algorithms share decisions about scarce public resources, with a focus on homelessness services." />
+  <meta property="og:url" content="https://gpokharel.com/" />
+  <meta property="og:image" content="https://gpokharel.com/assets/img/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@500;600&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;family=Inter:wght@400;500;600&amp;display=swap" />
   <link rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body>
   <header id="site-header"></header>
   <main id="content">
 
-    <!-- Hero: portrait on the left, introduction on the right from 768px up;
-         stacked with the photo on top below that. home.js fills the name,
-         role, portrait and bio from data/site.json; the static name and
-         portrait below are fallbacks so the page is never empty. -->
-    <section class="hero container section" aria-labelledby="hero-name">
+    <!-- Hero. home.js fills every part of it from update/site.json: the role
+         line, the headline (this page's h1), the intro, the portrait and the
+         job-market box. On phones the role sits beside a small portrait and
+         the rest runs full width; from 768px up the text is on the left and
+         the portrait on the right. -->
+    <section class="hero container" aria-labelledby="hero-headline">
+      <p class="hero-role" id="hero-role"></p>
       <div class="hero-photo">
-        <img id="hero-img" src="assets/img/profile.jpg" alt="Gaurab Pokharel"
-             width="600" height="750" fetchpriority="high" decoding="async" />
+        <img id="hero-img" src="update/profile.jpg" alt="Gaurab Pokharel"
+             width="900" height="1350" fetchpriority="high" decoding="async" />
       </div>
-      <div class="hero-intro">
-        <h1 id="hero-name">Gaurab Pokharel</h1>
-        <p id="hero-role" class="hero-role">PhD candidate in Computer Science, Virginia Tech</p>
-        <div id="hero-bio" class="prose"></div>
+      <div class="hero-body">
+        <h1 id="hero-headline"></h1>
+        <div class="hero-intro" id="hero-intro"></div>
+        <div class="callout job-market" id="job-market" role="note" aria-label="Job market" hidden></div>
       </div>
     </section>
 
-    <!-- Recent news: home.js renders this from data/news.json, newest first.
-         The section stays hidden if the file can't be loaded or is empty. -->
-    <section id="news-section" class="news container" aria-labelledby="news-heading" hidden>
-      <h2 id="news-heading">Recent news</h2>
-      <ul id="news-list" class="news-list"></ul>
+    <!-- Recent papers: the first few entries of update/papers.json. The
+         section stays hidden if the file cannot be loaded or is empty. -->
+    <section class="band" id="recent-papers-section" aria-labelledby="recent-papers-heading" hidden>
+      <div class="container band-inner">
+        <h2 class="band-label" id="recent-papers-heading">Recent papers</h2>
+        <div class="band-body">
+          <ul class="paper-list" id="recent-papers"></ul>
+          <a class="more-link" href="papers.html">All papers</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- News: update/news.json, newest first. The latest few items show;
+         the rest sit behind the "Older news" disclosure. -->
+    <section class="band" id="news-section" aria-labelledby="news-heading" hidden>
+      <div class="container band-inner">
+        <h2 class="band-label" id="news-heading">News</h2>
+        <div class="band-body">
+          <ul class="news-list" id="news-list"></ul>
+          <details class="news-older" id="news-older" hidden>
+            <summary>Older news</summary>
+            <ul class="news-list" id="news-older-list"></ul>
+          </details>
+        </div>
+      </div>
     </section>
 
   </main>

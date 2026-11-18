@@ -1,8 +1,10 @@
 /* assets/css/print.css
-   Printable fallback for the CV page. Linked from cv.html with
-   media="print", so every rule here applies only when printing.
-   Goals: hide the site chrome and the download button, force black on
-   white, and lay the CV out as a tidy paper document. */
+   Print rules for the CV page. Linked from cv.html with media="print", so
+   everything here applies only when printing. The site chrome and the
+   download button are hidden, text is forced to black on white, and the CV
+   is laid out as a plain paper document with section names above their
+   entries. The PDF in update/cv.pdf remains the proper printable CV; this
+   is the fallback for someone who prints the web page. */
 
 @page {
   margin: 1.6cm 1.8cm;
@@ -28,9 +30,9 @@ p {
 
 #site-header,
 #site-footer,
-.cv-header,        /* on-screen title row, including the download button */
+.page-head h1,
 .cv-download,
-.cv-loading {
+.data-errors {
   display: none !important;
 }
 
@@ -43,8 +45,8 @@ p {
 .cv-print-name {
   margin: 0;
   font-family: var(--font-serif);
-  font-size: 20pt;
-  font-weight: 600;
+  font-size: 22pt;
+  line-height: 1.1;
   color: #000;
 }
 
@@ -54,7 +56,11 @@ p {
   color: #000;
 }
 
-.cv-updated {
+.page-head {
+  padding: 0;
+}
+
+.page-lede {
   margin: 0.15cm 0 0;
   font-size: 8.5pt;
   color: #000;
@@ -62,30 +68,38 @@ p {
 
 /* ---- layout -------------------------------------------------------------- */
 
-.container,
-.cv-page {
+.container {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 0;
 }
 
-.cv-section {
-  margin-top: 0.55cm;
+.band {
+  border-top: 0;
 }
 
-.cv-section-title {
+/* Section names sit above their entries on paper. */
+.band-inner {
+  display: block;
+  padding-block: 0.5cm 0;
+}
+
+.band-body {
+  padding-top: 0;
+}
+
+.band-label {
   margin: 0 0 0.25cm;
   padding-bottom: 0.08cm;
   border-bottom: 1pt solid #000;
-  font-size: 12.5pt;
+  font-size: 14pt;
   color: #000;
   break-after: avoid;
   page-break-after: avoid;
 }
 
 .cv-entries {
-  gap: 0.32cm;
+  gap: 0.3cm;
 }
 
 /* Keep individual entries whole across page breaks. */
@@ -94,40 +108,71 @@ p {
   page-break-inside: avoid;
 }
 
+/* Title on the left, date on the right, everything else underneath. */
+.cv-entry {
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 0.6cm;
+}
+
+.cv-entry > * {
+  grid-column: 1 / -1;
+  order: 0;
+}
+
+.cv-entry > .cv-primary {
+  grid-column: 1;
+}
+
+.cv-entry > .cv-date {
+  grid-column: 2;
+  grid-row: 1;
+}
+
 .cv-primary {
   font-size: 10.5pt;
   color: #000;
-  max-width: none;
 }
 
-.cv-secondary {
-  margin-top: 0.03cm;
+.cv-secondary,
+.cv-secondary strong,
+.cv-date,
+.cv-detail,
+.cv-detail-list,
+.cv-text {
+  max-width: none;
   color: #000;
-  max-width: none;
 }
 
-.cv-secondary strong {
-  font-weight: 600;
+.cv-secondary,
+.cv-date {
+  font-size: 9.5pt;
 }
 
 .cv-date {
-  color: #000;
-  font-size: 9pt;
+  margin: 0;
+  text-align: right;
 }
 
 .cv-detail,
 .cv-detail-list {
-  color: #000;
-  max-width: none;
+  font-size: 10pt;
 }
 
 .cv-detail-list {
-  gap: 0.12cm;
+  gap: 0.1cm;
   padding-left: 0.5cm;
 }
 
 .cv-detail-list li::marker {
   color: #000;
+}
+
+.pill {
+  padding: 0;
+  background: none;
+  color: #000;
+  font-size: inherit;
+  font-style: italic;
 }
 
 /* ---- links --------------------------------------------------------------- */
@@ -137,29 +182,9 @@ a {
   text-decoration: none;
 }
 
-/* Flatten the on-screen pills into plain labeled references. */
-.cv-links {
-  display: block;
-  margin-top: 0.1cm;
-}
-
-.cv-link {
-  display: block;
-  min-height: 0;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-  font-size: 9pt;
-  font-weight: 500;
-}
-
-/* Print the destination after the label so URLs survive on paper. */
-.cv-link::after {
-  content: ": " attr(href);
-  font-weight: 400;
+/* Print the destination after a link's label so URLs survive on paper. */
+.cv-secondary a[href^="http"]::after,
+.cv-detail a[href^="http"]::after {
+  content: " (" attr(href) ")";
   word-break: break-all;
-}
-
-.cv-error {
-  color: #000;
 }

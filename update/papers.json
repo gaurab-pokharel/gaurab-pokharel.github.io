@@ -1,0 +1,130 @@
+{
+  "sections": [
+    {
+      "id": "conference",
+      "title": "Conference papers",
+      "entries": [
+        {
+          "title": "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+          "authors": ["Gaurab Pokharel", "Sanmay Das", "Patrick J. Fowler"],
+          "venue": "Advances in Neural Information Processing Systems",
+          "abbr": "NeurIPS 2026",
+          "year": "2026",
+          "place": "Atlanta, USA",
+          "status": "to appear",
+          "note": "Spotlight",
+          "arxiv": "2602.10039",
+          "project": "modeling-discretion",
+          "funding": "This work was supported by NSF Award 2533162."
+        },
+        {
+          "title": "Can LLMs Rank? A Tale of Triads and Triage",
+          "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
+          "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+          "abbr": "AIES 2026",
+          "year": "2026",
+          "place": "Malmö, Sweden",
+          "volume": "9",
+          "number": "3",
+          "pages": "2105–2117",
+          "doi": "10.1609/aies.v9i3.43292",
+          "arxiv": "2606.30412",
+          "project": "can-llms-rank",
+          "funding": "This work was supported by NSF Award 2533162."
+        },
+        {
+          "title": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+          "authors": ["Gaurab Pokharel", "Diptangshu Sen", "Sanmay Das", "Juba Ziani"],
+          "equal": ["Gaurab Pokharel", "Diptangshu Sen"],
+          "venue": "Proceedings of the ACM Conference on Fairness, Accountability, and Transparency",
+          "abbr": "FAccT 2026",
+          "year": "2026",
+          "place": "Montreal, Canada",
+          "pages": "280–320",
+          "doi": "10.1145/3805689.3806540",
+          "arxiv": "2510.07478",
+          "project": "stochastic-merit",
+          "funding": "This work was supported by the US National Science Foundation (NSF) under grants IIS-2504990, IIS-2336236, and IIS-2533162."
+        },
+        {
+          "title": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+          "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
+          "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+          "abbr": "AIES 2025",
+          "year": "2025",
+          "volume": "8",
+          "number": "3",
+          "pages": "2043–2054",
+          "doi": "10.1609/aies.v8i3.36694",
+          "project": "street-level-ai",
+          "funding": "This research was supported by NSF Award 2533162."
+        },
+        {
+          "title": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+          "authors": ["Gaurab Pokharel", "Sanmay Das", "Patrick J. Fowler"],
+          "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+          "abbr": "AAAI 2024",
+          "year": "2024",
+          "extra": "AI for Social Impact track",
+          "volume": "38",
+          "number": "20",
+          "pages": "22303–22312",
+          "doi": "10.1609/aaai.v38i20.30236",
+          "project": "discretionary-trees",
+          "funding": "This work was partially supported by the NSF (IIS-1939677, IIS-2127752) and by Amazon through an NSF FAI award."
+        }
+      ]
+    },
+    {
+      "id": "preprints",
+      "title": "Preprints",
+      "entries": [
+        {
+          "title": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+          "authors": ["Gaurab Pokharel", "Sanmay Das"],
+          "year": "2023",
+          "arxiv": "2302.06176",
+          "extra": "Multi-Agent AI in the Real World workshop, AAAI 2025",
+          "note": "Best Paper Award",
+          "project": "two-sided-matching"
+        }
+      ]
+    },
+    {
+      "id": "abstracts",
+      "title": "Extended abstracts",
+      "entries": [
+        {
+          "title": "Beyond Automation: Understanding Fairness, Ethics, and Human Discretion in AI-driven Societal Decisions",
+          "authors": ["Gaurab Pokharel"],
+          "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+          "abbr": "AIES 2025",
+          "year": "2025",
+          "extra": "Doctoral Consortium",
+          "volume": "8",
+          "number": "3",
+          "pages": "2918–2920",
+          "doi": "10.1609/aies.v8i3.36793"
+        }
+      ]
+    },
+    {
+      "id": "theses",
+      "title": "Theses",
+      "listed": false,
+      "entries": [
+        {
+          "title": "Increasing the Value of Information During Planning in Uncertain Environments",
+          "authors": ["Gaurab Pokharel"],
+          "affiliations": { "Gaurab Pokharel": "Oberlin College" },
+          "venue": "Undergraduate honors thesis, Oberlin College",
+          "year": "2021",
+          "extra": "May 2021",
+          "arxiv": "2409.13754",
+          "project": "value-of-info",
+          "bibtype": "misc"
+        }
+      ]
+    }
+  ]
+}

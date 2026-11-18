@@ -1,193 +1,238 @@
-/* assets/js/cv.js
-   CV page. Loads data/cv.json and renders the sections in the order they
-   appear in the file. Relies on the helpers site.js exposes on window:
-   fetchJSON(path) and formatDate(isoString).
+/* ==========================================================================
+   cv.js — CV page, loaded after site.js on cv.html only.
 
-   data/cv.json shape:
+   Reads update/cv.json and renders its sections in file order, each with
+   its name in the left margin. The publication lists are not typed into
+   cv.json: a section written as
+
+       { "title": "Peer-reviewed conference papers", "papers": "conference" }
+
+   is filled from the section of update/papers.json with that id, so a paper
+   is entered once and shows up on the Papers page and here.
+
+   update/cv.json shape:
    {
-     "pdf": "assets/files/cv.pdf",
-     "updated": "2026-07-06",                        // optional
+     "pdf": "update/cv.pdf",
+     "updated": "October 2026",            // free text, or an ISO date
      "sections": [
        {
          "title": "Education",
          "entries": [
            {
-             "primary":   "PhD, Computer Science",   // optional — prominent line
-             "secondary": "Virginia Tech",           // optional — muted line
-             "date":      "2024 – present",          // optional — right-aligned
-             "detail":    "GPA: 3.96/4.0",           // optional — string OR array
-                                                     //   of strings (bullet list)
-             "links":     [ { "label": "DOI", "url": "…" } ],  // optional
-             "link":      "https://…"                // optional — single-URL form,
-                                                     //   rendered with label "Link"
+             "primary":   "Ph.D., Computer Science",   // semibold title
+             "secondary": "Virginia Tech",             // muted line under it
+             "date":      "2021–present",              // right-hand column
+             "detail":    "One paragraph"              // or an array of
+                          | ["Bullet", "Bullet"],      //   bullet strings
+             "links":     [ { "label": "Details", "url": "https://…" } ]
            }
          ]
-       }
+       },
+       { "title": "Preprints", "papers": "preprints" }
      ]
    }
 
-   All JSON values are inserted as plain text (textContent / createTextNode,
-   never innerHTML), so data can't inject markup. The one deliberate
-   exception: exact occurrences of "Gaurab Pokharel" in a secondary line are
-   wrapped in a <strong> element so the name reads bold in author lists. */
+   Every field is optional. An entry with no "primary" is shown as a plain
+   paragraph (or a plain list), which is how Research interests is written.
+   "secondary" and "detail" may use inline Markdown: [text](url), **bold**
+   and *italic*. Links are placed at the end of the entry's muted line.
+   ========================================================================== */
 
 (function () {
   "use strict";
 
-  var DATA_PATH = "data/cv.json";
-  var FALLBACK_PDF = "assets/files/cv.pdf";
-  var AUTHOR_NAME = "Gaurab Pokharel";
-
-  /* ---- tiny DOM helpers ------------------------------------------------ */
-
-  /* Create an element with an optional class and plain-text content. */
-  function el(tag, className, text) {
-    var node = document.createElement(tag);
-    if (className) node.className = className;
-    if (text !== undefined && text !== null) node.textContent = String(text);
-    return node;
+  const Site = window.Site;
+  const container = document.getElementById("cv-sections");
+  if (!container) return;
+  if (!Site) {
+    console.error("cv.js: window.Site missing. assets/js/site.js must load first.");
+    return;
   }
+  const el = Site.el;
+  const FALLBACK_PDF = "update/cv.pdf";
 
-  /* Append text to a parent, wrapping the author's name in <strong>. */
-  function appendTextWithBoldName(parent, text) {
-    var parts = String(text).split(AUTHOR_NAME);
-    for (var i = 0; i < parts.length; i++) {
-      if (i > 0) parent.appendChild(el("strong", "", AUTHOR_NAME));
-      if (parts[i]) parent.appendChild(document.createTextNode(parts[i]));
+  init();
+
+  async function init() {
+    // Papers and site details are extras: without them the CV still renders,
+    // minus the publication lists.
+    const papersRequest = Site.fetchJSON(Site.paths.papers).catch(function () { return null; });
+    const siteRequest = Site.loadSite();
+
+    let data;
+    try {
+      data = await Site.fetchJSON(Site.paths.cv);
+    } catch (error) {
+      renderError();
+      return;
     }
-  }
+    const papers = await papersRequest;
+    const site = await siteRequest;
 
-  /* ---- rendering --------------------------------------------------------- */
-
-  /* Accept both the `links` array form and the legacy single `link` string. */
-  function normalizeLinks(entry) {
-    var links = [];
-    if (Array.isArray(entry.links)) {
-      entry.links.forEach(function (item) {
-        if (item && item.url) {
-          links.push({ label: item.label || "Link", url: item.url });
-        }
-      });
-    }
-    if (typeof entry.link === "string" && entry.link) {
-      links.push({ label: "Link", url: entry.link });
-    }
-    return links;
-  }
-
-  function renderEntry(entry) {
-    var item = el("li", "cv-entry");
-
-    /* Head row: primary + secondary on the left, date on the right. */
-    var head = el("div", "cv-entry-head");
-    var main = el("div", "cv-entry-main");
-
-    if (entry.primary) {
-      main.appendChild(el("h3", "cv-primary", entry.primary));
-    }
-    if (entry.secondary) {
-      var secondary = el("p", "cv-secondary");
-      appendTextWithBoldName(secondary, entry.secondary);
-      main.appendChild(secondary);
-    }
-
-    head.appendChild(main);
-    if (entry.date) head.appendChild(el("p", "cv-date", entry.date));
-
-    /* Skip the head row entirely for entries that have none of it
-       (e.g. the research-interests bullet list). */
-    if (main.childNodes.length > 0 || entry.date) item.appendChild(head);
-
-    /* Detail: a single line, or an array rendered as a bullet list. */
-    if (Array.isArray(entry.detail)) {
-      var list = el("ul", "cv-detail-list");
-      entry.detail.forEach(function (line) {
-        list.appendChild(el("li", "", line));
-      });
-      item.appendChild(list);
-    } else if (entry.detail) {
-      item.appendChild(el("p", "cv-detail", entry.detail));
-    }
-
-    /* Links (DOI, arXiv, Details, …) as small pills. */
-    var links = normalizeLinks(entry);
-    if (links.length > 0) {
-      var wrap = el("div", "cv-links");
-      links.forEach(function (link) {
-        var anchor = el("a", "cv-link", link.label);
-        anchor.setAttribute("href", link.url);
-        wrap.appendChild(anchor);
-      });
-      item.appendChild(wrap);
-    }
-
-    return item;
-  }
-
-  function renderSection(section) {
-    var wrapper = el("section", "cv-section");
-    if (section.title) {
-      wrapper.appendChild(el("h2", "cv-section-title", section.title));
-    }
-    var list = el("ul", "cv-entries");
-    (section.entries || []).forEach(function (entry) {
-      list.appendChild(renderEntry(entry));
+    // Point the download button at the path declared in cv.json.
+    document.querySelectorAll(".cv-download").forEach(function (button) {
+      button.setAttribute("href", data.pdf || FALLBACK_PDF);
     });
-    wrapper.appendChild(list);
+
+    // "Last updated ..." line under the heading.
+    const updated = document.getElementById("cv-updated");
+    if (updated && data.updated) {
+      updated.textContent = "Last updated " + Site.formatDate(data.updated);
+      updated.hidden = false;
+    }
+
+    const fragment = document.createDocumentFragment();
+    (Array.isArray(data.sections) ? data.sections : []).forEach(function (section) {
+      const node = renderSection(section, papers, site.name || "");
+      if (node) fragment.appendChild(node);
+    });
+    container.textContent = "";
+    container.appendChild(fragment);
+  }
+
+  /* ---------------------------------------------------------------------- */
+  /* Sections                                                                */
+  /* ---------------------------------------------------------------------- */
+
+  function renderSection(section, papers, owner) {
+    if (!section) return null;
+    const list = el("ul", "cv-entries");
+
+    if (section.papers) {
+      // Filled from update/papers.json.
+      const source = papers && Array.isArray(papers.sections)
+        ? papers.sections.find(function (s) { return s && s.id === section.papers; })
+        : null;
+      (source && Array.isArray(source.entries) ? source.entries : []).forEach(function (paper) {
+        if (paper && paper.title) list.appendChild(renderPaper(paper, owner));
+      });
+    } else {
+      (Array.isArray(section.entries) ? section.entries : []).forEach(function (entry) {
+        if (entry) list.appendChild(renderEntry(entry));
+      });
+    }
+    if (list.childNodes.length === 0) return null; // nothing to show
+
+    const wrapper = el("section", "band cv-section");
+    const inner = el("div", "container band-inner");
+    inner.appendChild(el("h2", "band-label", section.title || ""));
+    const body = el("div", "band-body");
+    body.appendChild(list);
+    inner.appendChild(body);
+    wrapper.appendChild(inner);
     return wrapper;
   }
 
-  function renderError(container) {
+  /* ---------------------------------------------------------------------- */
+  /* Entries                                                                 */
+  /* ---------------------------------------------------------------------- */
+
+  /** The title, then the date. main.css places the date in a fixed column
+      on the right (or after the muted lines on phones). */
+  function appendHead(item, primary, date) {
+    item.appendChild(Site.keepCompounds(el("h3", "cv-primary", primary)));
+    if (date) item.appendChild(el("p", "cv-date", date));
+  }
+
+  /** Append " · Label · Label" links to a muted line. The spaces around
+      each dot are non-breaking, so a link never wraps away from its dot and
+      a line never ends with a stray dot: the last word and the links move
+      to the next line together. */
+  function appendLinks(line, links) {
+    links.forEach(function (link) {
+      if (line.childNodes.length) line.appendChild(document.createTextNode("\u00a0·\u00a0"));
+      line.appendChild(Site.setLink(el("a", "", link.label), link.url));
+    });
+  }
+
+  /** One entry from cv.json. */
+  function renderEntry(entry) {
+    const item = el("li", "cv-entry");
+    const details = Array.isArray(entry.detail)
+      ? entry.detail.filter(Boolean)
+      : (entry.detail ? [entry.detail] : []);
+
+    // No title: a plain paragraph, or a plain list (research interests).
+    if (!entry.primary) {
+      if (Array.isArray(entry.detail)) {
+        const list = el("ul", "cv-detail-list cv-text");
+        details.forEach(function (text) { list.appendChild(inlineNode("li", "", text)); });
+        item.appendChild(list);
+      } else if (details.length) {
+        item.appendChild(inlineNode("p", "cv-text", details[0]));
+      }
+      return item;
+    }
+
+    appendHead(item, entry.primary, entry.date);
+
+    // Muted line, with any links at its end.
+    const links = (Array.isArray(entry.links) ? entry.links : []).filter(function (link) {
+      return link && link.url;
+    }).map(function (link) {
+      return { label: link.label || "Link", url: String(link.url) };
+    });
+    if (entry.secondary || links.length) {
+      const line = entry.secondary ? inlineNode("p", "cv-secondary", entry.secondary) : el("p", "cv-secondary");
+      appendLinks(line, links);
+      item.appendChild(line);
+    }
+
+    // Details: one paragraph, or bullets.
+    if (Array.isArray(entry.detail) && details.length) {
+      const list = el("ul", "cv-detail-list");
+      details.forEach(function (text) { list.appendChild(inlineNode("li", "", text)); });
+      item.appendChild(list);
+    } else if (details.length) {
+      item.appendChild(inlineNode("p", "cv-detail", details[0]));
+    }
+    return item;
+  }
+
+  /** One paper from papers.json, in the same anatomy as every other entry:
+      title and year, the author line, then the venue line with its links. */
+  function renderPaper(paper, owner) {
+    const item = el("li", "cv-entry");
+    appendHead(item, paper.title, paper.year);
+
+    if (paper.authors && paper.authors.length) {
+      item.appendChild(Site.papers.appendAuthors(el("p", "cv-secondary"), paper, owner));
+    }
+
+    const line = el("p", "cv-secondary");
+    const venue = Site.papers.venueLine(paper);
+    if (venue) line.appendChild(document.createTextNode(venue));
+    const links = Site.papers.links(paper).map(function (link) {
+      return { label: link.label, url: link.url };
+    });
+    if (paper.note) {
+      // The pill and the links after it wrap as one unit, after an
+      // ordinary space, so a wrapped pill starts flush with the text.
+      if (venue) line.appendChild(document.createTextNode(" "));
+      const group = el("span", "nobreak");
+      group.appendChild(el("span", "pill", paper.note));
+      appendLinks(group, links);
+      line.appendChild(group);
+    } else {
+      appendLinks(line, links);
+    }
+    if (line.childNodes.length) item.appendChild(line);
+    return item;
+  }
+
+  /** An element whose content is a text field with inline Markdown. */
+  function inlineNode(tag, className, text) {
+    const node = el(tag, className);
+    node.innerHTML = Site.inline(text);
+    return node;
+  }
+
+  function renderError() {
     container.textContent = "";
-    var message = el("p", "cv-error", "Sorry — the CV could not be loaded right now. ");
-    var fallback = el("a", "", "Download the PDF version instead.");
+    const message = el("p", "page-note container", "The CV could not be loaded right now. ");
+    const fallback = el("a", "", "Download the PDF instead.");
     fallback.setAttribute("href", FALLBACK_PDF);
     message.appendChild(fallback);
     container.appendChild(message);
-  }
-
-  /* ---- page init --------------------------------------------------------- */
-
-  async function init() {
-    var container = document.getElementById("cv-sections");
-    if (!container) return;
-
-    var loadJSON = window.fetchJSON || async function (path) {
-      var response = await fetch(path);
-      if (!response.ok) throw new Error("HTTP " + response.status);
-      return response.json();
-    };
-
-    try {
-      var data = await loadJSON(DATA_PATH);
-
-      /* Point the download button at the path declared in cv.json. */
-      var pdfPath = data.pdf || FALLBACK_PDF;
-      document.querySelectorAll(".cv-download").forEach(function (button) {
-        button.setAttribute("href", pdfPath);
-      });
-
-      /* Optional "last updated" line under the heading. */
-      var updated = document.getElementById("cv-updated");
-      if (updated && data.updated) {
-        var pretty = window.formatDate ? window.formatDate(data.updated) : data.updated;
-        updated.textContent = "Last updated " + pretty;
-        updated.hidden = false;
-      }
-
-      /* Render every section, in file order. */
-      container.textContent = "";
-      (data.sections || []).forEach(function (section) {
-        container.appendChild(renderSection(section));
-      });
-    } catch (error) {
-      renderError(container);
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
   }
 })();
