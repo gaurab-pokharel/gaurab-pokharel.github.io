@@ -24,6 +24,8 @@ This is a conversion, not an edit. Do not rewrite, shorten, reorder or improve a
 - Possibly the current `update/cv.json`.
 - Possibly `update/papers.json`.
 
+Both files hold notes as well as data. Anything after `//` on a line is a note, and so is everything between `/*` and `*/`. Notes are not data. In particular, each file has a block that begins `/* TEMPLATE` and holds a made-up example entry. That example is not part of my CV or one of my papers.
+
 Do not ask questions before you start. Where a rule below does not settle something, make the closest reasonable choice and mention it in the "Changes" part of your reply.
 
 ## The file format
@@ -71,11 +73,113 @@ An entry has up to five fields. Use only the ones an entry needs, and never writ
 
 An entry with only `detail` is shown as plain text with no heading. Use that for a section that is a paragraph, such as Research interests.
 
+## Layout of the file
+
+The website reads this file as JSON that may also hold notes: anything after `//` on a line is ignored, and so is everything between `/*` and `*/`. I use notes and spacing to make the file easy to read and to add to. Lay the file out as follows.
+
+1. Begin with these two notes, copied character for character:
+
+```jsonc
+// =============================================================================
+//  CV
+//
+//  The LaTeX CV is the master copy. After changing it, the usual way to
+//  refresh this file is the prompt in prompts/cv-from-latex.md, which
+//  writes the whole file again. Small fixes can be made here by hand.
+//  Either way, save the new PDF as update/cv.pdf and change "updated".
+//
+//  Publications are not in this file. The lines marked "papers" further
+//  down are filled in from papers.json.
+//
+//  An entry has up to five parts. Use only the ones it needs:
+//      "primary"     the title of the entry, shown semibold
+//      "secondary"   the muted line under it
+//      "date"        shown in the column on the right
+//      "detail"      one "paragraph", or a [list] that becomes bullets
+//      "links"       [{ "label": "Details", "url": "https://..." }]
+//
+//  Lines that begin with // are notes, like this one. The site ignores them.
+// =============================================================================
+
+/* TEMPLATE. Copy the lines from { to }, with its comma.
+
+        {
+          "primary":   "Title of the entry",
+          "secondary": "The place, or a short qualifier",
+          "date":      "2027",
+          "detail":    "One sentence or one paragraph."
+        },
+
+   This block sits inside a note, so it never shows on the site. */
+```
+
+2. Then a blank line, the opening `{`, the `pdf` and `updated` lines, a blank line, `"sections": [` and a blank line.
+3. Before each section write a divider note: four spaces, `// ---- `, the section title, a space, then hyphens up to column 80. After each section leave one blank line.
+4. Publication placeholders that follow one another share a single divider, `// ---- Publications: filled in from papers.json`, and are written one per line with their `"papers"` values lined up.
+5. Inside a section, leave one blank line between entries.
+6. Inside an entry, write the fields in the order `primary`, `secondary`, `date`, `detail`, `links`, one per line. Put spaces after the colons so that the values of the one-line fields start in the same column. A `detail` list and `links` are written as `"detail": [` with one item per line.
+7. Indent with two spaces per level. Do not use tabs.
+
+This is how the start of the body looks:
+
+```jsonc
+{
+  "pdf":     "update/cv.pdf",
+  "updated": "October 2026",   // the line under the page title
+
+  "sections": [
+
+    // ---- Education ----------------------------------------------------------
+    {
+      "title": "Education",
+      "entries": [
+        {
+          "primary":   "Ph.D., Computer Science",
+          "secondary": "Virginia Tech",
+          "date":      "2021–present",
+          "detail": [
+            "Doctoral studies began at George Mason University in 2021; transferred to Virginia Tech in 2025.",
+            "Advisors: Sanmay Das and Patrick J. Fowler. GPA: 4.0/4.0."
+          ]
+        },
+
+        {
+          "primary":   "M.S., Computer Science",
+          "secondary": "George Mason University",
+          "date":      "2021–2024",
+          "detail":    "Machine learning concentration; GPA: 3.96/4.0."
+        }
+      ]
+    },
+
+    // ---- Publications: filled in from papers.json ---------------------------
+    { "title": "Peer-reviewed conference papers",        "papers": "conference" },
+    { "title": "Extended abstracts",                     "papers": "abstracts"  },
+    { "title": "Preprints and manuscripts under review", "papers": "preprints"  },
+
+    // ---- Service ------------------------------------------------------------
+    {
+      "title": "Service",
+      "entries": [
+        {
+          "primary":   "Proceedings Chair",
+          "secondary": "ACM EAAMO 2026 (Munich)",
+          "date":      "2026"
+        }
+      ]
+    }
+
+  ]
+}
+```
+
+The only notes in the file are the two at the top, the dividers, and the short note after `updated`. Do not add others. If the current `update/cv.json` I attached has notes of mine that are not described here, keep them where they are.
+
 ## What to leave out
 
 - The header at the top of the CV: my name, address, email and website. The page shows these itself.
 - Every publication. See the next section.
-- Layout commands, spacing and comments.
+- Layout commands, spacing and LaTeX comments.
 
 ## Publications
 
@@ -252,7 +356,7 @@ Some entries in the current file have a `links` field with no counterpart in the
 
 ## What to send back
 
-1. The complete `update/cv.json` in one code block. If you can create files, also attach it.
+1. The complete `update/cv.json` in one code block, laid out as described under "Layout of the file". If you can create files, also attach it.
 2. "Changes": a short list of what differs from the current `update/cv.json`, entry by entry. If I did not attach it, list any choices you had to make.
 3. "Publication check". If I attached `update/papers.json`, compare each publication in the LaTeX with its entry there (title, authors and their order, venue, year, volume, number, pages, DOI, arXiv number, status, awards) and list every difference, along with any paper that is in one and not the other. If I did not attach it, list the publications in the LaTeX, one line each, so I can compare by hand.
 4. "Possible typos": anything in the LaTeX that looks like a mistake. Convert it as written and list it here. Do not correct it silently.
@@ -262,7 +366,9 @@ Some entries in the current file have a `links` field with no counterpart in the
 
 Check each of these and fix what fails:
 
-- The JSON is valid: double quotes around every name and string, no trailing commas, no comments.
+- With its notes taken out, the file is valid JSON: double quotes around every name and string, and no trailing commas.
+- The file starts with the two notes given under "Layout of the file", every section has its divider, and there is one blank line between entries.
+- No entry comes from a `TEMPLATE` block.
 - The sections are in the LaTeX order, with the publication subsections replaced by placeholders.
 - No publication appears as an entry.
 - No string contains a backslash command, `~`, `--`, a backtick or `$` used as a math delimiter.

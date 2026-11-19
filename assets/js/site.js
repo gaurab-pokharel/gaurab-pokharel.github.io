@@ -3,11 +3,11 @@
 
    What it does
    • Injects the header into #site-header (the name as a wordmark linking to
-     index.html, and the nav Home / Papers / Projects / CV with the current
-     page marked by file name: index → Home, papers → Papers, projects and
-     project → Projects, cv → CV) and the footer into #site-footer (GitHub,
-     LinkedIn, Google Scholar and email icons, then "© year name").
+     index.html, and the tabs listed in NAV_ITEMS below, with the current
+     page's tab marked) and the footer into #site-footer (GitHub, LinkedIn,
+     Google Scholar and email icons, then "© year name").
    • Reads everything from the update/ folder. Pages never hardcode content.
+     The content files are JSON that may also hold notes (see stripNotes).
    • Exposes helpers on window.Site for the page scripts, and keeps the three
      original helpers on window as well:
        fetchJSON(path)        → Promise of parsed JSON (cached per path)
@@ -27,6 +27,9 @@
   /* Where the content lives                                                 */
   /* ---------------------------------------------------------------------- */
 
+  /* One line per content file. A page script reads a file with
+     Site.fetchJSON(Site.paths.news), for example. A new content file gets a
+     line here (README.md, "Adding a tab"). */
   const PATHS = {
     site: "update/site.json",
     news: "update/news.json",
@@ -39,11 +42,20 @@
     }
   };
 
+  /* ---------------------------------------------------------------------- */
+  /* The tabs                                                                */
+  /* ---------------------------------------------------------------------- */
+
+  /* One line per tab, in the order they appear in the header. A new tab gets
+     a line here (README.md, "Adding a tab", lists the other steps).
+       label  the word shown in the header
+       href   the page the tab opens
+       also   other pages that belong to the tab and keep it marked */
   const NAV_ITEMS = [
-    { label: "Home", href: "index.html", key: "home" },
-    { label: "Papers", href: "papers.html", key: "papers" },
-    { label: "Projects", href: "projects.html", key: "projects" },
-    { label: "CV", href: "cv.html", key: "cv" }
+    { label: "Home", href: "index.html" },
+    { label: "Papers", href: "papers.html" },
+    { label: "Projects", href: "projects.html", also: ["project.html"] },
+    { label: "CV", href: "cv.html" }
   ];
 
   /* Minimal fallback so the shell still renders if update/site.json cannot
@@ -101,12 +113,77 @@
     box.appendChild(line);
   }
 
+  /**
+   * The content files are JSON with two allowances that make them easier to
+   * edit by hand:
+   *   • notes, written as // to the end of the line, or between slash-star
+   *     and star-slash over as many lines as needed;
+   *   • a comma after the last item of a list, which strict JSON forbids
+   *     and which is the most common slip when pasting a new item.
+   * This removes both and returns plain JSON text. Whatever is inside a
+   * "quoted string" is left alone, so an address such as https://arxiv.org
+   * is safe. Notes are replaced by spaces, not deleted, so a line number in
+   * an error message still points at the right line of the file.
+   */
+  function stripNotes(text) {
+    const out = [];
+    const length = text.length;
+    let comma = -1; // where in `out` a comma sits that may turn out to end a list
+    let last = "";  // the last character that was not a space or part of a note
+    let i = 0;
+
+    while (i < length) {
+      const ch = text[i];
+      const next = text[i + 1];
+
+      if (ch === '"') {
+        // A string: copy it whole, stepping over escaped characters.
+        let end = i + 1;
+        while (end < length && text[end] !== '"') end += text[end] === "\\" ? 2 : 1;
+        out.push(text.slice(i, end + 1));
+        i = end + 1;
+        comma = -1;
+        last = '"';
+      } else if (ch === "/" && next === "/") {
+        // A note that runs to the end of the line.
+        while (i < length && text[i] !== "\n") {
+          out.push(" ");
+          i += 1;
+        }
+      } else if (ch === "/" && next === "*") {
+        // A note that runs to its closing mark, over one line or several.
+        const close = text.indexOf("*/", i + 2);
+        const end = close === -1 ? length : close + 2;
+        for (; i < end; i += 1) out.push(text[i] === "\n" ? "\n" : " ");
+      } else {
+        if (ch === ",") {
+          // Only a comma that comes after an item can be the spare one.
+          comma = last && "[{,:".indexOf(last) === -1 ? out.length : -1;
+        } else if ((ch === "]" || ch === "}") && comma !== -1) {
+          out[comma] = " "; // nothing followed that comma: drop it
+          comma = -1;
+        } else if (ch.trim() !== "") {
+          comma = -1;
+        }
+        if (ch.trim() !== "") last = ch;
+        out.push(ch);
+        i += 1;
+      }
+    }
+    return out.join("");
+  }
+
+  /** Turn the text of a content file into data. Throws if it is malformed. */
+  function parseContent(text) {
+    return JSON.parse(stripNotes(text));
+  }
+
   const jsonCache = new Map();
 
   /**
-   * Fetch and parse a JSON file. Each path is requested once per page load;
-   * later calls reuse the same promise. Rejects on network errors, HTTP
-   * errors and invalid JSON.
+   * Fetch and parse a content file. Each path is requested once per page
+   * load; later calls reuse the same promise. Rejects on network errors,
+   * HTTP errors and a file that cannot be parsed.
    */
   function fetchJSON(path) {
     if (!jsonCache.has(path)) {
@@ -119,9 +196,9 @@
         })
         .then(function (text) {
           try {
-            return JSON.parse(text);
+            return parseContent(text);
           } catch (error) {
-            throw new Error(path + " is not valid JSON: " + error.message);
+            throw new Error(path + " has a mistake in it: " + error.message);
           }
         })
         .catch(function (error) {
@@ -134,6 +211,25 @@
       jsonCache.set(path, request);
     }
     return jsonCache.get(path);
+  }
+
+  /**
+   * Once this page has loaded and the browser has nothing else to do, fetch
+   * the content files the page did not need itself. They are a few kilobytes
+   * each. With them in the browser's cache, the next page finds its data
+   * ready and can slide in complete, instead of filling in after it arrives.
+   * Skipped for visitors who have asked their browser to save data.
+   */
+  function warmCache() {
+    if (navigator.connection && navigator.connection.saveData) return;
+    Object.keys(PATHS).forEach(function (name) {
+      const path = PATHS[name];
+      if (typeof path !== "string" || jsonCache.has(path)) return;
+      // Read the file to the end, so the browser stores a complete copy.
+      fetch(path)
+        .then(function (response) { return response.arrayBuffer(); })
+        .catch(function () { /* not needed yet; the next page will ask again */ });
+    });
   }
 
   /** update/site.json, falling back to a minimal shell if it cannot load. */
@@ -446,27 +542,36 @@
   /* Building the shell                                                      */
   /* ---------------------------------------------------------------------- */
 
-  /**
-   * Which nav item is active, judged from the current file name:
-   * index → home, papers → papers, projects and project → projects,
-   * cv → cv. Anything else (e.g. 404.html) marks nothing active.
-   */
-  function activeKey() {
-    let file = window.location.pathname.split("/").pop() || "index.html";
-    file = file.toLowerCase().replace(/\.html?$/, "");
-    if (file === "" || file === "index") return "home";
-    if (file === "papers") return "papers";
-    if (file === "projects" || file === "project") return "projects";
-    if (file === "cv") return "cv";
-    return "";
+  /** "papers" for papers.html, /papers and PAPERS.HTML; "index" for "". */
+  function pageName(file) {
+    return String(file || "").toLowerCase().replace(/\.html?$/, "") || "index";
   }
 
-  /** Header: skip link, wordmark, nav. */
+  /**
+   * The tab the current page belongs to, judged from the file name in the
+   * address: the tab whose own page this is, or that lists this page under
+   * "also". Any other page (404.html, for example) marks no tab.
+   */
+  function activeTab() {
+    const here = pageName(window.location.pathname.split("/").pop());
+    return NAV_ITEMS.find(function (item) {
+      return [item.href].concat(item.also || []).some(function (file) {
+        return pageName(file) === here;
+      });
+    }) || null;
+  }
+
+  /** Header: skip link, wordmark, nav. Every nav link carries an empty
+      .nav-mark span, which main.css draws as the underline: full width under
+      the current page's link, and growing in when another link is hovered. */
   function buildHeader(site) {
-    const current = activeKey();
+    const current = activeTab();
     const links = NAV_ITEMS.map(function (item) {
-      const active = item.key === current ? ' aria-current="page"' : "";
-      return '<li><a href="' + item.href + '"' + active + ">" + item.label + "</a></li>";
+      const active = item === current ? ' aria-current="page"' : "";
+      return (
+        '<li><a href="' + item.href + '"' + active + ">" + item.label +
+        '<span class="nav-mark" aria-hidden="true"></span></a></li>'
+      );
     }).join("");
 
     return (
@@ -516,6 +621,7 @@
   window.Site = {
     paths: PATHS,
     fetchJSON: fetchJSON,
+    parseContent: parseContent,
     loadSite: loadSite,
     formatDate: formatDate,
     getParam: getParam,
@@ -561,6 +667,15 @@
       const wordmark = headerEl && headerEl.querySelector(".wordmark");
       if (wordmark && site.name) wordmark.textContent = site.name;
       if (footerEl) footerEl.innerHTML = buildFooter(site);
+    });
+
+    // After everything this page needs has loaded, get ready for the next one.
+    window.addEventListener("load", function () {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(warmCache, { timeout: 3000 });
+      } else {
+        window.setTimeout(warmCache, 800);
+      }
     });
   }
 

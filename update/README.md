@@ -12,6 +12,9 @@ change, nothing else in the repository needs to be touched.
 | Change the headline, intro, job-market box or links | `site.json` |
 | Replace the portrait | `profile.jpg` |
 
+Adding a whole new tab, such as "My lab", takes a few files outside this
+folder as well. The steps are under "Adding a tab" in the main `README.md`.
+
 ## Check a change before pushing
 
 From the repository root:
@@ -25,8 +28,34 @@ at the top of the page names the file and the problem. Visitors to the live
 site never see that banner. If a change does not seem to apply, hard-refresh
 the page (Ctrl+Shift+R, or Cmd+Shift+R on a Mac).
 
-JSON rules that cause most mistakes: use double quotes, put a comma between
-items but not after the last one, and do not write comments.
+The rules that cause most mistakes: use double quotes around names and text,
+and put a comma between items. A comma after the last item of a list does no
+harm.
+
+## How the files are laid out
+
+The five `.json` files are arranged the same way, so that the place to add
+something is easy to find:
+
+- A boxed note at the top says what the file is and how to add to it.
+- Under it is a template to copy: paste it where the note says and change
+  the text. (`site.json` is a single block, so it has no template.)
+- Divider lines mark the parts of the file: each section of papers, current
+  and past projects, each year of news, each section of the CV.
+- Entries are separated by one blank line. Their fields are in the same
+  order in every entry, and the values line up.
+
+Lines that begin with `//` are notes, and so is anything between `/*` and
+`*/`. The site ignores notes, so you can add your own wherever they help, for
+example a reminder next to a paper that is under review:
+
+```jsonc
+"status": "to appear",   // replace with volume, number and pages in December
+```
+
+Because of the notes these files are not strict JSON, and some editors
+underline the notes as mistakes. The repository includes settings that stop
+VS Code and GitHub from doing that. The examples below leave the notes out.
 
 ## News: `news.json`
 

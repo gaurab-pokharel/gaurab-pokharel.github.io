@@ -17,6 +17,8 @@ Each file in this folder is a complete prompt for a language model. The model do
 
 The top of each prompt has the same steps, with the optional extra files worth attaching.
 
+The files in `update/` hold notes and a template to copy, as well as data. The prompts tell the model that these are not data, so the files can be attached as they are.
+
 ## Adding a project from start to finish
 
 1. Run `project-writeup.md` with the paper PDF. It returns the write-up, the entries for `update/projects.json` and `update/papers.json`, a news line, the list of figures to export and a short brief for the picture.

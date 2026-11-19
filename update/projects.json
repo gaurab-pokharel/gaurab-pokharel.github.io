@@ -1,66 +1,111 @@
+// =============================================================================
+//  PROJECTS
+//
+//  One block per project. Each project also has a folder,
+//  update/projects/<id>/, with its write-up, its picture and its figures.
+//
+//  The Projects tab shows current projects first and past ones after them,
+//  each group in the order written here. Put a new project at the top.
+//
+//  To add a project: copy the template below, paste it above the first
+//  project, fill it in, and create the folder update/projects/<id>/.
+//
+//  When a project ends: change "status" to "past" and move its block down
+//  to the past projects.
+//
+//  Lines that begin with // are notes, like this one. The site ignores them.
+//  update/README.md explains every field.
+// =============================================================================
+
+/* TEMPLATE. Copy the lines from { to }, with its comma.
+
+  {
+    "id":      "short-name-with-hyphens",
+    "title":   "Short project title",
+    "period":  "2027",
+    "status":  "current",
+    "summary": "One sentence that says what the project is and what it found.",
+    "tags":    ["First topic", "Second topic", "Third topic"]
+  },
+
+   The "id" must match the folder name. Never change it once the page is
+   public, because it is part of the page's address.
+   This block sits inside a note, so it never shows on the site. */
+
 [
+  // ---- Current projects -----------------------------------------------------
+
   {
-    "id": "can-llms-rank",
-    "title": "Can LLMs Rank?",
-    "period": "2026",
-    "status": "current",
+    "id":      "can-llms-rank",
+    "title":   "Can LLMs Rank?",
+    "period":  "2026",
+    "status":  "current",
     "summary": "Diagnosing whether LLM pairwise rankings can be trusted: consistency within a run and agreement across runs.",
-    "tags": ["LLMs", "Ranking", "Pairwise comparisons", "Consistency", "Triage", "Resource allocation"]
+    "tags":    ["LLMs", "Ranking", "Pairwise comparisons", "Consistency", "Triage", "Resource allocation"]
   },
+
   {
-    "id": "modeling-discretion",
-    "title": "Budgeting Discretion",
-    "period": "2026",
-    "status": "current",
+    "id":      "modeling-discretion",
+    "title":   "Budgeting Discretion",
+    "period":  "2026",
+    "status":  "current",
     "summary": "Formalizing discretion as a finite override budget, with a dynamic threshold rule set by the tail-heaviness of potential gains, and evidence that caseworkers ration overrides against real capacity and timing.",
-    "tags": ["Dynamic programming", "Resource allocation", "Discretion", "Invariance", "Heavy tails"]
+    "tags":    ["Dynamic programming", "Resource allocation", "Discretion", "Invariance", "Heavy tails"]
   },
+
   {
-    "id": "eviction-prediction",
-    "title": "Eviction Prediction Framework",
-    "period": "2026",
-    "status": "current",
+    "id":      "eviction-prediction",
+    "title":   "Eviction Prediction Framework",
+    "period":  "2026",
+    "status":  "current",
     "summary": "A modular, leakage-free pipeline for eviction-risk modeling, with strict temporal splits and pluggable feature generators as first-class objects.",
-    "tags": ["Temporal splits", "Feature engineering", "Model evaluation", "Reproducibility"]
+    "tags":    ["Temporal splits", "Feature engineering", "Model evaluation", "Reproducibility"]
   },
+
+  // ---- Past projects --------------------------------------------------------
+
   {
-    "id": "stochastic-merit",
-    "title": "Fixed Points and Stochastic Meritocracies",
-    "period": "2026",
-    "status": "past",
+    "id":      "stochastic-merit",
+    "title":   "Fixed Points and Stochastic Meritocracies",
+    "period":  "2026",
+    "status":  "past",
     "summary": "How merit-based, individually fair selection can still entrench group inequality over time, once a small affinity feedback loop turns random early leads into self-reinforcing ones.",
-    "tags": ["Long-run fairness", "Feedback loops", "Stochastic processes", "Meritocratic selection", "Dynamics"]
+    "tags":    ["Long-run fairness", "Feedback loops", "Stochastic processes", "Meritocratic selection", "Dynamics"]
   },
+
   {
-    "id": "street-level-ai",
-    "title": "Street-Level AI",
-    "period": "2025",
-    "status": "past",
+    "id":      "street-level-ai",
+    "title":   "Street-Level AI",
+    "period":  "2025",
+    "status":  "past",
     "summary": "Testing whether off-the-shelf LLMs can stand in for street-level bureaucrats in homelessness allocation; they prove internally inconsistent and poorly aligned with vetted vulnerability scores.",
-    "tags": ["LLMs", "Human-AI decision-making", "Ranking", "Homelessness services", "Robustness", "Resource allocation"]
+    "tags":    ["LLMs", "Human-AI decision-making", "Ranking", "Homelessness services", "Robustness", "Resource allocation"]
   },
+
   {
-    "id": "discretionary-trees",
-    "title": "Discretionary Trees",
-    "period": "2024",
-    "status": "past",
+    "id":      "discretionary-trees",
+    "title":   "Discretionary Trees",
+    "period":  "2024",
+    "status":  "past",
     "summary": "Using machine learning to make street-level discretion in homelessness services legible, showing that discretionary overrides are targeted and welfare-improving rather than arbitrary.",
-    "tags": ["Interpretable ML", "Street-level bureaucracy", "Homelessness services", "Discretion", "Procedural justice"]
+    "tags":    ["Interpretable ML", "Street-level bureaucracy", "Homelessness services", "Discretion", "Procedural justice"]
   },
+
   {
-    "id": "two-sided-matching",
-    "title": "Two-Sided Bandits in Matching Markets",
-    "period": "2023",
-    "status": "past",
+    "id":      "two-sided-matching",
+    "title":   "Two-Sided Bandits in Matching Markets",
+    "period":  "2023",
+    "status":  "past",
     "summary": "Decentralized algorithms that provably converge to stable matchings when both sides of a market must learn their preferences and cannot communicate.",
-    "tags": ["Matching markets", "Bandits", "Decentralized learning", "Stable matching", "UCB", "Thompson sampling"]
+    "tags":    ["Matching markets", "Bandits", "Decentralized learning", "Stable matching", "UCB", "Thompson sampling"]
   },
+
   {
-    "id": "value-of-info",
-    "title": "Increasing the Value of Information in Online POMDP Planning",
-    "period": "2021",
-    "status": "past",
+    "id":      "value-of-info",
+    "title":   "Increasing the Value of Information in Online POMDP Planning",
+    "period":  "2021",
+    "status":  "past",
     "summary": "An entropy-augmented UCB rule for POMCP that keeps online planners from undervaluing information gathering when its payoff is delayed.",
-    "tags": ["POMDPs", "Online planning", "Value of information", "POMCP", "Entropy", "UCB"]
+    "tags":    ["POMDPs", "Online planning", "Value of information", "POMCP", "Entropy", "UCB"]
   }
 ]

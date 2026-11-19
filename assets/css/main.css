@@ -21,7 +21,8 @@
      14. Project page: heading, details, write-up, citation
      15. CV page
      16. Utilities
-     17. Motion preferences
+     17. Motion: page transitions, reactions to the pointer, the dot grid
+         at the top of each page, and the rules for reduced motion
 
    Mobile-first. Breakpoints: 600px (phone to tablet), 768px (two-column
    hero), 860px (section names move into the left margin), 1024px (three
@@ -70,6 +71,11 @@
   /* The left margin that holds section names, and the gap beside it. */
   --label-col: 180px;
   --col-gap: clamp(1.5rem, 0.4rem + 3.4vw, 3rem);
+
+  /* Motion (section 17). One curve for things that settle into place, and
+     one with a little overshoot for things that spring. */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* 2. Reset and base --------------------------------------------------------- */
@@ -83,6 +89,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* Keeps room for the scrollbar at all times, so the page does not shift
+     sideways when its content arrives and it becomes long enough to scroll. */
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -336,7 +345,8 @@ a:hover {
 
 /* 7. Header and navigation ------------------------------------------------------
    site.js injects: .header-inner > .wordmark + .site-nav.
-   On phones the name sits above one row with all four links. From 600px up
+   On phones the name sits above one row with all the links (four fit on
+   the narrowest phone; a fifth would wrap onto a second row). From 600px up
    the name is on the left and the links on the right. */
 
 #site-header {
@@ -371,6 +381,7 @@ a:hover {
 .site-nav ul {
   list-style: none;
   display: flex;
+  flex-wrap: wrap; /* a link that does not fit drops to the next row */
   gap: 0 0.5rem;
   margin: 0;
   margin-inline-start: -0.5rem;
@@ -378,6 +389,7 @@ a:hover {
 }
 
 .site-nav a {
+  position: relative; /* anchors the underline */
   display: inline-flex;
   align-items: center;
   min-height: 44px; /* tap target */
@@ -395,10 +407,24 @@ a:hover {
 .site-nav a[aria-current="page"] {
   color: var(--text);
   font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 8px;
+}
+
+/* The underline is its own small element (an empty span from site.js) so
+   that it can move: it grows in under a hovered link, and during a page
+   transition it travels from the old tab to the new one (section 17). It
+   spans the link's text, not its side padding. */
+.nav-mark {
+  position: absolute;
+  inset-inline: 0.5rem;
+  bottom: 7.25px;
+  height: 1.5px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.site-nav a[aria-current="page"] .nav-mark {
+  transform: scaleX(1);
 }
 
 @media (min-width: 600px) {
@@ -425,6 +451,10 @@ a:hover {
 
   .site-nav a {
     padding-inline: 0.75rem;
+  }
+
+  .nav-mark {
+    inset-inline: 0.75rem;
   }
 }
 
@@ -520,7 +550,7 @@ a:hover {
   line-height: 1.2;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.15s ease, transform 0.24s var(--ease-spring);
 }
 
 .btn:hover {
@@ -619,6 +649,7 @@ a:hover {
   grid-area: photo;
   aspect-ratio: 4 / 5;
   overflow: hidden;
+  isolation: isolate; /* keeps the rounded corners clean while the photo zooms */
   border-radius: 12px;
   background: var(--border);
 }
@@ -628,6 +659,7 @@ a:hover {
   height: 100%;
   object-fit: cover;
   object-position: 50% 5%;
+  transition: transform 0.7s var(--ease-out);
 }
 
 .hero-body {
@@ -736,14 +768,17 @@ a:hover {
   }
 }
 
-/* Link under the recent papers list. */
+/* Link under the recent papers list: "All papers" and an arrow that nudges
+   forward on hover (section 17b). */
 .more-link {
   display: inline-flex;
   align-items: center;
+  gap: 0.375rem;
   min-height: 44px;
   margin-top: 0.5rem;
   font-size: var(--fs-ui);
   font-weight: 500;
+  text-decoration: none;
 }
 
 /* News: the date in its own column from 600px up, above the text on phones. */
@@ -940,13 +975,14 @@ a:hover {
   padding: 0 1.125rem;
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: transparent;
+  background: var(--bg); /* solid, so the dot grid behind does not show through */
   color: var(--text-muted);
   font: inherit;
   font-size: var(--fs-ui);
   line-height: 1.2;
   cursor: pointer;
-  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease,
+    transform 0.24s var(--ease-spring);
 }
 
 .filter-btn:hover {
@@ -988,16 +1024,18 @@ a:hover {
 .project-thumb {
   aspect-ratio: 16 / 10;
   overflow: hidden;
+  isolation: isolate; /* keeps the rounded corners clean while the picture zooms */
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface);
-  transition: border-color 0.15s ease;
+  transition: border-color 0.25s ease;
 }
 
 .project-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
 }
 
 .project-card-meta {
@@ -1016,9 +1054,16 @@ a:hover {
   letter-spacing: -0.005em;
 }
 
+/* The title's underline is a thin teal strip drawn as a background, so that
+   its width can grow from nothing when the card is hovered (section 17b). */
 .project-card-title a {
   color: var(--text);
   text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1.5px;
+  transition: background-size 0.32s var(--ease-out);
 }
 
 /* The title link is stretched over the whole card, so the card is one tap
@@ -1027,10 +1072,6 @@ a:hover {
   content: "";
   position: absolute;
   inset: 0;
-}
-
-.project-card:hover .project-card-title a {
-  color: var(--accent);
 }
 
 .project-card:hover .project-thumb,
@@ -1096,6 +1137,7 @@ a:hover {
   padding-block: clamp(1.25rem, 3.6vw, 3.25rem) clamp(1.75rem, 3.4vw, 3rem);
 }
 
+/* "All projects" with an arrow that nudges back on hover (section 17b). */
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -1104,10 +1146,6 @@ a:hover {
   font-size: var(--fs-ui);
   font-weight: 500;
   text-decoration: none;
-}
-
-.back-link:hover {
-  text-decoration: underline;
 }
 
 .project-meta {
@@ -1614,7 +1652,260 @@ a:hover {
   white-space: nowrap;
 }
 
-/* 17. Motion preferences ---------------------------------------------------------- */
+/* 17. Motion --------------------------------------------------------------------
+   Three things move on this site:
+     17a. Page transitions: the content slides left or right between pages.
+     17b. Reactions: small responses to the pointer on links, buttons and
+          pictures.
+     17c. The dot grid behind the band at the top of each page.
+   17d turns all of it off for visitors who ask their system for reduced
+   motion. Nothing here is needed to use the site: a browser that ignores
+   every rule in this section shows the same pages, standing still. */
+
+/* 17a. Page transitions
+   The browser's own page-transition feature ("view transitions") animates
+   the move between two pages of this site. Browsers without it skip these
+   rules and load pages as they always have. assets/js/motion.js tells the
+   browser which way to slide.
+
+   A transition is built from layers. The header and the nav underline are
+   named, so each is carried across on its own layer: the header holds still
+   and the underline travels from the old tab to the new one. Everything
+   else is the layer called "root", and that is the part that slides. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+#site-header {
+  view-transition-name: site-header;
+}
+
+.site-nav a[aria-current="page"] .nav-mark {
+  view-transition-name: nav-mark;
+}
+
+/* motion.js adds this class on a scrolled page. The header is then not in
+   the same place on both pages, so it joins the sliding layer. */
+.vt-header-off #site-header,
+.vt-header-off .site-nav a[aria-current="page"] .nav-mark {
+  view-transition-name: none;
+}
+
+::view-transition-group(site-header),
+::view-transition-group(nav-mark) {
+  animation-duration: 0.36s;
+  animation-timing-function: var(--ease-out);
+}
+
+/* When one of the two pages is scrolled, the header exists on one side
+   only. A header that is arriving waits for the old page to leave; one that
+   is leaving goes at once. */
+::view-transition-new(site-header):only-child,
+::view-transition-new(nav-mark):only-child {
+  animation: vt-fade-in 0.3s ease-out 0.19s both;
+}
+
+::view-transition-old(site-header):only-child,
+::view-transition-old(nav-mark):only-child {
+  animation: vt-fade-out 0.16s ease-in both;
+}
+
+/* The sliding layer. The old page leaves first and the new one starts only
+   when it has gone, so the two are never on screen together. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+/* Direction unknown: a plain cross-fade. */
+::view-transition-old(root) {
+  animation: vt-fade-out 0.16s ease-in both;
+}
+
+::view-transition-new(root) {
+  animation: vt-fade-in 0.3s ease-out 0.16s both;
+}
+
+/* Forward: the page opened is to the right in the nav. */
+:root:active-view-transition-type(forward)::view-transition-old(root) {
+  animation:
+    vt-fade-out 0.19s ease-in both,
+    vt-out-left 0.19s ease-in both;
+}
+
+:root:active-view-transition-type(forward)::view-transition-new(root) {
+  animation:
+    vt-fade-in 0.34s ease-out 0.19s both,
+    vt-in-right 0.42s var(--ease-out) 0.19s both;
+}
+
+/* Back: the page opened is to the left in the nav. */
+:root:active-view-transition-type(back)::view-transition-old(root) {
+  animation:
+    vt-fade-out 0.19s ease-in both,
+    vt-out-right 0.19s ease-in both;
+}
+
+:root:active-view-transition-type(back)::view-transition-new(root) {
+  animation:
+    vt-fade-in 0.34s ease-out 0.19s both,
+    vt-in-left 0.42s var(--ease-out) 0.19s both;
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes vt-out-left {
+  to { transform: translateX(-36px); }
+}
+
+@keyframes vt-in-right {
+  from { transform: translateX(36px); }
+}
+
+@keyframes vt-out-right {
+  to { transform: translateX(36px); }
+}
+
+@keyframes vt-in-left {
+  from { transform: translateX(-36px); }
+}
+
+/* 17b. Reactions
+   Pictures zoom slightly inside frames that stay still. Underlines draw in.
+   Buttons spring. Arrows nudge. Only small things wiggle: the labels such as
+   "Spotlight" and the footer icons. Text blocks and whole cards never move.
+
+   The hover rules apply only where there is a real pointer, because on a
+   touch screen a hover state stays stuck after a tap. Touch screens get the
+   press on buttons. */
+
+.nav-mark {
+  transition: transform 0.28s var(--ease-out);
+}
+
+/* The arrows in "All papers" and "All projects". */
+.more-link .arrow,
+.back-link span {
+  display: inline-block;
+  transition: transform 0.24s var(--ease-spring);
+}
+
+/* One short wiggle. */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  22% { transform: rotate(-6deg); }
+  50% { transform: rotate(5deg); }
+  76% { transform: rotate(-2deg); }
+}
+
+/* Underlines appear for keyboard users too, and stay even with reduced
+   motion (17d makes them appear at once instead of drawing in). */
+.site-nav a:focus-visible .nav-mark {
+  transform: scaleX(1);
+}
+
+.project-card-title a:focus-visible {
+  background-size: 100% 1.5px;
+}
+
+@media (hover: hover) {
+  .site-nav a:hover .nav-mark {
+    transform: scaleX(1);
+  }
+
+  .project-card:hover .project-card-title a {
+    background-size: 100% 1.5px;
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* Portrait and project pictures: a slow, slight zoom. */
+  .hero-photo:hover img {
+    transform: scale(1.04);
+  }
+
+  .project-card:hover .project-thumb img {
+    transform: scale(1.045);
+  }
+
+  /* Buttons grow a touch, with a small spring. */
+  .btn:hover {
+    transform: scale(1.05);
+  }
+
+  /* Arrows nudge in the direction they point. */
+  .more-link:hover .arrow {
+    transform: translateX(5px);
+  }
+
+  .back-link:hover span {
+    transform: translateX(-5px);
+  }
+
+  /* A label wiggles when its row is hovered; a footer icon when it is. */
+  .paper:hover .pill,
+  .cv-entry:hover .pill,
+  .detail-row:hover .pill {
+    animation: wiggle 0.5s ease;
+  }
+
+  .social-links a:hover svg {
+    animation: wiggle 0.5s ease;
+  }
+}
+
+/* Pressing a button dips it, on touch screens as well. */
+@media (prefers-reduced-motion: no-preference) {
+  .btn:active,
+  .filter-btn:active {
+    transform: scale(0.97);
+  }
+}
+
+/* 17c. The dot grid
+   assets/js/dots.js draws a faint grid of dots behind the band at the top of
+   each page: the headline and portrait on the home page, the page heading
+   on the others. It draws on a canvas that it adds to .dot-band, a wrapper
+   that spans the full width of the window. The switches that turn the grid
+   on or off, everywhere or on one page, are at the top of that file. The
+   rules here only place the canvas: behind the band's content, from the
+   rule under the header to the next rule down. */
+
+.dot-band {
+  position: relative;
+  isolation: isolate; /* lets the canvas sit behind the content, not the page */
+}
+
+.dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@media print {
+  .dot-grid {
+    display: none;
+  }
+}
+
+/* 17d. Reduced motion
+   Smooth scrolling and the page transition are switched on only when the
+   visitor has not asked for reduced motion. For those who have, every
+   transition and animation is cut to nothing; the hover rules that move or
+   resize something are already limited to "no-preference" above, and
+   dots.js draws its grid once and leaves it still. */
 
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -1630,5 +1921,11 @@ a:hover {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Without the arrow's nudge, these two links get an underline on hover. */
+  .more-link:hover,
+  .back-link:hover {
+    text-decoration: underline;
   }
 }

@@ -1,32 +1,66 @@
+// =============================================================================
+//  NEWS
+//
+//  Newest first. The home page shows the first few items (how many is set
+//  by "news" in site.json) and folds the rest away under "Older news".
+//
+//  To add an item: copy the template below, paste it above the first item,
+//  then change the date and the text.
+//
+//      "date"   YEAR-MONTH-DAY, for example 2026-12-01
+//      "text"   one or two sentences. A link is written [words](address).
+//               **bold** and *italic* also work.
+//
+//  Lines that begin with // are notes, like this one. The site ignores them.
+// =============================================================================
+
+/* TEMPLATE. Copy the lines from { to }, with its comma.
+
+  {
+    "date": "2026-12-01",
+    "text": "One or two sentences, with a [link](project.html?id=some-project) if you like."
+  },
+
+   This block sits inside a note, so it never shows on the site. */
+
 [
+  // ---- 2026 -----------------------------------------------------------------
+
   {
     "date": "2026-09-24",
     "text": "[Budgeting Discretion](project.html?id=modeling-discretion) was accepted to NeurIPS 2026 as a spotlight. I will be in Atlanta in December."
   },
+
   {
     "date": "2026-09-17",
     "text": "I defended my dissertation proposal and am now a PhD candidate."
   },
+
   {
     "date": "2026-07-16",
     "text": "[Can LLMs Rank?](project.html?id=can-llms-rank) was accepted to AIES 2026 in Malmö, Sweden."
   },
+
   {
     "date": "2026-06-29",
     "text": "New preprint: [Can LLMs Rank?](project.html?id=can-llms-rank) pairs a circular-triad check with inter-run agreement to test whether an LLM's rankings can be trusted."
   },
+
   {
     "date": "2026-06-25",
     "text": "I presented [Fixed Points and Stochastic Meritocracies](project.html?id=stochastic-merit) at FAccT 2026 in Montreal."
   },
+
   {
     "date": "2026-06-08",
     "text": "I joined Pearson as an intern on the Scoring Services team, working on evaluation methods for model-assisted scoring."
   },
+
   {
     "date": "2026-03-02",
     "text": "[Fixed Points and Stochastic Meritocracies](project.html?id=stochastic-merit) was accepted to FAccT 2026."
   },
+
   {
     "date": "2026-02-20",
     "text": "New preprint: [Budgeting Discretion](project.html?id=modeling-discretion) models discretion as a budgeted resource."

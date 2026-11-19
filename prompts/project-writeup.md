@@ -21,6 +21,8 @@ You cannot see the website and you do not need to. This prompt describes every f
 - The paper as a PDF, or a description of the project in my own words. This is your only source of facts about the project.
 - Possibly my current `update/projects.json` and `update/papers.json`.
 
+My data files hold notes as well as data. Anything after `//` on a line is a note, and so is everything between `/*` and `*/`. Notes are not data, so ignore them when you read the files. In particular, each file has a block that begins `/* TEMPLATE` and holds a made-up example entry. That example is not one of my projects or papers.
+
 If neither a PDF nor a description is in this conversation, ask me for one and stop. Otherwise do not ask questions before you start. Make the most reasonable choice and list what you were unsure of in part I of your reply.
 
 Accuracy matters more than polish. Use only what the source says. Do not invent results, numbers, venues, dates, page numbers, DOIs, arXiv numbers, links, co-authors or funding. When a detail is not in the source, leave the field out and say so in part I.
@@ -55,15 +57,17 @@ One JSON object, like this one:
 
 ```json
 {
-  "id": "modeling-discretion",
-  "title": "Budgeting Discretion",
-  "period": "2026",
-  "status": "current",
-  "summary": "A model of caseworker discretion as a limited budget of overrides, with evidence from homelessness services that caseworkers ration overrides against capacity and timing.",
-  "tags": ["Discretion", "Resource allocation", "Dynamic programming", "Heavy tails"],
+  "id":        "modeling-discretion",
+  "title":     "Budgeting Discretion",
+  "period":    "2026",
+  "status":    "current",
+  "summary":   "A model of caseworker discretion as a limited budget of overrides, with evidence from homelessness services that caseworkers ration overrides against capacity and timing.",
+  "tags":      ["Discretion", "Resource allocation", "Dynamic programming", "Heavy tails"],
   "thumbnail": "thumbnail.svg"
 }
 ```
+
+Write the fields in this order, one per line, with spaces after the colons so that the values line up, as above. My files are laid out that way. The same goes for the entries in parts D and F.
 
 | Field | Rule |
 | --- | --- |
@@ -90,17 +94,17 @@ A published paper looks like this:
 
 ```json
 {
-  "title": "Can LLMs Rank? A Tale of Triads and Triage",
+  "title":   "Can LLMs Rank? A Tale of Triads and Triage",
   "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
-  "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
-  "abbr": "AIES 2026",
-  "year": "2026",
-  "place": "Malmö, Sweden",
-  "volume": "9",
-  "number": "3",
-  "pages": "2105–2117",
-  "doi": "10.1609/aies.v9i3.43292",
-  "arxiv": "2606.30412",
+  "venue":   "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+  "abbr":    "AIES 2026",
+  "year":    "2026",
+  "place":   "Malmö, Sweden",
+  "volume":  "9",
+  "number":  "3",
+  "pages":   "2105–2117",
+  "doi":     "10.1609/aies.v9i3.43292",
+  "arxiv":   "2606.30412",
   "project": "can-llms-rank",
   "funding": "This work was supported by NSF Award 2533162."
 }
@@ -110,15 +114,15 @@ A preprint that is only on arXiv looks like this:
 
 ```json
 {
-  "title": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+  "title":   "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
   "authors": ["Gaurab Pokharel", "Sanmay Das"],
-  "year": "2023",
-  "arxiv": "2302.06176",
+  "year":    "2023",
+  "arxiv":   "2302.06176",
   "project": "two-sided-matching"
 }
 ```
 
-Leave out any field you have no value for. Do not write empty strings.
+Leave out any field you have no value for. Do not write empty strings. Keep the fields in this order: `title`, `authors`, `equal`, `venue`, `abbr`, `year`, `extra`, `place`, `volume`, `number`, `pages`, `status`, `note`, `doi`, `arxiv`, `links`, `project`, `funding`, `affiliations`, `bibtype`, `bibkey`.
 
 | Field | Needed | Rule |
 | --- | --- | --- |
@@ -217,10 +221,10 @@ End your reply by repeating this checklist with the real id and file names fille
 1. Create the folder `update/projects/<id>/`.
 2. Save part B in it as `writeup.md`.
 3. Export the figures listed in part G into the same folder, with those file names.
-4. Paste part C at the top of the list in `update/projects.json`, right after the opening `[`, and put a comma after it.
-5. Paste part D at the top of the `entries` list of the named section in `update/papers.json`, and put a comma after it. (Or add the one line, if the paper was already listed.)
+4. Paste part C into `update/projects.json` above the first project, and put a comma after it. (If its status is `past`, paste it above the first past project instead.)
+5. Paste part D into `update/papers.json` as the first entry of the named section, straight after that section's `"entries": [` line, and put a comma after it. (Or add the one line, if the paper was already listed.)
 6. Add the lines from part E to `affiliations` in `update/site.json`.
-7. Optional: paste part F at the top of the list in `update/news.json`, and put a comma after it.
+7. Optional: paste part F into `update/news.json` above the first item, and put a comma after it.
 8. Make the picture with `prompts/project-thumbnail.md` and save it as `update/projects/<id>/thumbnail.svg`.
 9. Run `python3 -m http.server 8000` in the repository folder and open `http://localhost:8000/project.html?id=<id>`, then the Projects and Papers tabs. If a file has a mistake, a banner at the top of the page names it.
 
@@ -339,5 +343,6 @@ Check each of these and fix what fails:
 - There is exactly one blockquote, and it starts with `**Key takeaway:**`.
 - Figures are numbered in order, each is mentioned in the text, and each `src` is a file name that appears in part G.
 - There is no em dash and no word from the avoid list in the write-up, the summary or the news line.
-- Each JSON block is valid: double quotes, no trailing commas, no comments, no empty strings.
+- Each JSON block you wrote is valid: double quotes, no trailing commas, no notes, no empty strings.
+- Nothing in your reply comes from a `TEMPLATE` block in my files.
 - Every claim and number can be found in the source I gave you.

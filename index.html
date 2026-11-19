@@ -12,12 +12,15 @@
   <meta property="og:url" content="https://gpokharel.com/" />
   <meta property="og:image" content="https://gpokharel.com/assets/img/og.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="icon" href="assets/img/favicon.png" />
+  <link rel="icon" href="assets/img/favicon.png?v=2" />
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;family=Inter:wght@400;500;600&amp;display=swap" />
   <link rel="stylesheet" href="assets/css/main.css" />
+  <!-- Sets the slide direction for page transitions. It has to run before
+       the page is first drawn, which is why it is here and not at the end. -->
+  <script src="assets/js/motion.js"></script>
 </head>
 <body>
   <header id="site-header"></header>
@@ -27,19 +30,23 @@
          line, the headline (this page's h1), the intro, the portrait and the
          job-market box. On phones the role sits beside a small portrait and
          the rest runs full width; from 768px up the text is on the left and
-         the portrait on the right. -->
-    <section class="hero container" aria-labelledby="hero-headline">
-      <p class="hero-role" id="hero-role"></p>
-      <div class="hero-photo">
-        <img id="hero-img" src="update/profile.jpg" alt="Gaurab Pokharel"
-             width="900" height="1350" fetchpriority="high" decoding="async" />
-      </div>
-      <div class="hero-body">
-        <h1 id="hero-headline"></h1>
-        <div class="hero-intro" id="hero-intro"></div>
-        <div class="callout job-market" id="job-market" role="note" aria-label="Job market" hidden></div>
-      </div>
-    </section>
+         the portrait on the right.
+         The outer band spans the full width of the window. dots.js draws the
+         dot grid behind it; with the grid switched off it is an empty wrapper. -->
+    <div class="dot-band" data-dots="home">
+      <section class="hero container" aria-labelledby="hero-headline">
+        <p class="hero-role" id="hero-role"></p>
+        <div class="hero-photo">
+          <img id="hero-img" src="update/profile.jpg" alt="Gaurab Pokharel"
+               width="900" height="1350" fetchpriority="high" decoding="async" />
+        </div>
+        <div class="hero-body">
+          <h1 id="hero-headline"></h1>
+          <div class="hero-intro" id="hero-intro"></div>
+          <div class="callout job-market" id="job-market" role="note" aria-label="Job market" hidden></div>
+        </div>
+      </section>
+    </div>
 
     <!-- Recent papers: the first few entries of update/papers.json. The
          section stays hidden if the file cannot be loaded or is empty. -->
@@ -48,7 +55,7 @@
         <h2 class="band-label" id="recent-papers-heading">Recent papers</h2>
         <div class="band-body">
           <ul class="paper-list" id="recent-papers"></ul>
-          <a class="more-link" href="papers.html">All papers</a>
+          <a class="more-link" href="papers.html">All papers <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -72,5 +79,8 @@
   <footer id="site-footer"></footer>
   <script src="assets/js/site.js"></script>
   <script src="assets/js/home.js"></script>
+  <!-- The dot grid behind the top section. Its on/off switches are at the
+       top of the file. -->
+  <script src="assets/js/dots.js"></script>
 </body>
 </html>

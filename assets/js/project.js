@@ -95,7 +95,13 @@
     if (description && project.summary) description.setAttribute("content", project.summary);
 
     const article = el("article", "project");
-    article.appendChild(renderHead(project));
+
+    // The heading sits in a band that spans the full width of the window,
+    // so that dots.js can draw the dot grid behind it.
+    const headBand = el("div", "dot-band");
+    headBand.setAttribute("data-dots", "project");
+    headBand.appendChild(renderHead(project));
+    article.appendChild(headBand);
 
     const details = renderDetails(project, papers, site);
     if (details) article.appendChild(details);

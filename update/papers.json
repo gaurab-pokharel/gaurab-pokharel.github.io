@@ -1,130 +1,201 @@
+// =============================================================================
+//  PAPERS
+//
+//  Every paper is entered once, in this file. The Papers tab, the recent
+//  papers on the home page, the publication lists on the CV tab and the
+//  details on each project page are all built from it.
+//
+//  The file has 4 sections, in this order:
+//      conference   Conference papers
+//      preprints    Preprints
+//      abstracts    Extended abstracts
+//      theses       not listed on the Papers tab; used by project pages only
+//
+//  To add a paper: copy the template below, paste it as the FIRST entry of
+//  its section (straight after that section's "entries": [ line), fill it
+//  in, and delete the lines that do not apply.
+//
+//  When a preprint is accepted: move its block to the top of the conference
+//  section, then add "venue", "abbr" and "status": "to appear".
+//
+//  Lines that begin with // are notes, like this one. The site ignores them.
+//  update/README.md explains every field.
+// =============================================================================
+
+/* TEMPLATE. Copy the lines from { to }, with its comma.
+
+        {
+          "title":   "Title of the paper, as printed on it",
+          "authors": ["Gaurab Pokharel", "Second Author", "Third Author"],
+          "venue":   "Full name of the venue, without the abbreviation",
+          "abbr":    "NeurIPS 2027",
+          "year":    "2027",
+          "extra":   "Track or workshop name",
+          "place":   "City, Country",
+          "volume":  "9",
+          "number":  "3",
+          "pages":   "2105–2117",
+          "status":  "to appear",
+          "note":    "Spotlight",
+          "doi":     "10.1609/aies.v9i3.43292",
+          "arxiv":   "2606.30412",
+          "project": "the-project-id",
+          "funding": "One sentence that names the grants."
+        },
+
+   Only "title", "authors" and "year" are required. A preprint has no
+   "venue" and no "abbr". The less common fields ("equal", "links",
+   "affiliations", "bibtype", "bibkey") are described in update/README.md.
+   This block sits inside a note, so it never shows on the site. */
+
 {
   "sections": [
+
+    // =========================================================================
+    //  CONFERENCE PAPERS
+    // =========================================================================
     {
-      "id": "conference",
+      "id":    "conference",
       "title": "Conference papers",
       "entries": [
         {
-          "title": "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
+          "title":   "Budgeting Discretion: Theory and Evidence on Street-Level Decision-Making",
           "authors": ["Gaurab Pokharel", "Sanmay Das", "Patrick J. Fowler"],
-          "venue": "Advances in Neural Information Processing Systems",
-          "abbr": "NeurIPS 2026",
-          "year": "2026",
-          "place": "Atlanta, USA",
-          "status": "to appear",
-          "note": "Spotlight",
-          "arxiv": "2602.10039",
+          "venue":   "Advances in Neural Information Processing Systems",
+          "abbr":    "NeurIPS 2026",
+          "year":    "2026",
+          "place":   "Atlanta, USA",
+          "status":  "to appear",
+          "note":    "Spotlight",
+          "arxiv":   "2602.10039",
           "project": "modeling-discretion",
           "funding": "This work was supported by NSF Award 2533162."
         },
+
         {
-          "title": "Can LLMs Rank? A Tale of Triads and Triage",
+          "title":   "Can LLMs Rank? A Tale of Triads and Triage",
           "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
-          "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
-          "abbr": "AIES 2026",
-          "year": "2026",
-          "place": "Malmö, Sweden",
-          "volume": "9",
-          "number": "3",
-          "pages": "2105–2117",
-          "doi": "10.1609/aies.v9i3.43292",
-          "arxiv": "2606.30412",
+          "venue":   "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+          "abbr":    "AIES 2026",
+          "year":    "2026",
+          "place":   "Malmö, Sweden",
+          "volume":  "9",
+          "number":  "3",
+          "pages":   "2105–2117",
+          "doi":     "10.1609/aies.v9i3.43292",
+          "arxiv":   "2606.30412",
           "project": "can-llms-rank",
           "funding": "This work was supported by NSF Award 2533162."
         },
+
         {
-          "title": "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
+          "title":   "Fixed Points and Stochastic Meritocracies: A Long-Term Perspective",
           "authors": ["Gaurab Pokharel", "Diptangshu Sen", "Sanmay Das", "Juba Ziani"],
-          "equal": ["Gaurab Pokharel", "Diptangshu Sen"],
-          "venue": "Proceedings of the ACM Conference on Fairness, Accountability, and Transparency",
-          "abbr": "FAccT 2026",
-          "year": "2026",
-          "place": "Montreal, Canada",
-          "pages": "280–320",
-          "doi": "10.1145/3805689.3806540",
-          "arxiv": "2510.07478",
+          "equal":   ["Gaurab Pokharel", "Diptangshu Sen"],
+          "venue":   "Proceedings of the ACM Conference on Fairness, Accountability, and Transparency",
+          "abbr":    "FAccT 2026",
+          "year":    "2026",
+          "place":   "Montreal, Canada",
+          "pages":   "280–320",
+          "doi":     "10.1145/3805689.3806540",
+          "arxiv":   "2510.07478",
           "project": "stochastic-merit",
           "funding": "This work was supported by the US National Science Foundation (NSF) under grants IIS-2504990, IIS-2336236, and IIS-2533162."
         },
+
         {
-          "title": "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
+          "title":   "Street-Level AI: Are Large Language Models Ready for Real-World Judgments?",
           "authors": ["Gaurab Pokharel", "Shafkat Farabi", "Patrick J. Fowler", "Sanmay Das"],
-          "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
-          "abbr": "AIES 2025",
-          "year": "2025",
-          "volume": "8",
-          "number": "3",
-          "pages": "2043–2054",
-          "doi": "10.1609/aies.v8i3.36694",
+          "venue":   "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+          "abbr":    "AIES 2025",
+          "year":    "2025",
+          "volume":  "8",
+          "number":  "3",
+          "pages":   "2043–2054",
+          "doi":     "10.1609/aies.v8i3.36694",
           "project": "street-level-ai",
           "funding": "This research was supported by NSF Award 2533162."
         },
+
         {
-          "title": "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
+          "title":   "Discretionary Trees: Understanding Street-Level Bureaucracy via Machine Learning",
           "authors": ["Gaurab Pokharel", "Sanmay Das", "Patrick J. Fowler"],
-          "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
-          "abbr": "AAAI 2024",
-          "year": "2024",
-          "extra": "AI for Social Impact track",
-          "volume": "38",
-          "number": "20",
-          "pages": "22303–22312",
-          "doi": "10.1609/aaai.v38i20.30236",
+          "venue":   "Proceedings of the AAAI Conference on Artificial Intelligence",
+          "abbr":    "AAAI 2024",
+          "year":    "2024",
+          "extra":   "AI for Social Impact track",
+          "volume":  "38",
+          "number":  "20",
+          "pages":   "22303–22312",
+          "doi":     "10.1609/aaai.v38i20.30236",
           "project": "discretionary-trees",
           "funding": "This work was partially supported by the NSF (IIS-1939677, IIS-2127752) and by Amazon through an NSF FAI award."
         }
       ]
     },
+
+    // =========================================================================
+    //  PREPRINTS
+    // =========================================================================
     {
-      "id": "preprints",
+      "id":    "preprints",
       "title": "Preprints",
       "entries": [
         {
-          "title": "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
+          "title":   "Converging to Stability in Two-Sided Bandits: The Case of Unknown Preferences on Both Sides of a Matching Market",
           "authors": ["Gaurab Pokharel", "Sanmay Das"],
-          "year": "2023",
-          "arxiv": "2302.06176",
-          "extra": "Multi-Agent AI in the Real World workshop, AAAI 2025",
-          "note": "Best Paper Award",
+          "year":    "2023",
+          "extra":   "Multi-Agent AI in the Real World workshop, AAAI 2025",
+          "note":    "Best Paper Award",
+          "arxiv":   "2302.06176",
           "project": "two-sided-matching"
         }
       ]
     },
+
+    // =========================================================================
+    //  EXTENDED ABSTRACTS
+    // =========================================================================
     {
-      "id": "abstracts",
+      "id":    "abstracts",
       "title": "Extended abstracts",
       "entries": [
         {
-          "title": "Beyond Automation: Understanding Fairness, Ethics, and Human Discretion in AI-driven Societal Decisions",
+          "title":   "Beyond Automation: Understanding Fairness, Ethics, and Human Discretion in AI-driven Societal Decisions",
           "authors": ["Gaurab Pokharel"],
-          "venue": "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
-          "abbr": "AIES 2025",
-          "year": "2025",
-          "extra": "Doctoral Consortium",
-          "volume": "8",
-          "number": "3",
-          "pages": "2918–2920",
-          "doi": "10.1609/aies.v8i3.36793"
+          "venue":   "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society",
+          "abbr":    "AIES 2025",
+          "year":    "2025",
+          "extra":   "Doctoral Consortium",
+          "volume":  "8",
+          "number":  "3",
+          "pages":   "2918–2920",
+          "doi":     "10.1609/aies.v8i3.36793"
         }
       ]
     },
+
+    // =========================================================================
+    //  THESES  (not listed on the Papers tab)
+    // =========================================================================
     {
-      "id": "theses",
-      "title": "Theses",
-      "listed": false,
+      "id":     "theses",
+      "title":  "Theses",
+      "listed": false,   // false keeps this section off the Papers tab
       "entries": [
         {
-          "title": "Increasing the Value of Information During Planning in Uncertain Environments",
-          "authors": ["Gaurab Pokharel"],
+          "title":        "Increasing the Value of Information During Planning in Uncertain Environments",
+          "authors":      ["Gaurab Pokharel"],
+          "venue":        "Undergraduate honors thesis, Oberlin College",
+          "year":         "2021",
+          "extra":        "May 2021",
+          "arxiv":        "2409.13754",
+          "project":      "value-of-info",
           "affiliations": { "Gaurab Pokharel": "Oberlin College" },
-          "venue": "Undergraduate honors thesis, Oberlin College",
-          "year": "2021",
-          "extra": "May 2021",
-          "arxiv": "2409.13754",
-          "project": "value-of-info",
-          "bibtype": "misc"
+          "bibtype":      "misc"
         }
       ]
     }
+
   ]
 }

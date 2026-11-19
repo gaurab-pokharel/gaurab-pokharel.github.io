@@ -1,37 +1,59 @@
+// =============================================================================
+//  SITE DETAILS
+//
+//  Your name, the words on the home page, the job-market box and the links
+//  in the footer. To change something, edit the text between the "quotes".
+//
+//  Lines that begin with // are notes, like this one. The site ignores them.
+//  update/README.md explains every field.
+// =============================================================================
+
 {
-  "name": "Gaurab Pokharel",
-  "role": "PhD candidate in Computer Science, Virginia Tech",
+  // ---- Who you are ----------------------------------------------------------
+  //      "role" is the small line above the headline on the home page.
+  "name":  "Gaurab Pokharel",
+  "role":  "PhD candidate in Computer Science, Virginia Tech",
   "email": "gaurab@vt.edu",
   "photo": "update/profile.jpg",
 
+  // ---- Home page: the large sentence, and the paragraph under it ------------
+  //      "intro" can hold more than one paragraph. Add another "quoted"
+  //      line under the first, with a comma between them.
   "headline": "I study how people and algorithms share decisions about scarce public resources.",
   "intro": [
     "Most of my work is on homelessness services, where a caseworker can overrule what an algorithm recommends. I ask when those overrides help and how caseworkers ration them. I also test whether a language model can be trusted to rank people at all."
   ],
 
+  // ---- Home page: the highlighted job-market box ----------------------------
+  //      Change true to false to hide the box.
   "jobMarket": {
-    "show": true,
+    "show":  true,
     "title": "Fall 2027 job market",
-    "text": "Faculty and research roles"
+    "text":  "Faculty and research roles"
   },
 
+  // ---- Home page: how many items to show ------------------------------------
   "home": {
     "recentPapers": 3,
-    "news": 4
+    "news":         4   // the rest fold away under "Older news"
   },
 
+  // ---- Footer icons ---------------------------------------------------------
   "social": {
-    "github": "https://github.com/gaurab-pokharel",
+    "github":   "https://github.com/gaurab-pokharel",
     "linkedin": "https://www.linkedin.com/in/gaurab278/",
-    "scholar": "https://scholar.google.com/citations?user=FSE8mAIAAAAJ&hl=en"
+    "scholar":  "https://scholar.google.com/citations?user=FSE8mAIAAAAJ&hl=en"
   },
 
+  // ---- Affiliations, shown under the authors on project pages ---------------
+  //      One line per person. Add a line for each new co-author, and spell
+  //      the name exactly as it is written in papers.json.
   "affiliations": {
-    "Gaurab Pokharel": "Virginia Tech",
-    "Sanmay Das": "Virginia Tech",
-    "Shafkat Farabi": "Virginia Tech",
+    "Gaurab Pokharel":   "Virginia Tech",
+    "Sanmay Das":        "Virginia Tech",
+    "Shafkat Farabi":    "Virginia Tech",
     "Patrick J. Fowler": "Washington University in St. Louis",
-    "Diptangshu Sen": "Georgia Tech",
-    "Juba Ziani": "Georgia Tech"
+    "Diptangshu Sen":    "Georgia Tech",
+    "Juba Ziani":        "Georgia Tech"
   }
 }
